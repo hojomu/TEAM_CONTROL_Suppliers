@@ -17,6 +17,7 @@
 
 <P><a href="/delivery_calendar">배송 스케줄 캘린더</a></P>
 <P><a href="/delivery_list">배송 리스트</a></P>
+<P><a href="/adminGraph">관리자 계정 페이지</a></P>
 
 
 </body>
