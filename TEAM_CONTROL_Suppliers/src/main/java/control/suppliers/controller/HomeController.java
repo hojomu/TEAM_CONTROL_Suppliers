@@ -42,4 +42,22 @@ public class HomeController {
 		return "headerSidebar";
 	}
 	
+	// 기본 헤더, 사이드화 확인 페이지로 이동
+	@RequestMapping(value = "/shipment_header", method = RequestMethod.GET)
+	public String shipment_header(Locale locale, Model model) {
+		return "shipment_header";
+	}
+	
+	// 기본 헤더, 사이드화 확인 페이지로 이동
+	@RequestMapping(value = "/shipment_table", method = RequestMethod.GET)
+	public String shipment_table(Locale locale, Model model) {
+		return "shipment_table";
+	}
+	
+	// 기본 헤더, 사이드화 확인 페이지로 이동
+	@RequestMapping(value = "/shipment_order", method = RequestMethod.GET)
+	public String shipment_order(Locale locale, Model model) {
+		return "shipment_order";
+	}
+	
 }
