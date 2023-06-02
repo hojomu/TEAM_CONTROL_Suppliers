@@ -15,6 +15,9 @@
 <P><a href="/shipment_table">출하조회</a></P>
 <P><a href="/shipment_order">출하등록</a></P>
 
+<P><a href="/delivery_calendar">배송 스케줄 캘린더</a></P>
+<P><a href="/delivery_list">배송 리스트</a></P>
+
 
 </body>
 </html>

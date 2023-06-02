@@ -60,4 +60,16 @@ public class HomeController {
 		return "shipment_order";
 	}
 	
+	// 배송 스케줄 캘린더로 이동
+	@RequestMapping(value = "/delivery_calendar", method = RequestMethod.GET)
+	public String delivery_calendar(Locale locale, Model model) {
+		return "delivery_calendar";
+	}
+		
+	// 배송 스케줄 캘린더로 이동
+	@RequestMapping(value = "/delivery_list", method = RequestMethod.GET)
+	public String delivery_list(Locale locale, Model model) {
+		return "delivery_list";
+	}
+		
 }
