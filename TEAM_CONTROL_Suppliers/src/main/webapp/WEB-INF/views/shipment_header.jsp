@@ -29,6 +29,11 @@
 
   <!-- Template Main CSS File -->
   <link href="resources/css/style.css" rel="stylesheet">
+  
+  <!-- shipment CSS File -->
+  <link href="resources/css/shipment_table.css" rel="stylesheet">
+  <link href="resources/css/shipment_detail.css" rel="stylesheet">
+  <link href="resources/css/shipment_order.css" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: NiceAdmin
