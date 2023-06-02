@@ -5,7 +5,23 @@
 <%@ include file="shipment_header.jsp" %>
 
 <!-- 본문 내용 -->
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+조회페이지
 
+        <a class="nav-link collapsed" href="/shipment_detail">
+          <span>조회디테일</span>
+        </a>
 
 <!-- 본문 끝 -->
   
