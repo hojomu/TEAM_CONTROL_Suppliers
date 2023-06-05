@@ -52,6 +52,11 @@
       			
       			<div class="card-body pb-0">
       				<h5 class="card-title">현재 운반중 <span>| 오늘</span></h5>
+      				<div id="carrierListBox">
+      					<ul id="carrierList">
+      						<li>김상식씨</li>
+      					</ul>
+      				</div>
       				
       				
       			</div>
@@ -62,6 +67,7 @@
       	<!-- Table with hoverable rows -->
 	    <div class="col-12">
 	      <div class="card overflow-auto">
+	      
 	
 		    <div class="filter">
 		      <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
