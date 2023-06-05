@@ -5,7 +5,27 @@
 <%@ include file="delivery_headerSidebar.jsp" %>
 
 <!-- 본문 내용 -->
+<main id="main" class="main">
 
+	<link href ="resources/css/delivery_calendar.css" rel="stylesheet"/>
+    <script src="resources/js/delivery_caalendar.js"></script>
+    <script>
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridMonth'
+        });
+        calendar.render();
+      });
+
+    </script>
+
+  <div class="card">
+    <div id='calendar'></div>
+  </div>  
+  
+</main>
 
 <!-- 본문 끝 -->
   
