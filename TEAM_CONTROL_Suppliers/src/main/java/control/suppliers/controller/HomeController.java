@@ -77,5 +77,17 @@ public class HomeController {
 	public String delivery_list(Locale locale, Model model) {
 		return "delivery_list";
 	}
+	
+	// login 화면
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login(Locale locale, Model model) {
+		return "login";
+	}
+	
+	// 고객 관리
+	@RequestMapping(value = "/customer", method = RequestMethod.GET)
+	public String customer_input(Locale locale, Model model) {
+		return "customer_input";
+	}
 		
 }

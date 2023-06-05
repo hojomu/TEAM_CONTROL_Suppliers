@@ -19,6 +19,8 @@
 <P><a href="/delivery_list">배송 리스트</a></P>
 <P><a href="/adminGraph">관리자 계정 페이지</a></P>
 
+<P><a href="/login">login </a></P>
+<P><a href="/customer">고객 관리</a></P>
 
 </body>
 </html>
