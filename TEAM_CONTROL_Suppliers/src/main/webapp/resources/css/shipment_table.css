@@ -8,18 +8,28 @@
 
 }
 
+.shipment_search_date{
+	margin: 10px;
+}
+
 .shipment_search_date_input{
     width: 110px;
     height: 30px;
     border-radius: 5px;
     border: solid 1px #000;
+    padding-left: 5px;
+}
+
+.shipment_search_text{
+	margin: 10px 10px 30px 10px;
 }
 
 .shipment_search_text_input{
-	width: 200px;
+	width: 220px;
     height: 30px;
     border-radius: 5px;
     border: solid 1px #000;
+    padding-left: 5px;
 }
 
 .shipment_search_text_button{
@@ -42,35 +52,45 @@
 }
 
 .shipment_table_header{
-	display: flex;
+	/* display: flex; */
 	/* justify-content: center; */
-    align-items: center;
+    /* align-items: center; */
+}
+
+.shipment_table_header_day{
+	display: flex;
+	align-items: center;
+	float: left;
+	margin-top: 18px;
 }
 
 .shipment_table_header_today{
 /* 	display: flex;
     justify-content: center;
     align-items: center; */
+    display: block;
 }
 
 .shipment_table_header_leftbnt{
     width: 25px;
     height: 20px;
     border-radius: 5px;
-    border: solid 1px #000;
+    border: solid 1px #dee2e6;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 10px;
 }
 
 .shipment_table_header_rightbnt{
     width: 25px;
     height: 20px;
     border-radius: 5px;
-    border: solid 1px #000;
+    border: solid 1px #dee2e6;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 10px;
 }
 
 .shipment_table_header_orderbnt{
@@ -85,19 +105,46 @@
     color: #fff;
     background: #4492ff;
     border: none;
-    margin: 5px;
+    margin: 20px;
+    float: right;
 }
 
-.shipment_table_header_orderbnt:hober{
+.shipment_table_header_orderbnt:hover{
 	background: #356dff;
 }
 
 .shipment_table_box{
-	height: 500px;
+	height: 530px;
     overflow-y: scroll;
+    border: solid 1px #dee2e6;
+    clear: both;
 	}
 
 .shipment_table_thead {
   position: sticky;
   top: 0;
   }
+  
+thead th div {
+  background-color: #f2f2f2; /* 원하는 배경색으로 변경하세요 */
+  width: 100%;
+  height: 100%;
+  padding: .5rem 0.5rem;
+}
+
+tbody th div {
+  padding: .5rem 0.5rem;
+}
+
+.table>:not(caption)>*>* {
+  padding: 0px;
+  color: #000; /* 원하는 색상 값으로 변경 */
+  background-color: #f2f2f2; /* 원하는 배경색으로 변경 */
+  border-bottom-width: 1px; /* 원하는 값으로 변경 */
+  box-shadow: inset 0 0 0 9999px #fff; /* 원하는 값으로 변경 */
+}
+
+.table{
+	border-collapse: separate;
+    border-spacing: 0;
+}

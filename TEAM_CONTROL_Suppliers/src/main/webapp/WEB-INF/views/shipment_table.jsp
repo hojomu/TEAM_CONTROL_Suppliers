@@ -9,8 +9,6 @@
 
 <div class="shipment_tablelist_box">
 
-출하 조회 리스트
-
 <div class="shipment_search_date">
 수주일자
 <input type="date" class="shipment_search_date_input">
@@ -21,113 +19,117 @@
 
 <div class="shipment_search_text">
 납품처
-<input type="text" class="shipment_search_text_input">
+<input type="text" class="shipment_search_text_input" placeholder="search...">
 <button class="shipment_search_text_button">검색</button>
-</div>
-
-<div class="shipment_table_header">
-<button class="shipment_table_header_leftbnt">왼</button>
-<div class="shipment_table_header_today">2023년-6월-02일</div>
-<button class="shipment_table_header_rightbnt">오</button>
-<button class="shipment_table_header_orderbnt">출아요청서 등록</button>
 </div>
 
 		  <div class="card">
             <div class="card-body">
-              <h5 class="card-title">shipment</h5>
+            <div class="shipment_table_header">
+            
+            <div class="shipment_table_header_day">
+			<button class="shipment_table_header_leftbnt">&lt;</button>
+			<div class="shipment_table_header_today">2023년-6월-02일</div>
+			<button class="shipment_table_header_rightbnt">&gt;</button>
+			</div>
+			
+			<button class="shipment_table_header_orderbnt">출하요청서 등록</button>
+			</div>
+              <!-- <h5 class="card-title">shipment</h5> -->
               
               <div class="shipment_table_box">
               <!-- Bordered Table -->
               <table class="table table-bordered">
+              
                 <thead class="shipment_table_thead">
                   <tr>
-                    <th scope="col">no</th>
-                    <th scope="col">수주일자</th>
-                    <th scope="col">납기일자</th>
-                    <th scope="col">남품처</th>
-                    <th scope="col">총 액</th>
+                    <th scope="col"><div>no</div></th>
+                    <th scope="col"><div>수주일자</div></th>
+                    <th scope="col"><div>납기일자</div></th>
+                    <th scope="col"><div>남품처</div></th>
+                    <th scope="col"><div>총 액</div></th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <th scope="row">1</th>
+                    <th scope="row"><div>1</div></th>
                     <td>2023-05-25</td>
                     <td>2023-06-01</td>
                     <td>그린병원</td>
                     <td>369,000,000원</td>
                   </tr>
                   <tr>
-                    <th scope="row">2</th>
+                    <th scope="row"><div>1</div></th>
                     <td>2023-05-25</td>
                     <td>2023-06-01</td>
                     <td>숨병원</td>
                     <td>33,000,000원</td>
                   </tr>
                   <tr>
-                    <th scope="row">3</th>
+                    <th scope="row"><div>1</div></th>
                     <td>2023-05-25</td>
                     <td>2023-06-01</td>
                     <td>호조무병원</td>
                     <td>66,000,000원</td>
                   </tr>
                   <tr>
-                    <th scope="row">4</th>
+                    <th scope="row"><div>1</div></th>
                     <td>2023-05-25</td>
                     <td>2023-06-01</td>
-                    <td>연일이병원</td>
+                    <td>영일이병원</td>
                     <td>99,000,000원</td>
                   </tr>
                   <tr>
-                    <th scope="row">5</th>
+                    <th scope="row"><div>1</div></th>
                     <td>2023-05-25</td>
                     <td>2023-06-01</td>
                     <td>폴병원</td>
                     <td>55,000,000원</td>
                   </tr>
                   <tr>
-                    <th scope="row">5</th>
+                    <th scope="row"><div>1</div></th>
                     <td>2023-05-25</td>
                     <td>2023-06-01</td>
                     <td>폴병원</td>
                     <td>55,000,000원</td>
                   </tr>
                   <tr>
-                    <th scope="row">5</th>
+                    <th scope="row"><div>1</div></th>
                     <td>2023-05-25</td>
                     <td>2023-06-01</td>
                     <td>폴병원</td>
                     <td>55,000,000원</td>
                   </tr>
                   <tr>
-                    <th scope="row">5</th>
+                    <th scope="row"><div>1</div></th>
                     <td>2023-05-25</td>
                     <td>2023-06-01</td>
                     <td>폴병원</td>
                     <td>55,000,000원</td>
                   </tr>
                   <tr>
-                    <th scope="row">5</th>
+                    <th scope="row"><div>1</div></th>
                     <td>2023-05-25</td>
                     <td>2023-06-01</td>
                     <td>폴병원</td>
                     <td>55,000,000원</td>
                   </tr>
                   <tr>
-                    <th scope="row">5</th>
+                    <th scope="row"><div>1</div></th>
                     <td>2023-05-25</td>
                     <td>2023-06-01</td>
                     <td>폴병원</td>
                     <td>55,000,000원</td>
                   </tr>
                   <tr>
-                    <th scope="row">5</th>
+                    <th scope="row"><div>1</div></th>
                     <td>2023-05-25</td>
                     <td>2023-06-01</td>
                     <td>폴병원</td>
                     <td>55,000,000원</td>
                   </tr>
                   <tr>
-                    <th scope="row">5</th>
+                    <th scope="row"><div>10</div></th>
                     <td>2023-05-25</td>
                     <td>2023-06-01</td>
                     <td>폴병원</td>

@@ -1,1 +1,91 @@
 @charset "UTF-8";
+
+#main{
+	min-height: calc(100vh - 10rem);
+}
+
+.shipment_order_date{
+	margin: 10px;
+}
+
+.shipment_order_date_input{
+    width: 110px;
+    height: 30px;
+    border-radius: 5px;
+    border: solid 1px #000;
+    padding-left: 5px;
+}
+
+.shipment_order_text{
+	margin: 10px 10px 10px 10px;
+}
+
+.shipment_order_text_input{
+	width: 150px;
+    height: 25px;
+    border-radius: 5px;
+    border: solid 1px #000;
+    padding-left: 5px;
+}
+
+.shipment_order_botton{
+	display:flex;
+	justify-content: center;
+}
+
+.shipment_order_canclebnt{
+	font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 1px;
+    padding: 10px 30px;
+    border-radius: 4px;
+    transition: 0.5s;
+    line-height: 1;
+    color: #fff;
+    background: #4492ff;
+    border: none;
+    margin: 5px 15px 5px 15px;
+}
+
+.shipment_order_canclebnt:hover{
+    background: #356dff;
+}
+
+.shipment_order_registerbnt{
+	font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 1px;
+    padding: 10px 30px;
+    border-radius: 4px;
+    transition: 0.5s;
+    line-height: 1;
+    color: #fff;
+    background: #4492ff;
+    border: none;
+    margin: 5px 15px 5px 15px;
+}
+
+.shipment_order_registerbnt:hover{
+    background: #356dff;
+}
+
+.shipment_order_table_box{
+	height: 500px;
+    overflow-y: scroll;
+    border: solid 1px #dee2e6;
+    clear: both;
+	}
+
+tbody td div {
+  padding: .5rem 0.5rem;
+}
+
+.shipment_order_sum{
+	display: flex;
+	justify-content: space-evenly;
+	margin-top: 20px;
+}
+
+
