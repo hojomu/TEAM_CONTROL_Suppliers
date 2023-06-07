@@ -32,12 +32,51 @@
               <!-- <h5 class="card-title">shipment</h5> -->
               
               <div class="shipment_order_table_box">
+			  
+			   <div id="optionWindow">
+			    <div>
+			    <input type="text" placeholder="search..." class="product_order_option_search">
+			    <button class="product_order_option_searchbnt">검색</button>
+			    </div>
+					<div class="optionItem">
+					  <input type="checkbox" id="productA" value="A 제품"/>
+					  <label for="productA"><span>A 제품</span></label>
+					</div>
+					<div class="optionItem">
+					  <input type="checkbox" id="productB" value="B 제품"/>
+					  <label for="productB"><span>B 제품</span></label>
+					</div>
+					<div class="optionItem">
+					  <input type="checkbox" id="productC" value="C 제품"/>
+					  <label for="productC"><span>C 제품</span></label>
+					</div>
+			    <button onclick="addSelectedProducts()">추가</button>
+			    <button onclick="hideOption()">취소</button>
+			  </div>
+              
               <!-- Bordered Table -->
               <table class="table table-bordered">
               
+              	<colgroup>
+			        <col width="20%" />
+			        <col width="20%" />
+			        <col width="15%" />
+			        <col width="20%" />
+			        <col width="20%" />
+			        <col width="5%" />
+			        <%-- <col width="auto" /> --%>
+		        </colgroup>
+              
                 <thead class="shipment_table_thead">
                   <tr>
-                    <th scope="col"><div>품목명</div></th>
+                    <th scope="col">
+                    <div class="order_showOption">
+                    	품목명
+                    	<button class="showOptionbnt" onclick="showOption()">
+                    	<img alt="more" src="resources/img/more.png" width="22px" height="auto" class="order_morebnt">
+                    	</button>
+                    </div>
+                    </th>
                     <th scope="col"><div>품목코드</div></th>
                     <th scope="col"><div>수량</div></th>
                     <th scope="col"><div>판매단가</div></th>
@@ -47,9 +86,9 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td><div>a제품</div></td>
+                    <td ><div id="selectedProducts"></div></td>
                     <td><div>0123</div></td>
-                    <td><div>100</div></td>
+                    <td><div><input class="shipment_order_num"></div></td>
                     <td><div>50</div></td>
                     <td><div>5</div></td>
                     <td><div>50</div></td>
@@ -152,6 +191,7 @@
 
   <!-- Template Main JS File -->
   <script src="resources/js/main.js"></script>
+  <script src="resources/js/shipment_order.js"></script>
 
 </body>
 </html>

@@ -55,7 +55,7 @@
                     <th scope="row"><div>1</div></th>
                     <td>2023-05-25</td>
                     <td>2023-06-01</td>
-                    <td>그린병원</td>
+                    <td><a href="shipment_detail">그린병원</a></td>
                     <td>369,000,000원</td>
                   </tr>
                   <tr>

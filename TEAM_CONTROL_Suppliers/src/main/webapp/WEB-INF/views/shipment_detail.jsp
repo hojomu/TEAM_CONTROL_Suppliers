@@ -6,9 +6,136 @@
 <%@ include file="shipment_header.jsp" %>
 
 <!-- 본문 내용 -->
+<main id="main" class="main">
 
-조회 디테일 페이지
+			<div class="card">
+            <div class="card-body">
+            <div class="shipment_table_header">
+            
+            <div class="shipment_search_date">
+			수주일자 :
+			<span class="shipment_order_confirmation">2023-06-07</span>
+			-
+			납기일자 :
+			<span class="shipment_order_confirmation">2023-06-30</span>
+			</div>
+			
+			<div class="shipment_order_text">
+			계약 코드 : <span class="shipment_order_confirmation">01-0607-001</span> 
+			납품처 : <span class="shipment_order_confirmation">울산병원</span> 
+			납품처 주소 : <span class="shipment_order_confirmation">울산 남구 어쩌고 저쩌고</span> 
+            </div>
+            
+            <div class="shipment_order_text">
+			대표 이름 : <span class="shipment_order_confirmation">김수민</span>  
+			대표 번호 : <span class="shipment_order_confirmation">010-1234-5678</span>  
+			대표 이메일 : <span class="shipment_order_confirmation">abc123@gmail.com</span> 
+            </div>
+            
+			</div>
+              
+              <div class="shipment_order_table_box">
 
+              <!-- Bordered Table -->
+              <table class="table table-bordered">
+              
+              	<colgroup>
+			        <col width="20%" />
+			        <col width="20%" />
+			        <col width="15%" />
+			        <col width="20%" />
+			        <col width="20%" />
+			        <col width="5%" />
+			        <%-- <col width="auto" /> --%>
+		        </colgroup>
+              
+                <thead class="shipment_table_thead">
+                  <tr>
+                    <th scope="col"><div>품목명</div></th>
+                    <th scope="col"><div>품목코드</div></th>
+                    <th scope="col"><div>수량</div></th>
+                    <th scope="col"><div>판매단가</div></th>
+                    <th scope="col"><div>부가세</div></th>
+                    <th scope="col"><div>현재고</div></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><div>a제품</div></td>
+                    <td><div>0123</div></td>
+                    <td><div>100</div></td>
+                    <td><div>50</div></td>
+                    <td><div>5</div></td>
+                    <td><div>50</div></td>
+                  </tr>
+                  <tr>
+                    <td><div>a제품</div></td>
+                    <td><div>0123</div></td>
+                    <td><div>100</div></td>
+                    <td><div>50</div></td>
+                    <td><div>5</div></td>
+                    <td><div>50</div></td>
+                  </tr>
+                  <tr>
+                    <td><div>a제품</div></td>
+                    <td><div>0123</div></td>
+                    <td><div>100</div></td>
+                    <td><div>50</div></td>
+                    <td><div>5</div></td>
+                    <td><div>50</div></td>
+                  </tr>
+                  <tr>
+                    <td><div>a제품</div></td>
+                    <td><div>0123</div></td>
+                    <td><div>100</div></td>
+                    <td><div>50</div></td>
+                    <td><div>5</div></td>
+                    <td><div>50</div></td>
+                  </tr>
+                  <tr>
+                    <td><div>a제품</div></td>
+                    <td><div>0123</div></td>
+                    <td><div>100</div></td>
+                    <td><div>50</div></td>
+                    <td><div>5</div></td>
+                    <td><div>50</div></td>
+                  </tr>
+                  <tr>
+                    <td><div>a제품</div></td>
+                    <td><div>0123</div></td>
+                    <td><div>100</div></td>
+                    <td><div>50</div></td>
+                    <td><div>5</div></td>
+                    <td><div>50</div></td>
+                  </tr>
+                  <tr>
+                    <td><div>a제품</div></td>
+                    <td><div>0123</div></td>
+                    <td><div>100</div></td>
+                    <td><div>50</div></td>
+                    <td><div>5</div></td>
+                    <td><div>50</div></td>
+                  </tr>
+                </tbody>
+              </table>
+              </div>
+              <!-- End Bordered Table -->
+              
+              <div class="shipment_order_sum">
+				<div>총수량 : <span>100</span></div>
+				<div>총 판매가 : <span>123,000</span></div> 
+				<div>총 부가세 : <span>12,300</span></div> 
+				<div>총 액 : <span>135,300</span></div>
+			  </div>
+              
+            </div>
+            </div>
+
+<div class="shipment_order_botton">
+<button class="shipment_order_canclebnt">삭제</button><button class="shipment_order_registerbnt">다운로드</button>
+</div>
+
+</main>
 <!-- 본문 끝 -->
   
   <!-- ======= Footer ======= -->
@@ -39,6 +166,7 @@
 
   <!-- Template Main JS File -->
   <script src="resources/js/main.js"></script>
+  <script src="resources/js/shipment_order.js"></script>
 
 </body>
 </html>
