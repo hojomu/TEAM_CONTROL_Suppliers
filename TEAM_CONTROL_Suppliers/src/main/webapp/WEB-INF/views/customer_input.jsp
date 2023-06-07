@@ -4,32 +4,59 @@
 <!-- headerSidebar jsp -->
 <%@ include file="delivery_headerSidebar.jsp" %>
 
-<!-- 본문 내용 -->
+	<!-- managercheckdetail css -->
+	<link rel="stylesheet" href="/resources/css/customerinput.css"></link>	
+
+
+<body>
 <main id="main" class="main">
 
-	<link href ="resources/css/delivery_calendar.css" rel="stylesheet"/>
-    <script src="resources/js/delivery_caalendar.js"></script>
-    <script>
-
-      document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridMonth'
-        });
-        calendar.render();
-      });
-
-    </script>
-
-  <div class="card">
-    <div id='calendar'></div>
-  </div>  
-  
+<div class="container">
+  <div class="item">
+	<form>    
+  	  <div class="customer_table"> 	
+  	    <h2 class="customer_title">고객정보 입력</h2>
+		<table>			
+		    <colgroup>
+		        <col width="25%" />
+		        <col width="40%" />		       
+		        <%-- <col width="auto" /> --%>
+		    </colgroup>
+			<tr>
+				<td class="title2">병원이름</td>
+				<td class="content2">
+				   <input type="text" name="hospital">				   
+				</td>
+			</tr>
+			<tr>
+				<td>대표자 이름</td>
+				<td class="content2"><input type="text" name="name"></td>
+			</tr>
+			<tr>
+				<td>전화번호</td>
+				<td class="content2"><input type="text" name="phone"></td>		
+			</tr>
+			<tr>
+				<td>병원 주소</td>
+				<td class="content2"><input type="text" name="address"></td>		
+			</tr>
+			<tr>
+				<td>대표 이메일</td>
+				<td class="content2"><input type="text" name="email"></td>			
+			</tr>	
+		</table>
+	  </div>
+	  <div class="customer_button">
+		  <div class="customer_button_item">
+				<input type="submit" value="확 인" class="btn-get-started" formaction="CustomerInput">
+		  </div>
+	  </div>
+    </form>
+  </div>
+</div>
 </main>
 
-<!-- 본문 끝 -->
-  
-  <!-- ======= Footer ======= -->
+ <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
       &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
@@ -57,6 +84,8 @@
 
   <!-- Template Main JS File -->
   <script src="resources/js/main.js"></script>
-
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="/resources/js/managercheckdetail.js"></script> 
+  
 </body>
 </html>

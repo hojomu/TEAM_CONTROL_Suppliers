@@ -4,8 +4,120 @@
 <!-- headerSidebar jsp -->
 <%@ include file="delivery_headerSidebar.jsp" %>
 
+	<link href ="resources/css/delivery_list.css" rel="stylesheet"/>
+    
 <!-- 본문 내용 -->
+  <main id="main" class="main">
 
+    <div class="pagetitle">
+  <!-- 오늘 날짜  -->
+  	  
+      <p class="today_date"> 2023년 6월 05일 </p>
+  
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+      <div class="row">
+
+    <!-- Table with hoverable rows -->
+	 <div class="col-12">
+	  <div class="card overflow-auto">
+	
+	    
+	      <div class="list-body">
+	    
+	         <!--  <div class="list_top">
+	        	<a class="num"> no. 241567 </a>	
+	        	<a class="hos_adress"> 울산 남구 돋질로336번길 10 </a>
+	        	<a class="hos_name"> 보람병원 </a> 
+	          </div> -->
+	          
+		 	<ul class="list_top">
+		 		<li class="num">no. 241567</li>
+		 		<li class="hos_name">울산대학교병원</li>
+		 		<li class="hos_adress">울산 남구 돋질로336번길 10 </li>
+		 	</ul>	
+			
+	        <table class="table table-hover">
+	          <thead>
+	            <tr>
+	              <th scope="col" >품목명</th>
+	              <th scope="col" >품목코드</th>
+	              <th scope="col" >수량</th>
+	            </tr>
+	          </thead>
+	          
+	          <tbody class="table_inside">
+	            <tr>
+	              <td>A제품</td>
+	              <td>230121</td>
+	              <td>50</td>
+	            </tr>
+	            <tr>
+	              <td>B제품</td>
+	              <td>230121</td>
+	              <td>20</td>
+	            </tr>
+	            <tr>
+	              <td>C제품</td>
+	              <td>230121</td>
+	              <td>300</td>
+	            </tr>
+	            <tr>
+	              <td>D제품</td>
+	              <td>230121</td>
+	              <td>100</td>
+	            </tr>
+	            <tr>
+	              <td>E제품</td>
+	              <td>230121</td>
+	              <td>50</td>
+	            </tr>
+	            <tr>
+	              <td>A제품</td>
+	              <td>230121</td>
+	              <td>50</td>
+	            </tr>
+	            <tr>
+	              <td>B제품</td>
+	              <td>230121</td>
+	              <td>20</td>
+	            </tr>
+	            <tr>
+	              <td>C제품</td>
+	              <td>230121</td>
+	              <td>300</td>
+	            </tr>
+	            <tr>
+	              <td>D제품</td>
+	              <td>230121</td>
+	              <td>100</td>
+	            </tr>
+	            <tr>
+	              <td>E제품</td>
+	              <td>230121</td>
+	              <td>50</td>
+	            </tr>
+	          </tbody>
+	        </table>
+	        <!-- End Table with hoverable rows -->
+	        
+	        <ul class="list_button">
+		 		<li> <button type="submit" class="start" > 배송시작 </button> </li>
+		 		<li> <button type="button" class="end"> 배송완료 </button> </li>
+		 	</ul>	
+
+	        </div>
+	       
+	    </div>
+	   </div>
+	  </div>
+	 </section>
+	    
+  </main>
+   
+   
+   
 
 <!-- 본문 끝 -->
   
