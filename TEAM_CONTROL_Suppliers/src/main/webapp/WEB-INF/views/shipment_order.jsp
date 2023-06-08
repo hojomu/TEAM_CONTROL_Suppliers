@@ -34,7 +34,7 @@
               <div class="shipment_order_table_box">
 			  
 			   <div id="optionWindow">
-			    <div>
+			    <div class="product_order_option_searchbox">
 			    <input type="text" placeholder="search..." class="product_order_option_search">
 			    <button class="product_order_option_searchbnt">검색</button>
 			    </div>
@@ -50,8 +50,10 @@
 					  <input type="checkbox" id="productC" value="C 제품"/>
 					  <label for="productC"><span>C 제품</span></label>
 					</div>
-			    <button onclick="addSelectedProducts()">추가</button>
-			    <button onclick="hideOption()">취소</button>
+					<div class="product_order_option_buttombox">
+				    <button class="product_order_checkbnt" onclick="addSelectedProducts()">추가</button>
+				    <button class="product_order_cencelbnt" onclick="hideOption()">취소</button>
+				    </div>
 			  </div>
               
               <!-- Bordered Table -->
