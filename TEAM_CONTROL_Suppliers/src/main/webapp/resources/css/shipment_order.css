@@ -88,4 +88,259 @@ tbody td div {
 	margin-top: 20px;
 }
 
+.order_morebnt{
+	
+	
+}
 
+.order_showOption{
+	display: flex;
+	align-items: center;
+}
+
+.showOptionbnt{
+	width: 20px;
+	height: 20px;
+    border-radius: 5px;
+    background-color:#4492ff;
+    border:2px solid #4492ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5px;
+}
+
+#optionWindow {
+    display: none;
+    width: 300px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    position: absolute;
+    /* top: 50%; */
+    /* left: 50%; */
+    /* transform: translate(-50%, -50%); */
+    margin-top: 40px;
+    background-color: #fff;
+    z-index: 9999;
+}
+
+.optionItem {
+    padding-left: 3px;
+    padding-right: 3px;
+    border: solid #e6e6e6 1px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.product_order_option_search{
+	    width: 210px;
+    margin: 5px;
+}
+
+.product_order_option_searchbnt{
+	font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 1px;
+    /* padding: 10px 10px; */
+    border-radius: 4px;
+    transition: 0.5s;
+    line-height: 1;
+    color: #fff;
+    background: #4492ff;
+    border: none;
+    margin: 5px 5px 5px 5px;
+}
+
+.product_order_option_searchbnt:hover{
+    background: #356dff;
+}
+
+label{
+    display: flex;
+    align-items: center;
+}
+
+/* input 숨겨준다 */
+input#productA{
+  display:none;
+  }
+
+input#productA + label{
+  cursor:pointer;
+ }
+
+input#productA + label > span{
+  vertical-align: middle;
+  padding-left: 5px;
+ }
+
+/* label:before에 체크하기 전 상태 CSS */
+input#productA + label:before{
+  content:"+";
+  display:inline-block;
+  width:17px;
+  height:17px;
+  background-color:#4492ff;
+  border:2px solid #4492ff;
+  border-radius: 4px;
+  vertical-align:middle;
+  color: #fff;
+/*   font-weight: bold; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1em;
+  }
+  
+/* label:before에 체크 된 상태 CSS */  
+input#productA:checked + label:before{
+  content:"";
+  background-color:#4492ff;
+  border-color:#4492ff;
+  background-image: url('check.png');
+  background-size: 16px;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  }
+  
+  /* input 숨겨준다 */
+input#productB{
+  display:none;
+  }
+
+input#productB + label{
+  cursor:pointer;
+ }
+
+input#productB + label > span{
+  vertical-align: middle;
+  padding-left: 5px;
+ }
+
+/* label:before에 체크하기 전 상태 CSS */
+input#productB + label:before{
+  content:"+";
+  display:inline-block;
+  width:17px;
+  height:17px;
+  background-color:#4492ff;
+  border:2px solid #4492ff;
+  border-radius: 4px;
+  vertical-align:middle;
+  color: #fff;
+/*   font-weight: bold; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1em;
+  }
+  
+/* label:before에 체크 된 상태 CSS */  
+input#productB:checked + label:before{
+  content:"";
+  background-color:#4492ff;
+  border-color:#4492ff;
+  background-image: url('check.png');
+  background-size: 16px;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  }
+  
+    /* input 숨겨준다 */
+input#productC{
+  display:none;
+  }
+
+input#productC + label{
+  cursor:pointer;
+ }
+
+input#productC + label > span{
+  vertical-align: middle;
+  padding-left: 5px;
+ }
+
+/* label:before에 체크하기 전 상태 CSS  */
+input#productC + label:before{
+  content:"+";
+  display:inline-block;
+  width:17px;
+  height:17px;
+  background-color:#4492ff;
+  border:2px solid #4492ff;
+  border-radius: 4px;
+  vertical-align:middle;
+  color: #fff;
+  /* font-weight: bold; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1em;
+  }
+  
+/* label:before에 체크 된 상태 CSS */  
+input#productC:checked + label:before{
+  content:"";
+  background-color:#4492ff;
+  border-color:#4492ff;
+  background-image: url('check.png');
+  background-size: 16px;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  }
+
+.product_order_checkbnt{
+		font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 1px;
+    padding: 5px 5px;
+    border-radius: 4px;
+    transition: 0.5s;
+    line-height: 1;
+    color: #fff;
+    background: #4492ff;
+    border: none;
+    margin: 5px 5px 5px 5px;
+}
+
+.product_order_checkbnt:hover{
+    background: #356dff;
+}
+
+.product_order_cencelbnt{
+	font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 1px;
+    padding: 5px 5px;
+    border-radius: 4px;
+    transition: 0.5s;
+    line-height: 1;
+    color: #fff;
+    background: #4492ff;
+    border: none;
+    margin: 5px 5px 5px 5px;
+}
+  
+.product_order_cencelbnt:hover{
+    background: #356dff;
+}
+
+.product_order_option_searchbox{
+	display: flex;
+    justify-content: center;
+}
+
+.product_order_option_buttombox{
+	display: flex;
+    justify-content: center;
+}
+
+.optionItem_box{
+overflow-y: scroll;
+    height: 80px;
+    border-top: solid 1px #e6e6e6;
+    border-bottom: solid 1px #e6e6e6;
+}

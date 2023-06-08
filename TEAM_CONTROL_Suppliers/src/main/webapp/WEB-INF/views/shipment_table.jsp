@@ -53,87 +53,38 @@
                 <tbody>
                   <tr>
                     <th scope="row"><div>1</div></th>
-                    <td>2023-05-25</td>
-                    <td>2023-06-01</td>
-                    <td>그린병원</td>
-                    <td>369,000,000원</td>
+                    <td><div>2023-05-25</div></td>
+                    <td><div>2023-06-01</div></td>
+                    <td><div><a href="shipment_detail">그린병원</a></div></td>
+                    <td><div>369,000,000원</div></td>
                   </tr>
                   <tr>
                     <th scope="row"><div>1</div></th>
-                    <td>2023-05-25</td>
-                    <td>2023-06-01</td>
-                    <td>숨병원</td>
-                    <td>33,000,000원</td>
+                    <td><div>2023-05-25</div></td>
+                    <td><div>2023-06-01</div></td>
+                    <td><div>숨병원</div></td>
+                    <td><div>369,000,000원</div></td>
                   </tr>
                   <tr>
                     <th scope="row"><div>1</div></th>
-                    <td>2023-05-25</td>
-                    <td>2023-06-01</td>
-                    <td>호조무병원</td>
-                    <td>66,000,000원</td>
+                    <td><div>2023-05-25</div></td>
+                    <td><div>2023-06-01</div></td>
+                    <td><div>호조무병원</div></td>
+                    <td><div>369,000,000원</div></td>
                   </tr>
                   <tr>
                     <th scope="row"><div>1</div></th>
-                    <td>2023-05-25</td>
-                    <td>2023-06-01</td>
-                    <td>영일이병원</td>
-                    <td>99,000,000원</td>
+                    <td><div>2023-05-25</div></td>
+                    <td><div>2023-06-01</div></td>
+                    <td><div>영일이병원</div></td>
+                    <td><div>369,000,000원</div></td>
                   </tr>
                   <tr>
                     <th scope="row"><div>1</div></th>
-                    <td>2023-05-25</td>
-                    <td>2023-06-01</td>
-                    <td>폴병원</td>
-                    <td>55,000,000원</td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><div>1</div></th>
-                    <td>2023-05-25</td>
-                    <td>2023-06-01</td>
-                    <td>폴병원</td>
-                    <td>55,000,000원</td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><div>1</div></th>
-                    <td>2023-05-25</td>
-                    <td>2023-06-01</td>
-                    <td>폴병원</td>
-                    <td>55,000,000원</td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><div>1</div></th>
-                    <td>2023-05-25</td>
-                    <td>2023-06-01</td>
-                    <td>폴병원</td>
-                    <td>55,000,000원</td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><div>1</div></th>
-                    <td>2023-05-25</td>
-                    <td>2023-06-01</td>
-                    <td>폴병원</td>
-                    <td>55,000,000원</td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><div>1</div></th>
-                    <td>2023-05-25</td>
-                    <td>2023-06-01</td>
-                    <td>폴병원</td>
-                    <td>55,000,000원</td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><div>1</div></th>
-                    <td>2023-05-25</td>
-                    <td>2023-06-01</td>
-                    <td>폴병원</td>
-                    <td>55,000,000원</td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><div>10</div></th>
-                    <td>2023-05-25</td>
-                    <td>2023-06-01</td>
-                    <td>폴병원</td>
-                    <td>55,000,000원</td>
+                    <td><div>2023-05-25</div></td>
+                    <td><div>2023-06-01</div></td>
+                    <td><div>폴병원</div></td>
+                    <td><div>369,000,000원</div></td>
                   </tr>
                 </tbody>
               </table>
@@ -147,7 +98,7 @@
 
 <!--         <a class="nav-link collapsed" href="/shipment_detail">
           <span>조회디테일</span>
-        </a> -->
+        </a>   -->
 
 </main>
 <!-- 본문 끝 -->

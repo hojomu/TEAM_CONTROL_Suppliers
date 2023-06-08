@@ -1,1 +1,8 @@
 @charset "UTF-8";
+
+.shipment_order_confirmation{
+	background-color: #f6f9ff;
+    font-weight: bold;
+    padding: 0px 10px 0px 10px;
+	
+}
