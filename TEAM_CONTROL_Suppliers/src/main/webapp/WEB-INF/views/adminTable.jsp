@@ -98,7 +98,19 @@
 	 </section>
 	    
   </main>
-   
+   <div>
+   	${list[0].orderId}
+   	${list[0].customerHospital}
+   	${list[0].orderedProduct}
+   	${list[0].deliveryDate}
+   	${list[1].orderId}
+   	${list[1].customerHospital}
+   	${list[1].orderedProduct}
+   	${list[1].deliveryDate}
+   </div>
+   <div>
+   	${paging}
+   </div>
    
    
    
