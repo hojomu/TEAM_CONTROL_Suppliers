@@ -36,7 +36,7 @@
               
               <div class="shipment_order_table_box">
 
-              <!-- Bordered Table -->
+              <!-- Bordered Table   -->
               <table class="table table-bordered">
               
               	<colgroup>

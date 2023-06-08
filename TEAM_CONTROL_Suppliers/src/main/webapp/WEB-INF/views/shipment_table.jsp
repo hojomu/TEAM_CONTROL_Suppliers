@@ -147,7 +147,7 @@
 
 <!--         <a class="nav-link collapsed" href="/shipment_detail">
           <span>조회디테일</span>
-        </a> -->
+        </a>   -->
 
 </main>
 <!-- 본문 끝 -->

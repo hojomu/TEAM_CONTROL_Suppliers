@@ -256,7 +256,7 @@ input#productC + label > span{
   padding-left: 5px;
  }
 
-/* label:before에 체크하기 전 상태 CSS */
+/* label:before에 체크하기 전 상태 CSS  */
 input#productC + label:before{
   content:"+";
   display:inline-block;
