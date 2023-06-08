@@ -148,3 +148,16 @@ tbody th div {
 	border-collapse: separate;
     border-spacing: 0;
 }
+
+.shipment_order_numberbox{
+	display: flex;
+}
+
+.shipment_order_num{
+	height: 25px;
+}
+
+.shipment_order_n{
+	margin-left: 5px;
+    margin-bottom: 0;
+}

@@ -38,6 +38,7 @@
 			    <input type="text" placeholder="search..." class="product_order_option_search">
 			    <button class="product_order_option_searchbnt">검색</button>
 			    </div>
+			    	<div class="optionItem_box">
 					<div class="optionItem">
 					  <input type="checkbox" id="productA" value="A 제품"/>
 					  <label for="productA"><span>A 제품</span></label>
@@ -49,6 +50,7 @@
 					<div class="optionItem">
 					  <input type="checkbox" id="productC" value="C 제품"/>
 					  <label for="productC"><span>C 제품</span></label>
+					</div>
 					</div>
 					<div class="product_order_option_buttombox">
 				    <button class="product_order_checkbnt" onclick="addSelectedProducts()">추가</button>
@@ -90,7 +92,7 @@
                   <tr>
                     <td ><div id="selectedProducts"></div></td>
                     <td><div>0123</div></td>
-                    <td><div><input class="shipment_order_num"></div></td>
+                    <td><div class="shipment_order_numberbox"><input class="shipment_order_num"><p class="shipment_order_n">개</p></div></td>
                     <td><div>50</div></td>
                     <td><div>5</div></td>
                     <td><div>50</div></td>
@@ -98,7 +100,7 @@
                   <tr>
                     <td><div>a제품</div></td>
                     <td><div>0123</div></td>
-                    <td><div>100</div></td>
+                    <td><div class="shipment_order_numberbox"><input class="shipment_order_num"><p class="shipment_order_n">개</p></div></td>
                     <td><div>50</div></td>
                     <td><div>5</div></td>
                     <td><div>50</div></td>
@@ -106,7 +108,7 @@
                   <tr>
                     <td><div>a제품</div></td>
                     <td><div>0123</div></td>
-                    <td><div>100</div></td>
+                    <td><div class="shipment_order_numberbox"><input class="shipment_order_num"><p class="shipment_order_n">개</p></div></td>
                     <td><div>50</div></td>
                     <td><div>5</div></td>
                     <td><div>50</div></td>
@@ -114,7 +116,7 @@
                   <tr>
                     <td><div>a제품</div></td>
                     <td><div>0123</div></td>
-                    <td><div>100</div></td>
+                    <td><div class="shipment_order_numberbox"><input class="shipment_order_num"><p class="shipment_order_n">개</p></div></td>
                     <td><div>50</div></td>
                     <td><div>5</div></td>
                     <td><div>50</div></td>
@@ -122,7 +124,7 @@
                   <tr>
                     <td><div>a제품</div></td>
                     <td><div>0123</div></td>
-                    <td><div>100</div></td>
+                    <td><div class="shipment_order_numberbox"><input class="shipment_order_num"><p class="shipment_order_n">개</p></div></td>
                     <td><div>50</div></td>
                     <td><div>5</div></td>
                     <td><div>50</div></td>
@@ -130,7 +132,7 @@
                   <tr>
                     <td><div>a제품</div></td>
                     <td><div>0123</div></td>
-                    <td><div>100</div></td>
+                    <td><div class="shipment_order_numberbox"><input class="shipment_order_num"><p class="shipment_order_n">개</p></div></td>
                     <td><div>50</div></td>
                     <td><div>5</div></td>
                     <td><div>50</div></td>
@@ -138,7 +140,7 @@
                   <tr>
                     <td><div>a제품</div></td>
                     <td><div>0123</div></td>
-                    <td><div>100</div></td>
+                    <td><div class="shipment_order_numberbox"><input class="shipment_order_num"><p class="shipment_order_n">개</p></div></td>
                     <td><div>50</div></td>
                     <td><div>5</div></td>
                     <td><div>50</div></td>
