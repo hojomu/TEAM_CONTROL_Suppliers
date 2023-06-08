@@ -19,7 +19,7 @@
 		<table>			
 		    <colgroup>
 		        <col width="25%" />
-		        <col width="40%" />		       
+		        <col width="55%" />		       
 		        <%-- <col width="auto" /> --%>
 		    </colgroup>
 			<tr>
