@@ -8,7 +8,7 @@
 <main id="main" class="main">
 
 	<link href ="resources/css/delivery_calendar.css" rel="stylesheet"/>
-    <script src="resources/js/delivery_caalendar.js"></script>
+    <script src="resources/js/delivery_calendar.js"></script>
     
     
   <script>
@@ -18,7 +18,7 @@
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 // Tool Bar 목록 document : https://fullcalendar.io/docs/toolbar
                 headerToolbar: {
-                    left: 'prevYear,prev,next,nextYear today',
+                    left: 'prev,next today',
                     center: 'title',
                     right: 'dayGridMonth,dayGridWeek,dayGridDay'
                 },

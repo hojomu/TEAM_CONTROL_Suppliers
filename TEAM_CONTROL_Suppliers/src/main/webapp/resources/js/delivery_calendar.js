@@ -1533,11 +1533,7 @@ var FullCalendar = (function (exports) {
             defaultSeparator: betterDefaultSeparator || context.defaultSeparator,
         };
     }
-    
-    
-   
-      
-      
+
     /*
     TODO: fix the terminology of "formatter" vs "formatting func"
     */
@@ -4197,8 +4193,8 @@ var FullCalendar = (function (exports) {
         buttonText: {
             prev: 'prev',
             next: 'next',
-            /*prevYear: 'prev year',
-            nextYear: 'next year',*/
+            prevYear: 'prev year',
+            nextYear: 'next year',
             year: 'year',
             today: 'today',
             month: 'month',
@@ -5452,14 +5448,14 @@ var FullCalendar = (function (exports) {
         close: 'fc-icon-x',
         prev: 'fc-icon-chevron-left',
         next: 'fc-icon-chevron-right',
-        /*prevYear: 'fc-icon-chevrons-left',
-        nextYear: 'fc-icon-chevrons-right',*/
+        prevYear: 'fc-icon-chevrons-left',
+        nextYear: 'fc-icon-chevrons-right',
     };
     StandardTheme.prototype.rtlIconClasses = {
         prev: 'fc-icon-chevron-right',
         next: 'fc-icon-chevron-left',
-        /*prevYear: 'fc-icon-chevrons-right',
-        nextYear: 'fc-icon-chevrons-left',*/
+        prevYear: 'fc-icon-chevrons-right',
+        nextYear: 'fc-icon-chevrons-left',
     };
     StandardTheme.prototype.iconOverrideOption = 'buttonIcons'; // TODO: make TS-friendly
     StandardTheme.prototype.iconOverrideCustomButtonOption = 'icon';
@@ -14566,14 +14562,14 @@ var FullCalendar = (function (exports) {
         close: 'fa-times',
         prev: 'fa-chevron-left',
         next: 'fa-chevron-right',
-       /* prevYear: 'fa-angle-double-left',
-        nextYear: 'fa-angle-double-right',*/
+        prevYear: 'fa-angle-double-left',
+        nextYear: 'fa-angle-double-right',
     };
     BootstrapTheme$1.prototype.rtlIconClasses = {
         prev: 'fa-chevron-right',
         next: 'fa-chevron-left',
-     /*   prevYear: 'fa-angle-double-right',
-        nextYear: 'fa-angle-double-left',*/
+        prevYear: 'fa-angle-double-right',
+        nextYear: 'fa-angle-double-left',
     };
     BootstrapTheme$1.prototype.iconOverrideOption = 'bootstrapFontAwesome'; // TODO: make TS-friendly. move the option-processing into this plugin
     BootstrapTheme$1.prototype.iconOverrideCustomButtonOption = 'bootstrapFontAwesome';
@@ -14606,14 +14602,14 @@ var FullCalendar = (function (exports) {
         close: 'bi-x-lg',
         prev: 'bi-chevron-left',
         next: 'bi-chevron-right',
- /*       prevYear: 'bi-chevron-double-left',
-        nextYear: 'bi-chevron-double-right',*/
+        prevYear: 'bi-chevron-double-left',
+        nextYear: 'bi-chevron-double-right',
     };
     BootstrapTheme.prototype.rtlIconClasses = {
         prev: 'bi-chevron-right',
         next: 'bi-chevron-left',
-      /*  prevYear: 'bi-chevron-double-right',
-        nextYear: 'bi-chevron-double-left',*/
+        prevYear: 'bi-chevron-double-right',
+        nextYear: 'bi-chevron-double-left',
     };
     // wtf
     BootstrapTheme.prototype.iconOverrideOption = 'buttonIcons'; // TODO: make TS-friendly

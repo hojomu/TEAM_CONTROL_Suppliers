@@ -121,14 +121,14 @@
 .fc-icon-chevron-right:before {
   content: "\e901";
 }
-/* 
+
 .fc-icon-chevrons-left:before {
   content: "\e902";
 } */
 
-/* .fc-icon-chevrons-right:before {
+ .fc-icon-chevrons-right:before {
   content: "\e903";
-} */
+} 
 
 .fc-icon-minus-square:before {
   content: "\e904";
@@ -294,6 +294,7 @@ When it's NOT activated, the fc-button classes won't even be in the DOM.
 /* 버튼 반응형으로 수정 */
 
   @media (max-width: 600px) {
+  
    .fc .fc-button-group > .fc-prev-button {
       padding: 0;
     }
@@ -305,19 +306,63 @@ When it's NOT activated, the fc-button classes won't even be in the DOM.
    .fc .fc-today-button {
    	  margin-left:0  ;
    	  padding: 0;
+   	  font-size: 13px;
+   	  height: 25px;
+   	  
    } 
    
    .fc-button-group > .fc-button {
    	  padding: 0;
+   	 
    }
-     
+   
+   .fc .fc-toolbar-chunk > .fc-button-group > .fc-dayGridMonth-button {
+  	 border-top-left-radius: 3px;
+     border-bottom-left-radius: 3px;
+   }
+   
+   .fc .fc-toolbar-chunk > .fc-button-group > .fc-dayGridDay-button  {
+     border-top-right-radius: 3px;
+     border-bottom-right-radius: 3px;
+   }
+   
    .fc .fc-toolbar-chunk > .fc-toolbar-title {
-    font-size: 20px;
-    margin: 0;
-}
-    
+      font-size: 15px;
+      margin: 0;
+	}
 
-  }  
+  .fc-button-group > .fc-dayGridMonth-button {
+	   font-size:0px;
+    } 
+    
+    .fc-button-group > .fc-dayGridMonth-button:before  {
+	   font-size: 15px;
+       content: "m";
+       margin: 5px;
+       
+       
+	}
+  .fc-button-group > .fc-dayGridWeek-button {
+	   font-size:0px;
+    } 
+    
+    .fc-button-group > .fc-dayGridWeek-button:before  {
+	   font-size: 15px;
+       content: "w";
+       margin: 5px;
+	}
+  .fc-button-group > .fc-dayGridDay-button {
+	   font-size:0px;
+    } 
+    
+    .fc-button-group > .fc-dayGridDay-button:before  {
+	   font-size: 15px;
+       content: "d";
+       margin: 5px;
+    
+	}
+	
+}  
     
 /* ----------------------------------------------------- */
 
@@ -369,7 +414,8 @@ When it's NOT activated, the fc-button classes won't even be in the DOM.
     margin: 0;
   }
 .fc-direction-ltr .fc-toolbar > * > :not(:first-child) {
-    margin-left: .75em; /* space between */
+    margin-left: 5px; /* space between */
+
   }
 .fc-direction-rtl .fc-toolbar > * > :not(:first-child) {
     margin-right: .75em; /* space between */
@@ -426,8 +472,10 @@ When it's NOT activated, the fc-button classes won't even be in the DOM.
 
   }
 .fc .fc-scrollgrid-liquid {
-    height: 100%;
+     height: 100%; 
+
   }
+
 .fc .fc-scrollgrid-section { /* a <tr> */
     height: 1px /* better than 0, for firefox */
 
