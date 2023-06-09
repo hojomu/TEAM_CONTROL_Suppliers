@@ -66,11 +66,33 @@ li{
 	padding: 6px 0 6px 10px;
     height: 35px;
 	font-size: 15px;
-	margin-bottom: 3px;
+	margin-bottom: 3px;	
 }
 
+#order-number-column{
+	white-space: nowrap;
+}
 
+#order-customer-column{
+	white-space: nowrap;
+}
 
+#order-title-column{
+	white-space: nowrap;
+	max-width:900px;
+}
+
+#order-date-column{
+	white-space: nowrap;
+}
+
+#order-state-column{
+	white-space: nowrap;
+}
+
+.order-product{
+	max-width:900px;
+}
 
 
 

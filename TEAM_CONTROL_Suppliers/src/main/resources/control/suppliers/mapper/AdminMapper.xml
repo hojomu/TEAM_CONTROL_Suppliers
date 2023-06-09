@@ -17,12 +17,13 @@
 	<select id="list" resultMap="adminOrderResultMap">
 		SELECT
 			o.order_id,
-			o.delivery_date,
+			DATE_FORMAT(o.delivery_date, '%Y-%m-%d') AS delivery_date,
 			c.name as customerHospital
 		FROM `order` o
 		JOIN order_cancel oc ON o.order_id = oc.order_id
 		JOIN customer c ON o.customer_id = c.customer_id
 		WHERE oc.state = 'normal'
+		ORDER BY o.order_id DESC
 		LIMIT ${(pageNum-1)*amount}, #{amount}
 	</select>
 	<!-- 주문한 물건 목록 불러오기 (이름, 갯수) -->
@@ -41,7 +42,7 @@
   	  from `order` o
   		left join order_cancel oc ON o.order_id = oc.order_id
   	  where
-  	  	oc.oCancel_id = 'normal'
+  	  	oc.state = 'normal'
   	</select>
   	
   	

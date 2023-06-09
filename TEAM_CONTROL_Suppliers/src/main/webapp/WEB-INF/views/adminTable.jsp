@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 
 <!-- headerSidebar jsp -->
 <%@ include file="admin_header.jsp" %>
@@ -44,53 +45,56 @@
 	        <table class="table table-hover">
 	          <thead>
 	            <tr>
-	              <th scope="col"># 주문번호</th>
-	              <th scope="col">고객(병원)</th>
-	              <th scope="col">주문</th>
-	              <th scope="col">출하 예정일</th>
-	              <th scope="col">출하 상태</th>
+	              <th id="order-number-column" scope="col"># 주문번호</th>
+	              <th id="order-customer-column" scope="col">고객(병원)</th>
+	              <th id="order-title-column" scope="col">주문</th>
+	              <th id="order-date-column" scope="col">출하 예정일</th>
+	              <th id="order-state-column" scope="col">출하 상태</th>
 	            </tr>
 	          </thead>
 	          <tbody>
-	            <tr>
-	              <th scope="row">1</th>
-	              <td>우리 피부과</td>
-	              <td>제품 B 신규 계약</td>
-	              <td>2016-05-25</td>
-	              <td><span class="badge bg-success">Approved</span></td>
-	            </tr>
-	            <tr>
-	              <th scope="row">2</th>
-	              <td>홍 정형외과</td>
-	              <td>제품 B 신규 계약</td>
-	              <td>2014-12-05</td>
-	              <td><span class="badge bg-warning">Pending</span></td>
-	            </tr>
-	            <tr>
-	              <th scope="row">3</th>
-	              <td>울산 대학 병원</td>
-	              <td>제품 B 신규 계약</td>
-	              <td>2011-08-12</td>
-	              <td><span class="badge bg-danger">Rejected</span></td>
-	            </tr>
-	            <tr>
-	              <th scope="row">4</th>
-	              <td>부산 병원</td>
-	              <td>제품 B 신규 계약</td>
-	              <td>2012-06-11</td>
-	              <td><span class="badge bg-danger">Rejected</span></td>
-	            </tr>
-	            <tr>
-	              <th scope="row">5</th>
-	              <td>서울 탑 치과</td>
-	              <td>제품 B 신규 계약 Division Officer</td>
-	              <td>2011-04-19</td>
-	              <td><span class="badge bg-success">Approved</span></td>
-	            </tr>
+	          	<c:forEach items="${list}" var="orderList">
+	          	  <tr>
+	          	    <th scope="row">${orderList.orderId}</th>
+	          	    <td>${orderList.customerHospital}</td>
+	          	    <td class="order-product">
+	          	    <a href="/adminTable/detail?orderId=${orderList.orderId}">
+		          	    <c:forEach items="${orderList.orderedProduct}" var="orderedProduct">
+		          	    ${orderedProduct.product} ,
+		          	    </c:forEach>
+	          	    </a>
+	          	    </td>
+	          	    <td>${orderList.deliveryDate}</td>
+	          	    <td><span class="badge bg-success">Approved</span></td>
+	          	  </tr>
+	          	</c:forEach>
 	          </tbody>
 	        </table>
-	        <!-- End Table with hoverable rows -->
+	        <!-- pagnation 시작 -->
+              <ul class="pagination flex-center-align" >
+       	        <c:if test="${paging.prev}">
+       	        	<li class="page-item">
+						<a class="page-link" href="/adminTable?pageNum=${paging.startPage-1}&amount=${paging.cri.amount}">&laquo;</a>
+					</li>
+				</c:if>
+									
+				<!-- begin(1)이 end(10)될 동안 반복(1일 10일 될 동안 반복) -->
+				<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="num">
+					<li class="page-item">
+				 		<a class="page-link" href="/adminTable?pageNum=${num}&amount=${paging.cri.amount}">${num}</a>
+					</li>
+				</c:forEach>
+
+				<!-- next(다음)이 true이면 다음버튼 활성화 -->
+				<c:if test="${paging.next}">
+					<li class="page-item">
+						<a class="page-link" href="/adminTable?pageNum=${paging.endPage+1}&amount=${paging.cri.amount}">&raquo;</a>
+					</li>
+				</c:if>
+			  </ul>
+              	<!-- pagnation 끝 -->
 	        </div>
+	        <!-- End Table with hoverable rows -->
 	       
 	    </div>
 	   </div>
@@ -110,6 +114,9 @@
    </div>
    <div>
    	${paging}
+   </div>
+   <div>
+    ${listJson}
    </div>
    
    
@@ -147,6 +154,11 @@
 
   <!-- Template Main JS File -->
   <script src="resources/js/main.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+  	var list = ${listJson};
+  </script>
+  <script src="resources/js/adminTable.js"></script>
 
 </body>
 </html>

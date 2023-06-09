@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.google.gson.Gson;
+
 import control.suppliers.model.AdminOrderVO;
 import control.suppliers.model.CriteriaVO;
 import control.suppliers.model.PageVO;
@@ -40,6 +42,12 @@ public class AdminController {
 			
 			List<AdminOrderVO> resultList = as.list(cri);
 			log.info("as.list(cri) 결과: {}", resultList);
+			
+			Gson gson = new Gson();
+			String resultListJson = gson.toJson(resultList);
+			log.info("resultListJson: {}", resultListJson);
+			
+			model.addAttribute("listJson", resultListJson);
 			
 			model.addAttribute("list", resultList);
 			
