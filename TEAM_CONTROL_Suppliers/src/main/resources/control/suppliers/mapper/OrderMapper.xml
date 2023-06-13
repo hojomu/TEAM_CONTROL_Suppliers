@@ -6,11 +6,11 @@
   
 <mapper namespace="control.suppliers.mapper.OrderMapper">
 
-<!--   	<select id="memorder_customer" resultType="control.suppliers.model.CustomerVO">
+   	<select id="memorder_customer" resultType="control.suppliers.model.CustomerVO">
   	  	select *
   		from customer
   		where customer_id=#{customer_id}
-  	</select> -->
+  	</select>
   	
   	<!-- product 상품이름 불러오기, 검색기능 -->		
 <!-- 	<select id="list" resultType="control.suppliers.model.ProductVO">
@@ -58,12 +58,10 @@
 					<choose>
 						<otherwise>
 						where name like concat('%',#{keyword},'%')
-					      OR  product_id like concat('%',#{keyword},'%')
-					      OR  tax like concat('%',#{keyword},'%')
 						</otherwise>
 					</choose>
 			    </if>
-			    order by product_id desc
+			    order by name desc
   		</select>
   		
   		<select id="total" resultType="int">
@@ -76,7 +74,7 @@
 				</when>
 				<otherwise>
 					where name like concat('%',#{keyword},'%')
-			      OR  product_id like concat('%',#{keyword},'%')
+			      <!-- OR  product_id like concat('%',#{keyword},'%') -->
 				</otherwise>
 			
 			</choose>

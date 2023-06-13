@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
 <!-- headerSidebar jsp -->
@@ -42,8 +44,12 @@
 			  
 			   <div id="optionWindow">
 			    <div class="product_order_option_searchbox">
-			    <input type="text" placeholder="search..." class="product_order_option_search" name="keyword" class="keyword" value="${paging.cri.keyword}">
-			    <button class="product_order_option_searchbnt">검색</button>
+			    
+			    <form id="searchForm" action="shipment_order" method="get">
+			    <input type="text" placeholder="search..." class="product_order_option_search keyword" name="keyword" value="${paging.cri.keyword}">
+			    <button class="product_order_option_searchbnt" type="submit">검색</button>
+			    </form>
+			    
 			    </div>
 			    	<div class="optionItem_box">
 <!-- 					<div class="optionItem">
@@ -61,9 +67,9 @@
 					
 				<!-- for문 시작 -->
 				<c:forEach items="${list}" var="product_list">
-					<tr>
-						<td>${product_list.product_id}</td>
-					</tr>
+					<div>
+						<div>${product_list.name}</div>
+					</div>
 				</c:forEach>
 				<!-- for문 끝 -->
 				
