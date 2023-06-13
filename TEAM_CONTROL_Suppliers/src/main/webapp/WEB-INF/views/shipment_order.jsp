@@ -46,6 +46,13 @@
 			    <div class="product_order_option_searchbox">
 			    
 			    <form id="searchForm" action="shipment_order" method="get">
+			    
+<!-- 			      <select name="type">
+				    <option value="T">제목</option>
+				    <option value="C">내용</option>
+				    <option value="TC">제목+게시글</option>
+				  </select> -->
+			    
 			    <input type="text" placeholder="search..." class="product_order_option_search keyword" name="keyword" value="${paging.cri.keyword}">
 			    <button class="product_order_option_searchbnt" type="submit">검색</button>
 			    </form>
