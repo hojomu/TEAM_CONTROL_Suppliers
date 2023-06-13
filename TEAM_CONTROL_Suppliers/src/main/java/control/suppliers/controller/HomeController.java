@@ -61,10 +61,10 @@ public class HomeController {
 	}
 	
 	// 출하 등록
-	@RequestMapping(value = "/shipment_order", method = RequestMethod.GET)
+/*	@RequestMapping(value = "/shipment_order", method = RequestMethod.GET)
 	public String shipment_order(Locale locale, Model model) {
 		return "shipment_order";
-	}
+	}*/
 	
 	// 배송 스케줄 캘린더로 이동
 	@RequestMapping(value = "/delivery_calendar", method = RequestMethod.GET)

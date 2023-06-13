@@ -20,13 +20,20 @@
 			<input type="date" class="shipment_order_date_input">
 			</div>
 			
-			<div class="shipment_order_text">
-			계약 코드 : <input type="text" class="shipment_order_text_input"> 납품처 : <input type="text" class="shipment_order_text_input"> 납품처 주소 : <input type="text" class="shipment_order_text_input">
-            </div>
-            
-            <div class="shipment_order_text">
-			대표 이름 : <input type="text" class="shipment_order_text_input"> 대표 번호 : <input type="text" class="shipment_order_text_input"> 대표 이메일 : <input type="text" class="shipment_order_text_input">
-            </div>
+			<form action="shipment_order" method="post">
+			    <div class="shipment_order_text">
+			        계약 코드 : <input type="text" value="${order_customer.customer_id}" name="customer_id" class="shipment_order_text_input"> 
+			     <button type="submit">조회</button>
+			        납품처 : <input type="text" value="${order_customer.hospital}" name="hospital" class="shipment_order_text_input"> 
+			        납품처 주소 : <input type="text" value="${order_customer.address}" name="address" class="shipment_order_text_input">
+			    </div>
+			            
+			    <div class="shipment_order_text">
+			        대표 이름 : <input type="text" value="${order_customer.name}" name="name" class="shipment_order_text_input"> 
+			        대표 번호 : <input type="text" value="${order_customer.phone}" name="phone" class="shipment_order_text_input"> 
+			        대표 이메일 : <input type="text" value="${order_customer.email}" name="email" class="shipment_order_text_input">
+			    </div>
+			</form>
             
 			</div>
               <!-- <h5 class="card-title">shipment</h5> -->
@@ -35,11 +42,11 @@
 			  
 			   <div id="optionWindow">
 			    <div class="product_order_option_searchbox">
-			    <input type="text" placeholder="search..." class="product_order_option_search">
+			    <input type="text" placeholder="search..." class="product_order_option_search" name="keyword" class="keyword" value="${paging.cri.keyword}">
 			    <button class="product_order_option_searchbnt">검색</button>
 			    </div>
 			    	<div class="optionItem_box">
-					<div class="optionItem">
+<!-- 					<div class="optionItem">
 					  <input type="checkbox" id="productA" value="A 제품"/>
 					  <label for="productA"><span>A 제품</span></label>
 					</div>
@@ -50,7 +57,16 @@
 					<div class="optionItem">
 					  <input type="checkbox" id="productC" value="C 제품"/>
 					  <label for="productC"><span>C 제품</span></label>
-					</div>
+					</div> -->
+					
+				<!-- for문 시작 -->
+				<c:forEach items="${list}" var="product_list">
+					<tr>
+						<td>${product_list.product_id}</td>
+					</tr>
+				</c:forEach>
+				<!-- for문 끝 -->
+				
 					</div>
 					<div class="product_order_option_buttombox">
 				    <button class="product_order_checkbnt" onclick="addSelectedProducts()">추가</button>
