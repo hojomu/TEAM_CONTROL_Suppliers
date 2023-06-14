@@ -20,7 +20,7 @@ public class OrderController {
 	@Autowired
 	OrderService os;
 	
-	// customer 계약자 불러오기
+	// customer 계약자 불러오기   
 	@RequestMapping(value = "/shipment_order", method = RequestMethod.POST)
 	public String order_customer (@RequestParam("customer_id") int customer_id, Model model) {
 	    model.addAttribute("order_customer", os.memorder_customer(customer_id));
@@ -35,6 +35,16 @@ public class OrderController {
 		model.addAttribute("paging", new PageVO(cri, total));
 		return "shipment_order";
 	}
+	
+	// product 상품 상세 불러오기
+	@RequestMapping(value = "/detail", method = RequestMethod.GET)
+	public String detail (Model model, String name) {
+		model.addAttribute("detail", os.detail(name));
+		os.detail(name);
+		return "shipment_order";
+	}
+	
+	
 	
 	// product 상품이름 불러오기, 검색기능
 /*	@RequestMapping(value="/shipment_order", method = RequestMethod.GET)

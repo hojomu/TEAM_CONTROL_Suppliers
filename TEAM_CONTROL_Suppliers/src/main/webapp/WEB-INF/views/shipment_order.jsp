@@ -9,192 +9,131 @@
 
 <!-- 본문 내용 -->
 <main id="main" class="main">
-
-			<div class="card">
-            <div class="card-body">
-            <div class="shipment_table_header">
-            
-            <div class="shipment_search_date">
-			수주일자
-			<input type="date" class="shipment_order_date_input">
-			-
-			납기일자
-			<input type="date" class="shipment_order_date_input">
-			</div>
-			
-			<form action="shipment_order" method="post">
-			    <div class="shipment_order_text">
-			        계약 코드 : <input type="text" value="${order_customer.customer_id}" name="customer_id" class="shipment_order_text_input"> 
-			     <button type="submit">조회</button>
-			        납품처 : <input type="text" value="${order_customer.hospital}" name="hospital" class="shipment_order_text_input"> 
-			        납품처 주소 : <input type="text" value="${order_customer.address}" name="address" class="shipment_order_text_input">
-			    </div>
+	<form id="searchForm" action="shipment_order" method="post">
+				<div class="card">
+		            <div class="card-body">
+			            <div class="shipment_table_header">
 			            
-			    <div class="shipment_order_text">
-			        대표 이름 : <input type="text" value="${order_customer.name}" name="name" class="shipment_order_text_input"> 
-			        대표 번호 : <input type="text" value="${order_customer.phone}" name="phone" class="shipment_order_text_input"> 
-			        대표 이메일 : <input type="text" value="${order_customer.email}" name="email" class="shipment_order_text_input">
-			    </div>
-			</form>
-            
-			</div>
-              <!-- <h5 class="card-title">shipment</h5> -->
-              
-              <div class="shipment_order_table_box">
-			  
-			   <div id="optionWindow">
-			    <div class="product_order_option_searchbox">
-			    
-			    <form id="searchForm" action="shipment_order" method="get">
-			    
-<!-- 			      <select name="type">
-				    <option value="T">제목</option>
-				    <option value="C">내용</option>
-				    <option value="TC">제목+게시글</option>
-				  </select> -->
-			    
-			    <input type="text" placeholder="search..." class="product_order_option_search keyword" name="keyword" value="${paging.cri.keyword}">
-			    <button class="product_order_option_searchbnt" type="submit">검색</button>
-			    </form>
-			    
-			    </div>
-			    	<div class="optionItem_box">
-<!-- 					<div class="optionItem">
-					  <input type="checkbox" id="productA" value="A 제품"/>
-					  <label for="productA"><span>A 제품</span></label>
-					</div>
-					<div class="optionItem">
-					  <input type="checkbox" id="productB" value="B 제품"/>
-					  <label for="productB"><span>B 제품</span></label>
-					</div>
-					<div class="optionItem">
-					  <input type="checkbox" id="productC" value="C 제품"/>
-					  <label for="productC"><span>C 제품</span></label>
-					</div> -->
-					
-				<!-- for문 시작 -->
-				<c:forEach items="${list}" var="product_list">
-					<div>
-						<div>${product_list.name}</div>
-					</div>
-				</c:forEach>
-				<!-- for문 끝 -->
-				
-					</div>
-					<div class="product_order_option_buttombox">
-				    <button class="product_order_checkbnt" onclick="addSelectedProducts()">추가</button>
-				    <button class="product_order_cencelbnt" onclick="hideOption()">취소</button>
-				    </div>
-			  </div>
-              
-              <!-- Bordered Table -->
-              <table class="table table-bordered">
-              
-              	<colgroup>
-			        <col width="20%" />
-			        <col width="20%" />
-			        <col width="15%" />
-			        <col width="20%" />
-			        <col width="20%" />
-			        <col width="5%" />
-			        <%-- <col width="auto" /> --%>
-		        </colgroup>
-              
-                <thead class="shipment_table_thead">
-                  <tr>
-                    <th scope="col">
-                    <div class="order_showOption">
-                    	품목명
-                    	<button class="showOptionbnt" onclick="showOption()">
-                    	<img alt="more" src="resources/img/more.png" width="22px" height="auto" class="order_morebnt">
-                    	</button>
-                    </div>
-                    </th>
-                    <th scope="col"><div>품목코드</div></th>
-                    <th scope="col"><div>수량</div></th>
-                    <th scope="col"><div>판매단가</div></th>
-                    <th scope="col"><div>부가세</div></th>
-                    <th scope="col"><div>현재고</div></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td ><div id="selectedProducts"></div></td>
-                    <td><div>0123</div></td>
-                    <td><div class="shipment_order_numberbox"><input class="shipment_order_num"><p class="shipment_order_n">개</p></div></td>
-                    <td><div>50</div></td>
-                    <td><div>5</div></td>
-                    <td><div>50</div></td>
-                  </tr>
-                  <tr>
-                    <td><div>a제품</div></td>
-                    <td><div>0123</div></td>
-                    <td><div class="shipment_order_numberbox"><input class="shipment_order_num"><p class="shipment_order_n">개</p></div></td>
-                    <td><div>50</div></td>
-                    <td><div>5</div></td>
-                    <td><div>50</div></td>
-                  </tr>
-                  <tr>
-                    <td><div>a제품</div></td>
-                    <td><div>0123</div></td>
-                    <td><div class="shipment_order_numberbox"><input class="shipment_order_num"><p class="shipment_order_n">개</p></div></td>
-                    <td><div>50</div></td>
-                    <td><div>5</div></td>
-                    <td><div>50</div></td>
-                  </tr>
-                  <tr>
-                    <td><div>a제품</div></td>
-                    <td><div>0123</div></td>
-                    <td><div class="shipment_order_numberbox"><input class="shipment_order_num"><p class="shipment_order_n">개</p></div></td>
-                    <td><div>50</div></td>
-                    <td><div>5</div></td>
-                    <td><div>50</div></td>
-                  </tr>
-                  <tr>
-                    <td><div>a제품</div></td>
-                    <td><div>0123</div></td>
-                    <td><div class="shipment_order_numberbox"><input class="shipment_order_num"><p class="shipment_order_n">개</p></div></td>
-                    <td><div>50</div></td>
-                    <td><div>5</div></td>
-                    <td><div>50</div></td>
-                  </tr>
-                  <tr>
-                    <td><div>a제품</div></td>
-                    <td><div>0123</div></td>
-                    <td><div class="shipment_order_numberbox"><input class="shipment_order_num"><p class="shipment_order_n">개</p></div></td>
-                    <td><div>50</div></td>
-                    <td><div>5</div></td>
-                    <td><div>50</div></td>
-                  </tr>
-                  <tr>
-                    <td><div>a제품</div></td>
-                    <td><div>0123</div></td>
-                    <td><div class="shipment_order_numberbox"><input class="shipment_order_num"><p class="shipment_order_n">개</p></div></td>
-                    <td><div>50</div></td>
-                    <td><div>5</div></td>
-                    <td><div>50</div></td>
-                  </tr>
-                </tbody>
-              </table>
-              </div>
-              <!-- End Bordered Table -->
-              
-              <div class="shipment_order_sum">
-				<div>총수량 : <input type="text" class="shipment_order_amount"></div>
-				<div>총 판매가 : <input type="text" class="shipment_order_selling"></div> 
-				<div>총 부가세 : <input type="text" class="shipment_order_surtax"></div> 
-				<div>총 액 : <input type="text" class="shipment_order_total"></div>
-			  </div>
-              
-            </div>
-            </div>
+			            	<!-- 날짜 입력 -->
+				            <div class="shipment_search_date">
+								수주일자
+								<input type="date" class="shipment_order_date_input">
+								-
+								납기일자
+								<input type="date" class="shipment_order_date_input">
+							</div><!-- 날짜 입력 끝 -->
+							
+							<!-- 계약자 정보 -->
+							<!-- <form action="shipment_order" method="post"> -->
+							    <div class="shipment_order_text">
+								        계약 코드 : <input type="text" value="${order_customer.customer_id}" name="customer_id" class="shipment_order_text_input"> 
+								     <button type="submit">조회</button>
+								        납품처 : <input type="text" value="${order_customer.hospital}" name="hospital" class="shipment_order_text_input"> 
+								        납품처 주소 : <input type="text" value="${order_customer.address}" name="address" class="shipment_order_text_input">
+							    </div>   
+							    <div class="shipment_order_text">
+								        대표 이름 : <input type="text" value="${order_customer.name}" name="name" class="shipment_order_text_input"> 
+								        대표 번호 : <input type="text" value="${order_customer.phone}" name="phone" class="shipment_order_text_input"> 
+								        대표 이메일 : <input type="text" value="${order_customer.email}" name="email" class="shipment_order_text_input">
+							    </div>
+							<!-- </form> --><!-- 계약자 정보 끝 -->
+			            
+						</div><!-- shipment_table_header 끝 -->
+		              
+		                <!-- shipment_order_table_box -->
+			            <div class="shipment_order_table_box">
+						   <!-- optionWindow -->
+						   <div id="optionWindow">
+						   
+							    <div class="product_order_option_searchbox">
+								    <!-- <form id="searchForm" action="shipment_order" method="get"> -->
+									    <input type="text" id="searchInput" placeholder="search..." class="product_order_option_search keyword" name="keyword" value="${paging.cri.keyword}">
+									    <button class="product_order_option_searchbnt" type="submit">검색</button>
+								    <!-- </form> -->
+							    </div>
+						    
+						    	<div class="optionItem_box">
+									<!-- for문 시작 -->
+									<c:forEach items="${list}" var="product_list">
+										<div class="optionItem">
+											<div><a href="detail?name=${product_list.name}">${product_list.name}</a></div>
+										</div>
+									</c:forEach>
+									<!-- for문 끝 -->
+								</div>
+								
+								<div class="product_order_option_buttombox">
+								    <button class="product_order_checkbnt" onclick="addSelectedProducts()">추가</button>
+								    <button class="product_order_cencelbnt" onclick="hideOption()">취소</button>
+							    </div>
+							    
+						  </div><!-- optionWindow 끝 -->
+			              
+			              <!-- Bordered Table -->
+			              <table class="table table-bordered" id="productTable">
+			              	<colgroup>
+						        <col width="20%" />
+						        <col width="20%" />
+						        <col width="15%" />
+						        <col width="20%" />
+						        <col width="20%" />
+						        <col width="5%" />
+						        <%-- <col width="auto" /> --%>
+					        </colgroup>
+			              
+			                <thead class="shipment_table_thead">
+			                  <tr>
+			                    <th scope="col">
+				                    <div class="order_showOption">
+				                    	품목명
+				                    	<button class="showOptionbnt" onclick="showOption()">
+					                    	<img alt="more" src="resources/img/more.png" width="22px" height="auto" class="order_morebnt">
+				                    	</button>
+				                    </div>
+			                    </th>
+			                    <th scope="col"><div>품목코드</div></th>
+			                    <th scope="col"><div>수량</div></th>
+			                    <th scope="col"><div>판매단가</div></th>
+			                    <th scope="col"><div>부가세</div></th>
+			                    <th scope="col"><div>현재고</div></th>
+			                  </tr>
+			                </thead>
+			                <tbody>
+			                  <tr>
+			                    <td><div>${detail.name}</div></td>
+			                    <td><div>${detail.code}</div></td>
+			                    <td>
+				                    <div class="shipment_order_numberbox">
+					                    <input class="shipment_order_num">
+					                    <p class="shipment_order_n">개</p>
+				                    </div>
+			                    </td>
+			                    <td><div>${detail.price}</div></td>
+			                    <td><div>${detail.tax}</div></td>
+			                    <td><div>${detail.count}</div></td>
+			                  </tr>
+			                </tbody>
+			              </table>
+			              
+			            </div><!-- shipment_order_table_box 끝 -->
+		              
+		              <div class="shipment_order_sum">
+						<div>총수량 : <input type="text" class="shipment_order_amount"></div>
+						<div>총 판매가 : <input type="text" class="shipment_order_selling"></div> 
+						<div>총 부가세 : <input type="text" class="shipment_order_surtax"></div> 
+						<div>총 액 : <input type="text" class="shipment_order_total"></div>
+					  </div>
+		              
+		            </div><!-- card-body 끝 -->
+	            </div><!-- card 끝 -->
+	
+				<div class="shipment_order_botton">
+					<button class="shipment_order_canclebnt">취소</button>
+					<button class="shipment_order_registerbnt">등록</button>
+				</div>
+	</form>
+</main><!-- 본문 끝 -->
 
-<div class="shipment_order_botton">
-<button class="shipment_order_canclebnt">취소</button><button class="shipment_order_registerbnt">등록</button>
-</div>
-
-</main>
-<!-- 본문 끝 -->
   
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">

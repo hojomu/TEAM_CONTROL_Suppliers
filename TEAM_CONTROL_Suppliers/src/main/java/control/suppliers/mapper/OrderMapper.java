@@ -20,5 +20,7 @@ public interface OrderMapper {
 	public ArrayList<ProductVO> list(CriteriaVO cri);
 	
 	public int total(CriteriaVO cri);
+	
+	public ProductVO detail(String name);
 
 }

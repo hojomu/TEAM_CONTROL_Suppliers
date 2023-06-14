@@ -81,6 +81,11 @@
 
 			</if>
   		</select>
+  		
+  		<select id="detail" resultType="control.suppliers.model.ProductVO">
+  			select * from product
+  			where name=#{name}
+  		</select>
 	
 	
  

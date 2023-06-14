@@ -22,4 +22,6 @@ public interface OrderService {
 	
 	public int total(CriteriaVO cri);
 	
+	public ProductVO detail(String name);
+	
 }

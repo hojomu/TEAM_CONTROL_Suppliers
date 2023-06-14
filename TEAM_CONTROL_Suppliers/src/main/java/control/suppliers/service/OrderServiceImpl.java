@@ -40,4 +40,8 @@ public class OrderServiceImpl implements OrderService {
 	public int total(CriteriaVO cri) {
 		return om.total(cri);
 	}
+	
+	public ProductVO detail(String name) {
+		return om.detail(name);
+	}
 }
