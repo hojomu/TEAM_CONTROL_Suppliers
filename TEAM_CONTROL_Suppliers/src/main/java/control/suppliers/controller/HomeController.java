@@ -48,11 +48,11 @@ public class HomeController {
 		return "shipment_header";
 	}
 	
-	// 출하 조회
+/*	// 출하 조회
 	@RequestMapping(value = "/shipment_table", method = RequestMethod.GET)
 	public String shipment_table(Locale locale, Model model) {
 		return "shipment_table";
-	}
+	}*/
 	
 	// 출하 디테일
 	@RequestMapping(value = "/shipment_detail", method = RequestMethod.GET)

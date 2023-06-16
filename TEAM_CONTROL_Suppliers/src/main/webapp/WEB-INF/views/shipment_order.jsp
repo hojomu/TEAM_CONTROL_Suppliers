@@ -3,7 +3,6 @@
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-
 <!-- headerSidebar jsp -->
 <%@ include file="shipment_header.jsp" %>
 
@@ -27,11 +26,9 @@
 							<!-- <form action="shipment_order" method="post"> -->
 							    <div class="shipment_order_text">
 								        계약 코드 : <input type="text" value="${order_customer.customer_id}" name="customer_id" class="shipment_order_text_input"> 
-								     <button type="submit">조회</button>
+								     <button type="submit" class="product_order_checkbnt">조회</button>
 								        납품처 : <input type="text" value="${order_customer.hospital}" name="hospital" class="shipment_order_text_input"> 
-								        납품처 주소 : <input type="text" value="${order_customer.address}" name="address" class="shipment_order_text_input">
-							    </div>   
-							    <div class="shipment_order_text">
+								        납품처 주소 : <input type="text" value="${order_customer.address}" name="address" class="shipment_order_text_input"><br>
 								        대표 이름 : <input type="text" value="${order_customer.name}" name="name" class="shipment_order_text_input"> 
 								        대표 번호 : <input type="text" value="${order_customer.phone}" name="phone" class="shipment_order_text_input"> 
 								        대표 이메일 : <input type="text" value="${order_customer.email}" name="email" class="shipment_order_text_input">
@@ -43,20 +40,30 @@
 		                <!-- shipment_order_table_box -->
 			            <div class="shipment_order_table_box">
 						   <!-- optionWindow -->
-						   <div id="optionWindow">
+						   <div id="optionWindow" class="hidden">
 						   
 							    <div class="product_order_option_searchbox">
 								    <!-- <form id="searchForm" action="shipment_order" method="get"> -->
-									    <input type="text" id="searchInput" placeholder="search..." class="product_order_option_search keyword" name="keyword" value="${paging.cri.keyword}">
+									    <input type="text" id="searchInput" placeholder="search..." class="product_order_option_search keyword" name="keyword" value="<%-- ${paging.cri.keyword} --%>">
 									    <button class="product_order_option_searchbnt" type="submit">검색</button>
 								    <!-- </form> -->
 							    </div>
 						    
-						    	<div class="optionItem_box">
+<%-- 						    	<div class="optionItem_box">
 									<!-- for문 시작 -->
 									<c:forEach items="${list}" var="product_list">
 										<div class="optionItem">
 											<div><a href="detail?name=${product_list.name}">${product_list.name}</a></div>
+										</div>
+									</c:forEach>
+									<!-- for문 끝 -->
+								</div> --%>
+								
+								<div class="optionItem_box">
+									<!-- for문 시작 -->
+									<c:forEach items="리스트" var="product_list">
+										<div class="optionItem">
+											<div><a href="#">리스트 이름</a></div>
 										</div>
 									</c:forEach>
 									<!-- for문 끝 -->
@@ -78,7 +85,7 @@
 						        <col width="20%" />
 						        <col width="20%" />
 						        <col width="5%" />
-						        <%-- <col width="auto" /> --%>
+						        <col width="auto" />
 					        </colgroup>
 			              
 			                <thead class="shipment_table_thead">
@@ -100,17 +107,17 @@
 			                </thead>
 			                <tbody>
 			                  <tr>
-			                    <td><div>${detail.name}</div></td>
-			                    <td><div>${detail.code}</div></td>
+			                    <td><div>이름</div></td>
+			                    <td><div>코드</div></td>
 			                    <td>
 				                    <div class="shipment_order_numberbox">
 					                    <input class="shipment_order_num">
 					                    <p class="shipment_order_n">개</p>
 				                    </div>
 			                    </td>
-			                    <td><div>${detail.price}</div></td>
-			                    <td><div>${detail.tax}</div></td>
-			                    <td><div>${detail.count}</div></td>
+			                    <td><div>가격</div></td>
+			                    <td><div>부가세</div></td>
+			                    <td><div>재고</div></td>
 			                  </tr>
 			                </tbody>
 			              </table>

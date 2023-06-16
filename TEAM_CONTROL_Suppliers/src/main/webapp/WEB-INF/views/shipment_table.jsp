@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!-- headerSidebar jsp -->
 <%@ include file="shipment_header.jsp" %>
@@ -18,9 +20,10 @@
 </div>
 
 <div class="shipment_search_text">
-납품처
-<input type="text" class="shipment_search_text_input" placeholder="search...">
-<button class="shipment_search_text_button">검색</button>
+<form action="shipment_table" method="get">
+납품처 <input type="text" class="shipment_search_text_input keyword" name="keyword" value="${paging.cri.keyword}" placeholder="search...">
+<button class="shipment_search_text_button" type="submit">검색</button>
+</form>
 </div>
 
 		  <div class="card">
@@ -51,41 +54,20 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row"><div>1</div></th>
-                    <td><div>2023-05-25</div></td>
-                    <td><div>2023-06-01</div></td>
-                    <td><div><a href="shipment_detail">그린병원</a></div></td>
-                    <td><div>369,000,000원</div></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><div>1</div></th>
-                    <td><div>2023-05-25</div></td>
-                    <td><div>2023-06-01</div></td>
-                    <td><div>숨병원</div></td>
-                    <td><div>369,000,000원</div></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><div>1</div></th>
-                    <td><div>2023-05-25</div></td>
-                    <td><div>2023-06-01</div></td>
-                    <td><div>호조무병원</div></td>
-                    <td><div>369,000,000원</div></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><div>1</div></th>
-                    <td><div>2023-05-25</div></td>
-                    <td><div>2023-06-01</div></td>
-                    <td><div>영일이병원</div></td>
-                    <td><div>369,000,000원</div></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><div>1</div></th>
-                    <td><div>2023-05-25</div></td>
-                    <td><div>2023-06-01</div></td>
-                    <td><div>폴병원</div></td>
-                    <td><div>369,000,000원</div></td>
-                  </tr>
+                
+                  <!-- for문 시작 -->
+				  <c:forEach items="${list}" var="order_list">
+	                  <tr>
+	                    <th scope="row"><div>${order_list.order_id}</div></th>
+	                    <td><div>${order_list.order_date}</div></td>
+	                    <td><div>${order_list.delivery_date}</div></td>
+	                    <%-- <td><div><a href="detail?customer_id=${order_list.customer_id}">${order_list.customer_id}</a></div></td> --%>
+	                    <td><div><a href="shipment_detail">${order_list.customer_id}</a></div></td>
+	                    <td><div>${order_list.address}</div></td>
+	                  </tr>
+                  </c:forEach>
+				  <!-- for문 끝 -->
+
                 </tbody>
               </table>
               </div>

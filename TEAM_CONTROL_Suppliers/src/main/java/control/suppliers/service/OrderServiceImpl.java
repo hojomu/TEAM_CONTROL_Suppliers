@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import control.suppliers.mapper.OrderMapper;
 import control.suppliers.model.CriteriaVO;
 import control.suppliers.model.CustomerVO;
+import control.suppliers.model.OrderVO;
 import control.suppliers.model.ProductVO;
 
 @Service
@@ -33,7 +34,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 */
 	
-	public ArrayList<ProductVO> list(CriteriaVO cri) {
+/*	public ArrayList<ProductVO> list(CriteriaVO cri) {
 		return om.list(cri);
 	}
 	
@@ -43,5 +44,18 @@ public class OrderServiceImpl implements OrderService {
 	
 	public ProductVO detail(String name) {
 		return om.detail(name);
+	}*/
+	
+	//======================================================================
+	// shipment_table 리스트
+	public ArrayList<OrderVO> list(CriteriaVO cri){
+		System.out.println(cri);
+		return om.list(cri);
 	}
+
+	// shipment_table 리스트
+	public int total(CriteriaVO cri) {
+		return om.total(cri);
+	}
+	
 }

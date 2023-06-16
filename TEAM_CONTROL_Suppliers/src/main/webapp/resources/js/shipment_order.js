@@ -1,4 +1,4 @@
-    var optionWindow = document.getElementById('optionWindow');
+/*    var optionWindow = document.getElementById('optionWindow');
     var selectedProductsElement = document.getElementById('selectedProducts');
 
     function showOption() {
@@ -51,4 +51,8 @@
     		$('#searchInput').val(name); // 검색어 설정
     		$('#searchForm').submit(); // 검색 폼 제출
     	});
-    });
+    });*/
+function showOption() {
+    var optionWindow = document.getElementById("optionWindow");
+    optionWindow.classList.remove("hidden");
+}

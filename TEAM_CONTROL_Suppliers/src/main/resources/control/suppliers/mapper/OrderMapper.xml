@@ -51,7 +51,7 @@
 	  </where>
 	</select> -->
 	
-	  	<select id="list" resultType="control.suppliers.model.ProductVO">
+<!-- 	  	<select id="list" resultType="control.suppliers.model.ProductVO">
 				select *
 				from product
 				<if test="keyword != null">
@@ -74,7 +74,7 @@
 				</when>
 				<otherwise>
 					where name like concat('%',#{keyword},'%')
-			      <!-- OR  product_id like concat('%',#{keyword},'%') -->
+			      OR  product_id like concat('%',#{keyword},'%')
 				</otherwise>
 			
 			</choose>
@@ -85,7 +85,45 @@
   		<select id="detail" resultType="control.suppliers.model.ProductVO">
   			select * from product
   			where name=#{name}
+  		</select> -->
+  		
+  		<!-- ====================================================================== -->
+  		<!-- shipment_table 리스트 -->
+  		<select id="list" resultType="control.suppliers.model.OrderVO">
+				select *
+				from `order`
+				<if test="keyword != null">
+					<choose>
+						<otherwise>
+						where order_id like concat('%',#{keyword},'%')
+						OR  order_date like concat('%',#{keyword},'%')
+						OR  delivery_date like concat('%',#{keyword},'%')
+						OR  address like concat('%',#{keyword},'%')
+						OR  customer_id like concat('%',#{keyword},'%')
+						</otherwise>
+					</choose>
+			    </if>
+			    order by order_id desc
   		</select>
+  		
+  		<select id="total" resultType="int">
+  			select count(*) from `order`
+  			<if test="keyword != null">
+						
+			<choose>
+				<when test="type=='T'.toString()">
+					 where order_id like concat('%',#{keyword},'%')
+				</when>
+				<otherwise>
+					where order_id like concat('%',#{keyword},'%')
+			      <!-- OR  product_id like concat('%',#{keyword},'%') -->
+				</otherwise>
+			
+			</choose>
+
+			</if>
+  		</select>
+  		
 	
 	
  

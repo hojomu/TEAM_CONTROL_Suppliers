@@ -1,5 +1,7 @@
 package control.suppliers.controller;
 
+import java.util.Locale;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -20,6 +22,12 @@ public class OrderController {
 	@Autowired
 	OrderService os;
 	
+	// 출하 등록
+	@RequestMapping(value = "/shipment_order", method = RequestMethod.GET)
+	public String shipment_order(Locale locale, Model model) {
+		return "shipment_order";
+	}
+	
 	// customer 계약자 불러오기   
 	@RequestMapping(value = "/shipment_order", method = RequestMethod.POST)
 	public String order_customer (@RequestParam("customer_id") int customer_id, Model model) {
@@ -27,7 +35,7 @@ public class OrderController {
 	    return "shipment_order";
 	}
 	
-	// product 상품이름 불러오기, 검색기능
+/*	// product 상품이름 불러오기, 검색기능
 	@RequestMapping(value = "/shipment_order", method = RequestMethod.GET)
 	public String list (Model model, CriteriaVO cri) {
 		model.addAttribute("list", os.list(cri));
@@ -42,7 +50,7 @@ public class OrderController {
 		model.addAttribute("detail", os.detail(name));
 		os.detail(name);
 		return "shipment_order";
-	}
+	}*/
 	
 	
 	
@@ -60,6 +68,17 @@ public class OrderController {
 		model.addAttribute("paging", new PageVO(cri, total));
 		return "shipment_order";
 	}*/
+	
+	
+	//======================================================================
+	// shipment_table 리스트
+		@RequestMapping(value = "/shipment_table", method = RequestMethod.GET)
+		public String list (Model model, CriteriaVO cri) {
+			model.addAttribute("list", os.list(cri));
+			int total=os.total(cri);
+			model.addAttribute("paging", new PageVO(cri, total));
+			return "shipment_table";
+		}
 	
 	
 	
