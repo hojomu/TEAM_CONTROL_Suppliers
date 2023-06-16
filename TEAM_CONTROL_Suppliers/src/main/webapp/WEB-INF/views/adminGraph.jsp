@@ -31,22 +31,22 @@
                 <li class="dropdown-header text-start">
                   <h6>Filter</h6>
                 </li>
-
-                <li><a class="dropdown-item" href="#">오늘</a></li>
-                <li><a class="dropdown-item" href="#">이번 달</a></li>
-                <li><a class="dropdown-item" href="#">올 해</a></li>
+                
+                <li><a class="dropdown-item" href="/adminGraph?totTurnover=${adm.totTurnover}&customerNum=${adm.customerNum}&dpoOption=${adm.dpoOption}">오늘</a></li>
+                <li><a class="dropdown-item" href="/adminGraph?orderAmount=1&totTurnover=${adm.totTurnover}&customerNum=${adm.customerNum}&dpoOption=${adm.dpoOption}">이번 달</a></li>
+                <li><a class="dropdown-item" href="/adminGraph?orderAmount=2&totTurnover=${adm.totTurnover}&customerNum=${adm.customerNum}&dpoOption=${adm.dpoOption}">올 해</a></li>
               </ul>
             </div>
             
             <div class="card-body">
-              <h5 class="card-title">주문량 <span>| 오늘</span></h5>
+              <h5 class="card-title">주문량 <span>| 이번 달</span></h5>
 
               <div class="d-flex align-items-center">
                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                   <i class="bi bi-cart"></i>
                 </div>
                 <div class="ps-3">
-                  <h6>145</h6>
+                  <h6>${graphData.orderAmount}</h6>
                   <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
 
                 </div>
@@ -67,9 +67,8 @@
                   <h6>Filter</h6>
                 </li>
 
-                <li><a class="dropdown-item" href="#">오늘</a></li>
-                <li><a class="dropdown-item" href="#">이번 달</a></li>
-                <li><a class="dropdown-item" href="#">올 해</a></li>
+                <li><a class="dropdown-item" href="/adminGraph?orderAmount=${adm.orderAmount}&customerNum=${adm.customerNum}&dpoOption=${adm.dpoOption}">이번 달</a></li>
+                <li><a class="dropdown-item" href="/adminGraph?orderAmount=${adm.orderAmount}&totTurnover=1&customerNum=${adm.customerNum}&dpoOption=${adm.dpoOption}">올해</a></li>
               </ul>
             </div>
 
@@ -81,7 +80,7 @@
                   <i class="bi bi-currency-dollar"></i>
                 </div>
                 <div class="ps-3">
-                  <h6>3,264 만원</h6>
+                  <h6>${graphData.totTurnover} 만원</h6>
                   <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
 
                 </div>
@@ -103,9 +102,9 @@
                   <h6>Filter</h6>
                 </li>
 
-                <li><a class="dropdown-item" href="#">오늘</a></li>
-                <li><a class="dropdown-item" href="#">이번 주</a></li>
-                <li><a class="dropdown-item" href="#">이번 달</a></li>
+                <li><a class="dropdown-item" href="/adminGraph?orderAmount=${adm.orderAmount}&totTurnover=${adm.totTurnover}&dpoOption=${adm.dpoOption}">전체</a></li>
+                <li><a class="dropdown-item" href="/adminGraph?orderAmount=${adm.orderAmount}&totTurnover=${adm.totTurnover}&customerNum=1&dpoOption=${adm.dpoOption}">올해</a></li>
+                <li><a class="dropdown-item" href="/adminGraph?orderAmount=${adm.orderAmount}&totTurnover=${adm.totTurnover}&customerNum=2&dpoOption=${adm.dpoOption}">이번 달</a></li>
               </ul>
             </div>
 
@@ -117,7 +116,7 @@
                   <i class="bi bi-people"></i>
                 </div>
                 <div class="ps-3">
-                  <h6>1244</h6>
+                  <h6>${graphData.customerNum}</h6>
                   <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
 
                 </div>
@@ -140,31 +139,155 @@
                   <h6>Filter</h6>
                 </li>
 
-                <li><a class="dropdown-item" href="#">오늘</a></li>
-                <li><a class="dropdown-item" href="#">이번 주</a></li>
-                <li><a class="dropdown-item" href="#">이번 달</a></li>
+                <li><a class="dropdown-item" href="/adminGraph?orderAmount=${adm.orderAmount}&totTurnover=${adm.totTurnover}&customerNum=${adm.customerNum}">이번 달</a></li>
+                <li><a class="dropdown-item" href="/adminGraph?orderAmount=${adm.orderAmount}&totTurnover=${adm.totTurnover}&customerNum=${adm.customerNum}&dpoOption=1">올해</a></li>
               </ul>
             </div>
 
             <div class="card-body">
-              <h5 class="card-title">물품 별 주문량 <span>/오늘</span></h5>
+              <h5 class="card-title">물품 별 주문량 <span>/이번 달</span></h5>
 
               <!-- Line Chart -->
               <div id="reportsChart"></div>
 
               <script>
                 document.addEventListener("DOMContentLoaded", function() {
+                	var series = [];
+                	var dpoData = ${dpoData};
+                	
+                	//console.log(dpoData);
+                	
+                	var settedSeries = [];
+                	var settedColors = [];
+                	var settedCategories = [];
+                	
+                	var dpoOption = ${adm.dpoOption};
+                	
+                	//console.log("dpoOption :" +dpoOption);
+                	
+                	switch(dpoOption){
+                		case 0:
+                			// 이번 달의 날짜 수 계산하기
+                        	var basicDateSetter = dpoData[0].dateOrderAmount[0].date;
+                        	var dateObject = new Date(basicDateSetter);
+                        	var fixedYear = dateObject.getFullYear();
+                        	var fixedMonth = dateObject.getMonth();
+                        	var firstDayOfMonth = new Date(fixedYear, fixedMonth, 1);
+                        	var lastDayOfMonth = new Date(fixedYear, fixedMonth + 1, 0);
+                        	var maxDayOfMonth = lastDayOfMonth.getDate();
+                        	
+                        	console.log(maxDayOfMonth);
+                        	
+                        	
+                        	//series 생성
+                        	for (var i = 0; i < dpoData.length; i++){
+                            	var dataList = [];
+                        		for(var k = 0; k < maxDayOfMonth; k++){
+                        			dataList.push(0);
+                        		}
+                        		
+                        		
+                        		var productData = dpoData[i];
+                        		for(var n = 0; n < productData.dateOrderAmount.length; n++){
+                        			var date = productData.dateOrderAmount[n].date;
+                        			var settedDate = new Date(date).getDate();
+                        			//console.log(settedDate);
+                        			for(var j = 0; j < maxDayOfMonth; j++){
+                        				if((j+1) == settedDate){
+                        					dataList[j] = productData.dateOrderAmount[n].orderAmount;
+
+                            				break;
+                        				}
+                        			}
+                        		}
+
+                        		
+                        		var seriesDataPoint = {
+                        				name: productData.product,
+                        				data: dataList,
+                        		}
+                        		
+                        		settedSeries.push(seriesDataPoint);
+
+                        	    var r = Math.floor(Math.random() * 256);
+                       		    var g = Math.floor(Math.random() * 256);
+                       		    var b = Math.floor(Math.random() * 256);
+                       		  
+                       		    var randomColor = 'rgb(' + r + ', ' + g + ', ' + b + ')';
+                        		
+                        		settedColors.push(randomColor);
+                        	};
+                        	//x축 카테고리 생성
+                        	for (var i = 0; i < maxDayOfMonth; i++) {
+                        		  var currentDate = new Date(fixedYear, fixedMonth, i + 2);
+                        		  currentDate.setHours(0, 0, 0, 0); // 시간을 00:00:00:000으로 설정
+                        		  var formattedDate = currentDate.toISOString().substring(0, 10);
+                        		  //console.log(formattedDate);
+                        		  settedCategories.push(formattedDate);
+                        		}
+                        	//console.log(settedSeries);
+                        	//console.log(settedColors);
+                        	break;
+                        
+                		case 1:
+                        	var basicDateSetter = dpoData[0].dateOrderAmount[0].date;
+                        	var dateObject = new Date(basicDateSetter);
+                        	var fixedYear = dateObject.getFullYear();
+                			var monthes = 12;
+                			
+                			//series 생성
+                        	for (var i = 0; i < dpoData.length; i++){
+                            	var dataList = [];
+                        		for(var k = 0; k < monthes; k++){
+                        			dataList.push(0);
+                        		}
+                        		
+                        		
+                        		var productData = dpoData[i];
+                        		for(var n = 0; n < productData.dateOrderAmount.length; n++){
+                        			var date = productData.dateOrderAmount[n].date;
+                        			var settedDate = new Date(date).getMonth();
+                        			for(var j = 0; j < monthes; j++){
+                        				if(j == settedDate){
+                        					dataList[j] = productData.dateOrderAmount[n].orderAmount;
+
+                            				break;
+                        				}
+                        			}
+                        		}
+								
+                        		
+                        		var seriesDataPoint = {
+                        				name: productData.product,
+                        				data: dataList,
+                        		}
+                        		
+                        		settedSeries.push(seriesDataPoint);
+                        		
+                        	    var r = Math.floor(Math.random() * 256);
+                       		    var g = Math.floor(Math.random() * 256);
+                       		    var b = Math.floor(Math.random() * 256);
+                       		  
+                       		    var randomColor = 'rgb(' + r + ', ' + g + ', ' + b + ')';
+                        		
+                        		settedColors.push(randomColor);
+                        	};
+                        	//x축 카테고리 생성
+                        	for (var i = 0; i < monthes; i++) {
+                        		  var month = i + 1;
+                        		  var formattedDate = fixedYear + '-' + (month < 10 ? '0' + month : month);
+                        		  settedCategories.push(formattedDate);
+                        		}
+                        	//console.log(settedSeries);
+                        	
+                        	break;
+                	}
+                	
+                	
+                	
+
                   new ApexCharts(document.querySelector("#reportsChart"), {
-                    series: [{
-                      name: '제품A',
-                      data: [31, 40, 28, 51, 42, 82, 56],
-                    }, {
-                      name: '제품B',
-                      data: [11, 32, 45, 32, 34, 52, 41]
-                    }, {
-                      name: '제품C',
-                      data: [15, 11, 32, 18, 9, 24, 11]
-                    }],
+                    series: settedSeries,
                     chart: {
                       height: 350,
                       type: 'area',
@@ -176,7 +299,7 @@
                     markers: {
                       size: 4
                     },
-                    colors: ['#4154f1', '#2eca6a', '#ff771d'],
+                    colors: settedColors,
                     fill: {
                       type: "gradient",
                       gradient: {
@@ -195,11 +318,11 @@
                     },
                     xaxis: {
                       type: 'datetime',
-                      categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
+                      categories: settedCategories
                     },
                     tooltip: {
                       x: {
-                        format: 'dd/MM/yy HH:mm'
+                        format: 'dd/MM/yy'
                       },
                     }
                   }).render();
@@ -217,50 +340,57 @@
         <div class="col-12">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">축적형 막대 그래프</h5>
+              <h5 class="card-title">물품 별 재고</h5>
 
               <!-- Stacked Bar Chart -->
-              <canvas id="stakedBarChart" style="max-height: 400px;"></canvas>
+              <canvas id="barChart" style="max-height: 700px;"></canvas>
               <script>
-                document.addEventListener("DOMContentLoaded", function() {
-                  new Chart(document.querySelector('#stakedBarChart'), {
+              document.addEventListener("DOMContentLoaded", function() {
+            	  var stockData = ${stockData};
+            	  
+            	  var settedLabels = []; // x 축 물품명
+            	  var settedData = []; // 물품 별 재고수
+            	  var settedBGColor = [];
+            	  var settedBorderColor = [];
+            	  
+            	  for(var i = 0; i < stockData.length; i++){
+            		  var label = stockData[i].name;
+            		  var countData = stockData[i].count;
+            		  settedLabels.push(label);
+            		  settedData.push(countData);
+            		  
+            		  var r = Math.floor(Math.random() * 256);
+            		  var g = Math.floor(Math.random() * 256);
+            		  var b = Math.floor(Math.random() * 256);
+            		  
+            		  var bgColor = 'rgba(' + r + ', ' + g + ', ' + b + ', 0.2)';
+            		  var borColor = 'rgb(' + r + ', ' + g + ', ' + b + ')';
+            		  
+            		  settedBGColor.push(bgColor);
+            		  settedBorderColor.push(borColor);
+            		  
+            	  }
+            	  
+            	  
+                  new Chart(document.querySelector('#barChart'), {
                     type: 'bar',
                     data: {
-                      labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월' , '8월'],
+                      labels: settedLabels,
                       datasets: [{
-                          label: '제품 A',
-                          data: [-75, -15, 18, 48, 74 , 30],
-                          backgroundColor: 'rgb(255, 99, 132)',
-                        },
-                        {
-                          label: '제품 B',
-                          data: [-11, -1, 12, 62, 95 , -40],
-                          backgroundColor: 'rgb(75, 192, 192)',
-                        },
-                        {
-                          label: '제품 C',
-                          data: [-44, -5, 22, 35, 62 , 30],
-                          backgroundColor: 'rgb(255, 205, 86)',
-                        },
-                      ]
+                        label: '재고',
+                        data: settedData,
+                        backgroundColor: settedBGColor,
+                        borderColor: settedBorderColor,
+                        borderWidth: 1
+                      }]
                     },
-                    options: {
-                      plugins: {
-                        title: {
-                          display: true,
-                          text: '그래프 --- 주석'
-                        },
-                      },
-                      responsive: true,
+                    /* options: {
                       scales: {
-                        x: {
-                          stacked: true,
-                        },
                         y: {
-                          stacked: true
+                          beginAtZero: true
                         }
                       }
-                    }
+                    } */
                   });
                 });
               </script>

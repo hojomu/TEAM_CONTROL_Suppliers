@@ -1,4 +1,19 @@
 /**
+ * 
+ */
+// 카카오맵 설정
+var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+var options = { //지도를 생성할 때 필요한 기본 옵션
+    center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
+    level: 3 //지도의 레벨(확대, 축소 정도)
+};
+
+let intervalFocus;
+
+//마커 리 랜더링을 위해 배열 생성
+markers = [];
+
+/**
  * AbstractOverlay를 상속받을 객체를 선언합니다.
  */
 function TooltipMarker(position, tooltipText) {
@@ -334,37 +349,95 @@ function MarkerTracker(map, target) {
     };
 }
 
+function showDatas(){
+	// 마커 삭제
+	let trackerElements = document.querySelectorAll('.tracker');
+	for(let i = 0; i < markers.length; i++){
+		markers[i].setMap(null);
+		
+		if(trackerElements.length > 0)	{
+		var trackerKill = trackerElements[i];
+		trackerKill.parentNode.removeChild(trackerKill);
+		}
+	}
+	
+	markers = [];
+	
+	$.ajax({
+		type:'GET',
+		dataType:'JSON',
+		url: '/getCarrierDatas',
+		error: function(err){
+			console.log(err);
+		},
+		success: function(data){
+            //console.log(data);
+        	
+        	let carrierList = "";
+            
+            let markerTrackers = [];
+            
+    		// 받아온 데이터 for 문
+    		for(let i = 0; i < data.length; i++){
+    			if(data[i].eLocationVO[0]
+    					&& data[i].eLocationVO[0].transferState 
+    					&& (data[i].eLocationVO[0].transferState === 'start')){
+	    			// 마커 좌표 생성
+	    			let position = new kakao.maps.LatLng(data[i].eLocationVO[0].latitude , data[i].eLocationVO[0].longitude);
+	    			
+	    			// TooltipMarker 생성
+	    			let marker = new TooltipMarker(position, data[i].eName);
+	                marker.setMap(map);
+	    			markers.push(marker);
+	                
+	    			// MarkerTracker 생성
+	    			var markerTracker = new MarkerTracker(map, marker);
+	    			markerTrackers.push(markerTracker);
+	    			
+	    			// 운반자 리스트 생성
+	    			carrierList += "<li data-eId='"+data[i].eId+"' data-orderId='"+data[i].orderId+"'>"+data[i].eName+"</li>"
+    			}
+    		}
+    		
+    		// 마커 트래커 실행
+    		for(let i = 0; i < markerTrackers.length; i++){
+    			markerTrackers[i].run();
+    		}
+    		
+    		$("#carrierList").html(carrierList);
+    		
+		}
+	})
+}
 
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-mapOption = {
-    center: new kakao.maps.LatLng(37.402054, 127.1082099), // 지도의 중심좌표
-    level: 3 // 지도의 확대 레벨
-};
 
-// 지도를 생성합니다.
-var map = new kakao.maps.Map(mapContainer, mapOption);
 
-// 본사
-var dkpos1 = new kakao.maps.LatLng(33.450707, 126.570678);
-// 판교 오피스
-var dkpos2 = new kakao.maps.LatLng(37.402054, 127.108209); 
-// 고객 센터
-var dkpos3 = new kakao.maps.LatLng(37.402827, 127.107292);
+//지도를 생성합니다.
+var map = new kakao.maps.Map(container, options);
 
-// 툴팁을 노출하는 마커를 생성합니다.
-var marker1 = new TooltipMarker(dkpos1, 'kakao 본사');
-var marker2 = new TooltipMarker(dkpos2, 'kakao 판교오피스');
-var marker3 = new TooltipMarker(dkpos3, 'kakao 고객센터');
-marker1.setMap(map);
-marker2.setMap(map);
-marker3.setMap(map);
+window.addEventListener('load', function () {
 
-// MarkerTracker를 생성합니다.
-var markerTracker1 = new MarkerTracker(map, marker1);
-var markerTracker2 = new MarkerTracker(map, marker2);
-var markerTracker3 = new MarkerTracker(map, marker3);
+	showDatas();
+	
+	intervalId = setInterval(function() {
+		showDatas();
+	}, 5000);
+});
 
-// marker의 추적을 시작합니다.
-markerTracker1.run();
-markerTracker2.run();
-markerTracker3.run();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

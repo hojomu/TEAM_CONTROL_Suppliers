@@ -41,61 +41,12 @@
 	    
 	      <div class="card-body">
 	        <h5 class="card-title">출하 계획표 <span>| 오늘</span></h5>
-	
-	        <table class="table datatable">
-	          <thead>
-	            <tr>
-	              <th id="order-number-column" scope="col"># 주문번호</th>
-	              <th id="order-customer-column" scope="col">고객(병원)</th>
-	              <th id="order-title-column" scope="col">주문</th>
-	              <th id="order-date-column" scope="col">출하 예정일</th>
-	              <th id="order-state-column" scope="col">출하 상태</th>
-	            </tr>
-	          </thead>
-	          <tbody>
-	          	<c:forEach items="${list}" var="orderList">
-	          	  <tr>
-	          	    <th scope="row">${orderList.orderId}</th>
-	          	    <td>${orderList.customerHospital}</td>
-	          	    <td class="order-product">
-	          	    <a href="/detail?orderId=${orderList.orderId}">
-		          	    <c:forEach items="${orderList.orderedProduct}" var="orderedProduct">
-		          	    ${orderedProduct.product} ,
-		          	    </c:forEach>
-	          	    </a>
-	          	    </td>
-	          	    <td>${orderList.deliveryDate}</td>
-	          	    <td><span class="badge bg-success">Approved</span></td>
-	          	  </tr>
-	          	</c:forEach>
-	          </tbody>
-	        </table>
-	        <!-- pagnation 시작 -->
-              <ul class="pagination flex-center-align" >
-       	        <%-- <c:if test="${paging.prev}">
-       	        	<li class="page-item">
-						<a class="page-link" href="/adminTable?pageNum=${paging.startPage-1}&amount=${paging.cri.amount}">&laquo;</a>
-					</li>
-				</c:if>
-									
-				<!-- begin(1)이 end(10)될 동안 반복(1일 10일 될 동안 반복) -->
-				<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="num">
-					<li class="page-item">
-				 		<a class="page-link" href="/adminTable?pageNum=${num}&amount=${paging.cri.amount}">${num}</a>
-					</li>
-				</c:forEach>
-
-				<!-- next(다음)이 true이면 다음버튼 활성화 -->
-				<c:if test="${paging.next}">
-					<li class="page-item">
-						<a class="page-link" href="/adminTable?pageNum=${paging.endPage+1}&amount=${paging.cri.amount}">&raquo;</a>
-					</li>
-				</c:if> --%>
-			  </ul>
-              	<!-- pagnation 끝 -->
-	        </div>
-	        <!-- End Table with hoverable rows -->
-	       
+	        
+	        <!-- 여기 내용 적을 것 -->
+	        
+	        
+	        
+		  </div>
 	    </div>
 	   </div>
 	  </div>
@@ -139,7 +90,6 @@
   <!-- Template Main JS File -->
   <script src="resources/js/main.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="resources/js/adminTable.js"></script>
 
 </body>
 </html>

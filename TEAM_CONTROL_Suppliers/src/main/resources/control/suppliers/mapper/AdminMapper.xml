@@ -13,6 +13,31 @@
       <collection column="orderId = order_id" property="orderedProduct" javaType="List"
       ofType="control.suppliers.model.OrderedProductVO" select="selectOrderedProductList"/>
     </resultMap>
+    
+    <resultMap id="getDpoResultMap" type="control.suppliers.model.DatePerOrderVO">
+      <id property="product" column="product" javaType="String"/>
+      <collection property="dateOrderAmount" ofType="control.suppliers.model.DateOrderAmountVO">
+      	<id property="date" column="date"/>
+      	<result property="orderAmount" column="orderAmount"/>
+      </collection>
+    </resultMap>
+    
+    <resultMap id="getCarrierDatasResultMap" type="control.suppliers.model.TransportDataVO">
+      <id property="eId" column="eId" javaType="int"/>
+      <result property="orderId" column="orderId" javaType="int"/>
+      <result property="eName" column="eName" javaType="String"/>
+      <collection column="eId = eId" property="eLocationVO" javaType="List"
+      ofType="control.suppliers.model.ELocationVO" select="selectELocationDatas"/>
+    </resultMap>
+    
+    <!-- 운반현황 페이지 resultMap -->
+  	<resultMap id="adminTransportListResultMap" type="control.suppliers.model.AdminOrderVO">
+      <id property="orderId" column="order_id" javaType="int"/>
+      <result property="deliveryDate" column="delivery_date"/>
+      <collection column="orderId = order_id" property="orderedProduct" javaType="List"
+      ofType="control.suppliers.model.OrderedProductVO" select="selectTransportList"/>
+    </resultMap>
+    
 	<!-- 출하 계획표 불러오기 -->
 	<select id="list" resultMap="adminOrderResultMap">
 		SELECT
@@ -24,7 +49,7 @@
 		JOIN customer c ON o.customer_id = c.customer_id
 		WHERE oc.state = 'normal'
 		ORDER BY o.order_id DESC
-		LIMIT ${(pageNum-1)*amount}, #{amount}
+		<!-- LIMIT ${(pageNum-1)*amount}, #{amount} -->
 	</select>
 	<!-- 주문한 물건 목록 불러오기 (이름, 갯수) -->
 	<select id="selectOrderedProductList" parameterType="control.suppliers.model.AdminOrderVO" resultType="control.suppliers.model.OrderedProductVO">
@@ -38,16 +63,182 @@
 	
 	<!-- 계획표 전체 개수 불러오기 ( 검색 키워드를 넣을 시 수정 필수 ) -->
 	<select id="total" resultType="int">
-  	  select count(*) 
-  	  from `order` o
-  		left join order_cancel oc ON o.order_id = oc.order_id
-  	  where
-  	  	oc.state = 'normal'
+	  	  select count(*) 
+	  	  from `order` o
+	  		left join order_cancel oc ON o.order_id = oc.order_id
+	  	  where
+	  	  	oc.state = 'normal'
   	</select>
   	
+  	<!-- 그래프 페이지 -->
+  	<select id="getGraph" resultType="int">
+	  	SELECT 
+	  		COUNT(*)
+	  	FROM `order`
+	  	<where>
+	  		<choose>
+	  			<when test="orderAmount == 0">
+					YEAR(order_date) = YEAR(CURRENT_DATE()) AND MONTH(order_date) = MONTH(CURRENT_DATE()) AND DAY(order_date) = DAY(CURRENT_DATE())
+						AND order_id IN (
+							SELECT order_id
+							FROM order_cancel
+							WHERE state = 'normal'
+						)
+	  			</when>
+	  			<when test="orderAmount == 1">
+	  				YEAR(order_date) = YEAR(CURRENT_DATE()) AND MONTH(order_date) = MONTH(CURRENT_DATE())
+						AND order_id IN (
+							SELECT order_id
+							FROM order_cancel
+							WHERE state = 'normal'
+						)
+	  			</when>
+	  			<when test="orderAmount == 2">
+	  				YEAR(order_date) = YEAR(CURRENT_DATE())
+						AND order_id IN (
+							SELECT order_id
+							FROM order_cancel
+							WHERE state = 'normal'
+						)
+	  			</when>
+	  		</choose>
+	  	</where>
+  	</select>
+  	<select id="selectTotTurnover" resultType="int">
+  		SELECT SUM(op.count * p.price)
+		FROM ordered_product op
+		JOIN product p ON op.product_id = p.product_id
+		WHERE op.order_id IN (
+		  SELECT order_id
+		  FROM `order`
+		  <where>
+		  	<choose>
+			    <when test="totTurnover == 0">
+			      YEAR(order_date) = YEAR(CURRENT_DATE()) AND MONTH(order_date) = MONTH(CURRENT_DATE())
+			   		  AND order_id IN (
+						SELECT order_id
+						FROM order_cancel
+						WHERE state = 'normal'
+					  )
+			    </when>
+			    <when test="totTurnover == 1">
+			      YEAR(order_date) = YEAR(CURRENT_DATE())
+			   		  AND order_id IN (
+						SELECT order_id
+						FROM order_cancel
+						WHERE state = 'normal'
+					  )
+			    </when>
+		    </choose>
+		  </where>
+  		)
+  	</select>
+  	<select id="selectCustomerNum" resultType="int">
+	  	SELECT
+			COUNT(DISTINCT c.customer_id)
+		FROM customer c
+  		<choose>
+		  	<when test="customerNum == 0">
+		  	</when>
+		  	<when test="customerNum == 1">
+		  		JOIN `order` o ON o.customer_id = c.customer_id
+				JOIN order_cancel oc ON oc.order_id = o.order_id
+				WHERE
+					YEAR(o.order_date) = YEAR(CURRENT_DATE())
+				    AND oc.state = 'normal';
+		  	</when>
+		  	<when test="customerNum == 2">
+		  		JOIN `order` o ON o.customer_id = c.customer_id
+				JOIN order_cancel oc ON oc.order_id = o.order_id
+				WHERE
+					YEAR(o.order_date) = YEAR(CURRENT_DATE()) AND MONTH(o.order_date) = MONTH(CURRENT_DATE())
+				    AND oc.state = 'normal';
+		  	</when>
+		</choose>
+  	</select>
   	
+  	<!-- 날짜 별 제품 주문량 그래프 -->
+  	<select id="getDpo" resultMap="getDpoResultMap">
+  		SELECT
+		    p.name AS product,
+		    DATE_FORMAT(o.order_date, '%Y-%m-%d') AS date,
+		    SUM(op.count) AS orderAmount
+  		FROM `order` o
+  		JOIN order_cancel oc ON o.order_id = oc.order_id
+  		JOIN ordered_product op ON o.order_id = op.order_id
+  		JOIN product p ON op.product_id = p.product_id
+  		WHERE
+  		<choose>
+  			<when test="dpoOption == 0">
+  				YEAR(o.order_date) = YEAR(CURRENT_DATE()) AND MONTH(o.order_date) = MONTH(CURRENT_DATE())
+  					AND oc.state = 'normal'
+  				GROUP BY date, p.name
+  			</when>
+  			<when test="dpoOption == 1">
+  				YEAR(o.order_date) = YEAR(CURRENT_DATE())
+  					AND oc.state = 'normal'
+  				GROUP BY DATE_FORMAT(o.order_date, '%Y-%m'), p.name
+  			</when>
+  		</choose>
+  	</select>
   	
+  	<!-- 물품 별 재고 그래프 -->
+	<select id="getStock" resultType="control.suppliers.model.ProductStockVO">
+		SELECT
+			product_id AS productId,
+			name,
+			count
+		FROM product
+	</select>	
 	
+	<!-- 실시간 랜더링 데이터 호출 -->
+	<select id="getCarrierDatas" resultMap="getCarrierDatasResultMap">
+		SELECT
+			e.employee_id AS eId,
+			o.order_id AS orderId,
+			e.name AS eName
+		FROM `order` o
+		JOIN order_cancel oc ON o.order_id = oc.order_id
+		JOIN employee e ON o.transport_id = e.employee_id
+		WHERE Date(o.delivery_date) = CURRENT_DATE()
+			AND oc.state = 'normal'
+	</select>
+	<select id="selectELocationDatas" parameterType="control.suppliers.model.TransportDataVO" resultType="control.suppliers.model.ELocationVO">
+		SELECT
+			latitude,
+			longitude,
+			getTime,
+			transfer_state AS transferState
+		FROM carrierLocation
+		WHERE employee_id = #{eId}
+			AND Date(getTime) = CURRENT_DATE()
+		ORDER BY
+			getTime DESC
+	</select>
+	
+	<!-- 운반현황 페이지 리스트 -->
+	<select id="transportList" resultMap="adminTransportListResultMap">
+		SELECT
+			o.order_id,
+			DATE_FORMAT(o.delivery_date, '%Y-%m-%d') AS delivery_date,
+			c.name as customerHospital
+		FROM `order` o
+		JOIN order_cancel oc ON o.order_id = oc.order_id
+		JOIN customer c ON o.customer_id = c.customer_id
+		WHERE oc.state = 'normal'
+			AND Date(o.delivery_date) = CURRENT_DATE()
+		ORDER BY o.order_id DESC
+		<!-- LIMIT ${(pageNum-1)*amount}, #{amount} -->
+	</select>
+	<!-- 주문한 물건 목록 불러오기 (이름, 갯수) -->
+	<select id="selectTransportList" parameterType="control.suppliers.model.AdminOrderVO" resultType="control.suppliers.model.OrderedProductVO">
+		Select
+			op.count AS count,
+			p.name AS product
+		From ordered_product op
+		LEFT JOIN product p ON op.product_id = p.product_id
+		WHERE op.order_id = #{orderId}
+	</select>
 	
 </mapper>
 

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
     
 <!-- headerSidebar jsp -->
 <%@ include file="admin_header.jsp" %>
@@ -96,41 +97,21 @@
 	            </tr>
 	          </thead>
 	          <tbody>
-	            <tr>
-	              <th scope="row">1</th>
-	              <td>우리 피부과</td>
-	              <td>제품 B 신규 계약</td>
-	              <td>2016-05-25</td>
-	              <td><span class="badge bg-success">Approved</span></td>
-	            </tr>
-	            <tr>
-	              <th scope="row">2</th>
-	              <td>홍 정형외과</td>
-	              <td>제품 B 신규 계약</td>
-	              <td>2014-12-05</td>
-	              <td><span class="badge bg-warning">Pending</span></td>
-	            </tr>
-	            <tr>
-	              <th scope="row">3</th>
-	              <td>울산 대학 병원</td>
-	              <td>제품 B 신규 계약</td>
-	              <td>2011-08-12</td>
-	              <td><span class="badge bg-danger">Rejected</span></td>
-	            </tr>
-	            <tr>
-	              <th scope="row">4</th>
-	              <td>부산 병원</td>
-	              <td>제품 B 신규 계약</td>
-	              <td>2012-06-11</td>
-	              <td><span class="badge bg-danger">Rejected</span></td>
-	            </tr>
-	            <tr>
-	              <th scope="row">5</th>
-	              <td>서울 탑 치과</td>
-	              <td>제품 B 신규 계약 Division Officer</td>
-	              <td>2011-04-19</td>
-	              <td><span class="badge bg-success">Approved</span></td>
-	            </tr>
+	            <c:forEach items="${list}" var="orderList">
+	          	  <tr>
+	          	    <th scope="row">${orderList.orderId}</th>
+	          	    <td>${orderList.customerHospital}</td>
+	          	    <td class="order-product">
+	          	    <a href="/detail?orderId=${orderList.orderId}">
+		          	    <c:forEach items="${orderList.orderedProduct}" var="orderedProduct">
+		          	    ${orderedProduct.product} ,
+		          	    </c:forEach>
+	          	    </a>
+	          	    </td>
+	          	    <td>${orderList.deliveryDate}</td>
+	          	    <td><span class="badge bg-success">Approved</span></td>
+	          	  </tr>
+	          	</c:forEach>
 	          </tbody>
 	        </table>
 	        <!-- End Table with hoverable rows -->
@@ -181,6 +162,7 @@
 
   <!-- Template Main JS File -->
   <script src="resources/js/main.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoMapApiKey}"></script>
   <script src="/resources/js/adminCarrier.js" type="text/javascript"></script>
 
