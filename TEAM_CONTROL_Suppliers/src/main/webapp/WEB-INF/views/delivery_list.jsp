@@ -5,15 +5,16 @@
 <%@ include file="delivery_headerSidebar.jsp" %>
 
 	<link href ="resources/css/delivery_list.css" rel="stylesheet"/>
-    
+
+
 <!-- 본문 내용 -->
   <main id="main" class="main">
 
     <div class="date-area">
   <!-- 오늘 날짜  -->
-  	  <button class="date-btn back">&lt;</button>
-      <p class="today_date"> 2023년 6월 05일 </p>
-  	  <button class="date-btn">&gt;</button>
+  	 <!--  <button class="date-btn back">&lt;</button> -->
+      <p class="today_date" id="date"> </p>
+  	<!--   <button class="date-btn">&gt;</button> -->
   	  
     </div><!-- End Page Title -->
 
@@ -21,6 +22,7 @@
       <div class="row">
 
     <!-- Table with hoverable rows -->
+    <form>
 	 <div class="col-12">
 	  <div class="card overflow-auto">
 	      <div class="list-body">
@@ -102,6 +104,7 @@
 	        </div>      
 	    </div>
 	   </div>
+    </form>
 	   
     <!-- Table with hoverable rows -->
 	 <div class="col-12">
@@ -223,6 +226,7 @@
 
   <!-- Template Main JS File -->
   <script src="resources/js/main.js"></script>
-
+ 
+  <script src="resources/js/delivery_list.js"></script>
 </body>
 </html>

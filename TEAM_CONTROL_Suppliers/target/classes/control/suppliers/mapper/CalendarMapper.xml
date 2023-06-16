@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="control.suppliers.mapper.CalendarMapper" >
+  
+  <!-- 운반자 개별 스케줄 캘린더 resultMaps -->
+  <resultMap id="CalendarResultMap" type="control.suppliers.model.CalendarVO">
+  	<id property="orderId" column="order_id" javaType="int"/>
+  	<result property="transportId" column="transport_id"/>
+  	<result property="deliveryDate" column="delivery_date"/>
+  	<association property="customerId" resultMap="CustomerResultMap" />
+  </resultMap>
+	
+   <resultMap id="CustomerResultMap" type="control.suppliers.model.CustomerVO">
+    <id  property="customerId" column="customer_id"/>
+    <result property="hospital" column="hospital"  />
+  </resultMap>
+	
+	<select id="getEventList" resultMap="CalendarResultMap">
+		<!-- select * from calendar  -->
+		SELECT
+			o.transport_id,
+			DATE_FORMAT(o.delivery_date, '%Y-%m-%d') AS delivery_date,
+			c.name as hospital
+		FROM `order` o		
+		JOIN customer c ON o.customer_id = c.customer_id
+		
+	
+	</select>
+
+</mapper>
+
+ 

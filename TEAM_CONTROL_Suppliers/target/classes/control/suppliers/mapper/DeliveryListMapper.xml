@@ -1,0 +1,42 @@
+<!-- <?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="control.suppliers.mapper.DeliveryListMapper" >
+  
+<resultMap id="orderResultMap" type="OrderVO">
+  <id property="orderId" column="order_id" />
+  <result property="deliveryDate" column="delivery_date" />
+  <association property="customer" javaType="CustomerVO">
+    <result property="hospital" column="hospital" />
+    <result property="email" column="email" />
+    <result property="address" column="address" />
+  </association>
+  <collection property="orderedProducts" ofType="OrderedProductVO">
+    <id property="productId" column="product_id" />
+    <result property="count" column="count" />
+    <association property="product" javaType="ProductVO">
+      <result property="name" column="name" />
+      <result property="code" column="code" />
+    </association>
+  </collection>
+</resultMap>
+
+조인 쿼리
+<select id="getOrdersWithProducts" resultMap="orderResultMap">
+  SELECT o.order_id, o.delivery_date,
+         c.hospital, c.email, c.address,
+         op.product_id, op.count,
+         p.name, p.code
+  FROM order_table o
+  JOIN customer_table c ON o.customer_id = c.customer_id
+  JOIN ordered_product_table op ON o.order_id = op.order_id
+  JOIN product_table p ON op.product_id = p.product_id
+  WHERE o.delivery_date = #{deliveryDate}
+</select>
+
+</mapper>
+
+  -->
