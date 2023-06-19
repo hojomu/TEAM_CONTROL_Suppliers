@@ -71,23 +71,28 @@ li{
 
 #order-number-column{
 	white-space: nowrap;
+	width:8.2%;
 }
 
 #order-customer-column{
 	white-space: nowrap;
+	width:17.4%;
 }
 
 #order-title-column{
 	white-space: nowrap;
 	max-width:900px;
+	width:53%;
 }
 
 #order-date-column{
 	white-space: nowrap;
+	width:9.7%;
 }
 
 #order-state-column{
 	white-space: nowrap;
+	width:8.7%;
 }
 
 .order-product{
