@@ -51,7 +51,7 @@
 	              	  <td>${data.name}</td>
 	              	  <td class="table-text-center">${data.price}</td>
 	              	  <td class="table-text-center">${data.tax}</td>
-	              	  <td class="table-text-center">${data.count}</td>
+	              	  <td class="table-text-center stockAmount">${data.count}</td>
 	              	</tr>
 	              </c:forEach>
               	</tbody>
@@ -96,6 +96,7 @@
 
   <!-- Template Main JS File -->
   <script src="resources/js/main.js"></script>
+  <script src="resources/js/stockDetail.js"></script>
 
 </body>
 </html>
