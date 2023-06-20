@@ -1,0 +1,464 @@
+@charset "UTF-8";
+ul, ol{
+	padding:0;
+}
+li{
+	list-style:none;
+}
+.mapNode {
+    position: absolute;
+    background-image: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/sign-info-64.png);
+    cursor: pointer;
+    width: 64px;
+    height: 64px;
+}
+
+.mapTooltip {
+    background-color: #fff;
+    position: absolute;
+    border: 2px solid #333;
+    font-size: 25px;
+    font-weight: bold;
+    padding: 3px 5px 0;
+    left: 65px;
+    top: 14px;
+    border-radius: 5px;
+    white-space: nowrap;
+    display: none;
+}
+
+.mapTracker {
+    position: absolute;
+    margin: -35px 0 0 -30px;
+    display: none;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.mapIcon {
+    position: absolute;
+    left: 6px;
+    top: 9px;
+    width: 48px;
+    height: 48px;
+    background-image: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/sign-info-48.png);
+}
+
+.mapBalloon {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background-image: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/balloon.png);
+    -ms-transform-origin: 50% 34px;
+    -webkit-transform-origin: 50% 34px;
+    transform-origin: 50% 34px;
+}
+
+#carrierListBox{
+	margin:0 auto;
+	overflow-y: auto;
+	padding:10px 5px;
+}
+
+#carrierList > li{
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	padding: 6px 0 6px 10px;
+    height: 35px;
+	font-size: 15px;
+	margin-bottom: 3px;	
+}
+
+#order-number-column{
+	white-space: nowrap;
+	width:8.2%;
+}
+
+#order-customer-column{
+	white-space: nowrap;
+	width:17.4%;
+}
+
+#order-title-column{
+	white-space: nowrap;
+	max-width:900px;
+	width:53%;
+}
+
+#order-date-column{
+	white-space: nowrap;
+	width:9.7%;
+}
+
+#order-state-column{
+	white-space: nowrap;
+	width:8.7%;
+}
+
+.order-product{
+	max-width:900px;
+}
+
+
+/* 디테일 페이지 css */
+
+.hidden {
+    display: none;
+}
+
+.shipment_order_date{
+	margin: 10px;
+}
+
+.shipment_order_date_input{
+    width: 110px;
+    height: 30px;
+    border-radius: 5px;
+    border: solid 1px #000;
+    padding-left: 5px;
+}
+
+.shipment_order_text{
+	margin: 10px 10px 10px 10px;
+}
+
+.shipment_order_text_input{
+	width: 150px;
+    height: 25px;
+    border-radius: 5px;
+    border: solid 1px #000;
+    padding-left: 5px;
+    margin-bottom: 15px;
+}
+
+.shipment_order_botton{
+	display:flex;
+	justify-content: center;
+}
+
+.shipment_order_canclebnt{
+	font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 1px;
+    padding: 10px 30px;
+    border-radius: 4px;
+    transition: 0.5s;
+    line-height: 1;
+    color: #fff;
+    background: #4492ff;
+    border: none;
+    margin: 5px 15px 5px 15px;
+}
+
+.shipment_order_canclebnt:hover{
+    background: #356dff;
+}
+
+.shipment_order_registerbnt{
+	font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 1px;
+    padding: 10px 30px;
+    border-radius: 4px;
+    transition: 0.5s;
+    line-height: 1;
+    color: #fff;
+    background: #4492ff;
+    border: none;
+    margin: 5px 15px 5px 15px;
+}
+
+.shipment_order_registerbnt:hover{
+    background: #356dff;
+}
+
+.shipment_order_table_box{
+	height: 500px;
+    overflow-y: scroll;
+    border: solid 1px #dee2e6;
+    clear: both;
+	}
+
+tbody td div {
+  padding: .5rem 0.5rem;
+}
+
+.shipment_order_sum{
+	display: flex;
+	justify-content: space-evenly;
+	margin-top: 20px;
+}
+
+.order_morebnt{
+	
+	
+}
+
+.order_showOption{
+	display: flex;
+	align-items: center;
+}
+
+.showOptionbnt{
+	width: 20px;
+	height: 20px;
+    border-radius: 5px;
+    background-color:#4492ff;
+    border:2px solid #4492ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5px;
+}
+
+#optionWindow {
+    display: none;
+    width: 300px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    position: absolute;
+    /* top: 50%; */
+    /* left: 50%; */
+    /* transform: translate(-50%, -50%); */
+    margin-top: 40px;
+    background-color: #fff;
+    z-index: 9999;
+}
+
+.optionItem {
+    padding-left: 3px;
+    padding-right: 3px;
+    border: solid #e6e6e6 1px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.product_order_option_search{
+	    width: 210px;
+    margin: 5px;
+}
+
+.product_order_option_searchbnt{
+	font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 1px;
+    /* padding: 10px 10px; */
+    border-radius: 4px;
+    transition: 0.5s;
+    line-height: 1;
+    color: #fff;
+    background: #4492ff;
+    border: none;
+    margin: 5px 5px 5px 5px;
+}
+
+.product_order_option_searchbnt:hover{
+    background: #356dff;
+}
+
+label{
+    display: flex;
+    align-items: center;
+}
+
+/* input 숨겨준다 */
+input#productA{
+  display:none;
+  }
+
+input#productA + label{
+  cursor:pointer;
+ }
+
+input#productA + label > span{
+  vertical-align: middle;
+  padding-left: 5px;
+ }
+
+/* label:before에 체크하기 전 상태 CSS */
+input#productA + label:before{
+  content:"+";
+  display:inline-block;
+  width:17px;
+  height:17px;
+  background-color:#4492ff;
+  border:2px solid #4492ff;
+  border-radius: 4px;
+  vertical-align:middle;
+  color: #fff;
+/*   font-weight: bold; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1em;
+  }
+  
+/* label:before에 체크 된 상태 CSS */  
+input#productA:checked + label:before{
+  content:"";
+  background-color:#4492ff;
+  border-color:#4492ff;
+  background-image: url('check.png');
+  background-size: 16px;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  }
+  
+  /* input 숨겨준다 */
+input#productB{
+  display:none;
+  }
+
+input#productB + label{
+  cursor:pointer;
+ }
+
+input#productB + label > span{
+  vertical-align: middle;
+  padding-left: 5px;
+ }
+
+/* label:before에 체크하기 전 상태 CSS */
+input#productB + label:before{
+  content:"+";
+  display:inline-block;
+  width:17px;
+  height:17px;
+  background-color:#4492ff;
+  border:2px solid #4492ff;
+  border-radius: 4px;
+  vertical-align:middle;
+  color: #fff;
+/*   font-weight: bold; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1em;
+  }
+  
+/* label:before에 체크 된 상태 CSS */  
+input#productB:checked + label:before{
+  content:"";
+  background-color:#4492ff;
+  border-color:#4492ff;
+  background-image: url('check.png');
+  background-size: 16px;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  }
+  
+    /* input 숨겨준다 */
+input#productC{
+  display:none;
+  }
+
+input#productC + label{
+  cursor:pointer;
+ }
+
+input#productC + label > span{
+  vertical-align: middle;
+  padding-left: 5px;
+ }
+
+/* label:before에 체크하기 전 상태 CSS  */
+input#productC + label:before{
+  content:"+";
+  display:inline-block;
+  width:17px;
+  height:17px;
+  background-color:#4492ff;
+  border:2px solid #4492ff;
+  border-radius: 4px;
+  vertical-align:middle;
+  color: #fff;
+  /* font-weight: bold; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1em;
+  }
+  
+/* label:before에 체크 된 상태 CSS */  
+input#productC:checked + label:before{
+  content:"";
+  background-color:#4492ff;
+  border-color:#4492ff;
+  background-image: url('check.png');
+  background-size: 16px;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  }
+
+.product_order_checkbnt{
+		font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 1px;
+    padding: 5px 5px;
+    border-radius: 4px;
+    transition: 0.5s;
+    line-height: 1;
+    color: #fff;
+    background: #4492ff;
+    border: none;
+    margin: 5px 5px 5px 5px;
+}
+
+.product_order_checkbnt:hover{
+    background: #356dff;
+}
+
+.product_order_cencelbnt{
+	font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 1px;
+    padding: 5px 5px;
+    border-radius: 4px;
+    transition: 0.5s;
+    line-height: 1;
+    color: #fff;
+    background: #4492ff;
+    border: none;
+    margin: 5px 5px 5px 5px;
+}
+  
+.product_order_cencelbnt:hover{
+    background: #356dff;
+}
+
+.product_order_option_searchbox{
+	display: flex;
+    justify-content: center;
+}
+
+.product_order_option_buttombox{
+	display: flex;
+    justify-content: center;
+}
+
+.optionItem_box{
+overflow-y: scroll;
+    height: 80px;
+    border-top: solid 1px #e6e6e6;
+    border-bottom: solid 1px #e6e6e6;
+}
+
+.shipment_order_confirmation{
+	background-color: #f6f9ff;
+    font-weight: bold;
+    padding: 0px 10px 0px 10px;
+	
+}
+
+.shipment_table_header{
+	margin-top:20px;
+}
+
+
+
+

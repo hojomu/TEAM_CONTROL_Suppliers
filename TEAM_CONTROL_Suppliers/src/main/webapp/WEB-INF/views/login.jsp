@@ -13,7 +13,7 @@
 
 <div class="container">
   <div class="item">
-	<form>    
+	<form action="/login" method="post">    
   	  <div class="login_table"> 	
   	    <h2 class="login_title">Login</h2>
 		<table>			
@@ -34,9 +34,10 @@
 			</tr>			
 		</table>
 	  </div>
+	  <div style="color:red;">${checkMessage}</div>
 	  <div class="login_button">
 		  <div class="login_button_item">
-				<input type="submit" value="login" class="btn-get-login" formaction="loginInput">
+				<input type="submit" value="login" class="btn-get-login">
 		  </div>
 	  </div>
     </form>

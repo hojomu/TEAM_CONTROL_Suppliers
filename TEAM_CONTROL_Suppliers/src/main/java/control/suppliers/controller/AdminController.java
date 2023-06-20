@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,8 @@ import control.suppliers.model.AdminGraphVO;
 import control.suppliers.model.AdminOrderVO;
 import control.suppliers.model.CriteriaVO;
 import control.suppliers.model.DatePerOrderVO;
+import control.suppliers.model.LoginVO;
+import control.suppliers.model.OrderedProductVO;
 import control.suppliers.model.PageVO;
 import control.suppliers.model.ProductStockVO;
 import control.suppliers.model.TransportDataVO;
@@ -39,8 +43,12 @@ public class AdminController {
 		
 		// 그래프 페이지로 이동
 		@RequestMapping(value = "/adminGraph", method = RequestMethod.GET)
-		public String adminGraph(Locale locale, Model model, AdminGraphVO adm) {
-		    
+		public String adminGraph(HttpSession session, Model model, AdminGraphVO adm) {
+		    LoginVO account = (LoginVO) session.getAttribute("account");
+		    log.info("{}",account);
+		    if(account == null || !account.getDept().equals("admin")) {
+		    	return "redirect:/security";
+		    } else {
 			AdminGraphVO graphData = as.getGraph(adm);
 			ArrayList<DatePerOrderVO> dpoData = as.getDpo(adm);
 			ArrayList<ProductStockVO> stockData = as.getStock();
@@ -56,13 +64,14 @@ public class AdminController {
 		    model.addAttribute("adm", adm);
 		
 			return "adminGraph";
+		    }
 		}
 		
 		// 출하 계획표 불러오기
 		@RequestMapping(value="/adminTable", method = RequestMethod.GET)
-		public String adminTable (Model model, CriteriaVO cri) {
+		public String adminTable (Model model,AdminOrderVO data) {
 			
-			List<AdminOrderVO> resultList = as.list(cri);
+			List<AdminOrderVO> resultList = as.list(data);
 			//log.info("as.list(cri) 결과: {}", resultList);
 			
 			Gson gson = new Gson();
@@ -73,9 +82,9 @@ public class AdminController {
 			
 			model.addAttribute("list", resultList);
 			
-			int total=as.total(cri);
+			/*int total=as.total(cri);
 			
-			model.addAttribute("paging", new PageVO(cri, total));
+			model.addAttribute("paging", new PageVO(cri, total));*/
 			
 			return "adminTable";
 		}
@@ -96,12 +105,25 @@ public class AdminController {
 		
 		// 주문 상세보기 페이지 이동
 		@RequestMapping(value = "/detail", method = RequestMethod.GET)
-		public String orderDetail(Model model) {
+		public String orderDetail(Model model, AdminOrderVO data) {
+			ArrayList<AdminOrderVO> orderDetail = as.list(data);
+			List<OrderedProductVO> product = orderDetail.get(0).getOrderedProduct();
+			model.addAttribute("orderDetail",orderDetail);
+			model.addAttribute("product",product);
+			log.info("{}",orderDetail);
 			
 			return "adminDetail";
 		}
 		
-		
+		// 주문 취소
+		@RequestMapping(value = "/cancelOrder", method = RequestMethod.POST)
+		public String cancelOrder(AdminOrderVO data) {
+			log.info("{}",data);
+			int result = as.cancelOrder(data);
+			
+			return result == 1 ? "redirect:/adminTable"
+					: "redirect:/detail";
+		}
 		
 }
 
