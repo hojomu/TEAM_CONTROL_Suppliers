@@ -39,7 +39,7 @@
             </div>
             
             <div class="card-body">
-              <h5 class="card-title">주문량 <span>| 이번 달</span></h5>
+              <h5 class="card-title">주문량 <span id="orderAmountSpan">${adm.orderAmount}</span></h5>
 
               <div class="d-flex align-items-center">
                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -73,7 +73,7 @@
             </div>
 
             <div class="card-body">
-              <h5 class="card-title">매출액 <span>| 이번 달</span></h5>
+              <h5 class="card-title">매출액 <span id="turnOverSpan">${adm.totTurnover}</span></h5>
 
               <div class="d-flex align-items-center">
                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -109,7 +109,7 @@
             </div>
 
             <div class="card-body">
-              <h5 class="card-title">고객(병원) <span>| 올해</span></h5>
+              <h5 class="card-title">고객(병원) <span id="customerNumSpan">${adm.customerNum}</span></h5>
 
               <div class="d-flex align-items-center">
                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -145,7 +145,7 @@
             </div>
 
             <div class="card-body">
-              <h5 class="card-title">물품 별 주문량 <span>/이번 달</span></h5>
+              <h5 class="card-title">물품 별 주문량 <span id="dpoOptionSpan">${adm.dpoOption}</span></h5>
 
               <!-- Line Chart -->
               <div id="reportsChart"></div>
@@ -340,6 +340,10 @@
         <div class="col-12">
           <div class="card">
             <div class="card-body">
+              <div id="stockDetailBox">
+              	<a href="/stockDetail">자세히보기</a>
+              </div>
+            
               <h5 class="card-title">물품 별 재고</h5>
 
               <!-- Stacked Bar Chart -->
@@ -442,6 +446,7 @@
 
   <!-- Template Main JS File -->
   <script src="resources/js/main.js"></script>
+  <script src="resources/js/adminGraph.js"></script>
 
 </body>
 </html>

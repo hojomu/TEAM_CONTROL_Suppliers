@@ -207,6 +207,9 @@
 		SELECT
 			product_id AS productId,
 			name,
+			code,
+			price,
+			tax,
 			count
 		FROM product
 	</select>	
