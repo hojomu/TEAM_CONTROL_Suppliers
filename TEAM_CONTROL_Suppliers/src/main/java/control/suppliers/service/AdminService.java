@@ -11,7 +11,7 @@ import control.suppliers.model.TransportDataVO;
 
 public interface AdminService {
 	// 출하 계획표 불러오기
-	public ArrayList<AdminOrderVO> list(CriteriaVO cri);
+	public ArrayList<AdminOrderVO> list(AdminOrderVO data);
 	// 계획표 전체 개수 불러오기
 	public int total(CriteriaVO cri);
 	
@@ -25,10 +25,7 @@ public interface AdminService {
 	// 실시간 랜더링 데이터 호출
 	public ArrayList<TransportDataVO> getCarrierDatas();
 	
-	
-	
-	
-	
-	
+	// 주문 취소
+	public int cancelOrder(AdminOrderVO data);
 	
 }

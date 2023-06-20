@@ -20,8 +20,8 @@ public class AdminServiceImpl implements AdminService {
 	AdminMapper am;
 	
 	// 출하 계획표 불러오기
-	public ArrayList<AdminOrderVO> list(CriteriaVO cri){
-		return am.list(cri);
+	public ArrayList<AdminOrderVO> list(AdminOrderVO data){
+		return am.list(data);
 	}
 	
 	// 계획표 전체 개수 불러오기
@@ -55,10 +55,10 @@ public class AdminServiceImpl implements AdminService {
 		return am.getCarrierDatas();
 	}
 	
-
-	
-	
-	
+	// 주문 취소
+		public int cancelOrder(AdminOrderVO data) {
+			return am.cancelOrder(data);
+		}
 	
 }
 

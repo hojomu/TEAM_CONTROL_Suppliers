@@ -8,9 +8,15 @@
 
 	<!-- 출하 계획표 resultMaps -->
   	<resultMap id="adminOrderResultMap" type="control.suppliers.model.AdminOrderVO">
-      <id property="orderId" column="order_id" javaType="int"/>
-      <result property="deliveryDate" column="delivery_date"/>
-      <collection column="orderId = order_id" property="orderedProduct" javaType="List"
+      <id property="orderId" column="orderId" javaType="int"/>
+      <result property="deliveryDate" column="deliveryDate" javaType="String"/>
+      <result property="orderDate" column="orderDate" javaType="String"/>
+      <result property="hospital" column="hospital" javaType="String"/>
+      <result property="name" column="name" javaType="String"/>
+      <result property="address" column="address" javaType="String"/>
+      <result property="email" column="email" javaType="String"/>
+      <result property="phone" column="phone" javaType="String"/>
+      <collection column="orderId = orderId" property="orderedProduct" javaType="List"
       ofType="control.suppliers.model.OrderedProductVO" select="selectOrderedProductList"/>
     </resultMap>
     
@@ -41,13 +47,23 @@
 	<!-- 출하 계획표 불러오기 -->
 	<select id="list" resultMap="adminOrderResultMap">
 		SELECT
-			o.order_id,
-			DATE_FORMAT(o.delivery_date, '%Y-%m-%d') AS delivery_date,
-			c.name as customerHospital
+			o.order_id AS orderId,
+			DATE_FORMAT(o.delivery_date, '%Y-%m-%d') AS deliveryDate,
+			DATE_FORMAT(o.order_date, '%Y-%m-%d') AS orderDate,
+			c.hospital AS hospital,
+			c.name AS name,
+			c.address AS address,
+			c.email AS email,
+			c.phone AS phone
 		FROM `order` o
 		JOIN order_cancel oc ON o.order_id = oc.order_id
 		JOIN customer c ON o.customer_id = c.customer_id
 		WHERE oc.state = 'normal'
+			<choose>
+				<when test="orderId != 0">
+					AND o.order_id = #{orderId}
+				</when>
+			</choose>
 		ORDER BY o.order_id DESC
 		<!-- LIMIT ${(pageNum-1)*amount}, #{amount} -->
 	</select>
@@ -55,7 +71,11 @@
 	<select id="selectOrderedProductList" parameterType="control.suppliers.model.AdminOrderVO" resultType="control.suppliers.model.OrderedProductVO">
 		Select
 			op.count AS count,
-			p.name AS product
+			p.name AS product,
+			p.code AS code,
+			p.count AS stock,
+			p.tax AS tax,
+			p.price AS price
 		From ordered_product op
 		LEFT JOIN product p ON op.product_id = p.product_id
 		WHERE op.order_id = #{orderId}
@@ -239,6 +259,16 @@
 		LEFT JOIN product p ON op.product_id = p.product_id
 		WHERE op.order_id = #{orderId}
 	</select>
+	
+	<!-- 주문 취소 -->
+	<update id="cancelOrder">
+		UPDATE
+			order_cancel
+		SET 
+			state = 'cancel'
+		WHERE 
+			order_id = #{orderId}
+	</update>
 	
 </mapper>
 

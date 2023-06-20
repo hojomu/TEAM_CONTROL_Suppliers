@@ -56,7 +56,7 @@
 	          	<c:forEach items="${list}" var="orderList">
 	          	  <tr>
 	          	    <th scope="row">${orderList.orderId}</th>
-	          	    <td>${orderList.customerHospital}</td>
+	          	    <td>${orderList.hospital}</td>
 	          	    <td class="order-product">
 	          	    <a href="/detail?orderId=${orderList.orderId}">
 		          	    <c:forEach items="${orderList.orderedProduct}" var="orderedProduct">

@@ -5,61 +5,95 @@
 <!-- headerSidebar jsp -->
 <%@ include file="admin_header.jsp" %>
 
-   <!-- 본문 내용 -->
-   
-   <main id="main" class="main">
+<!-- 본문 내용 -->
+<main id="main" class="main">
+<c:set var="order" value="${orderDetail[0]}" />
+			<div class="card">
+            <div class="card-body">
+            <div class="shipment_table_header">
+            
+            <div class="shipment_search_date">
+			수주일자 :
+			<span class="shipment_order_confirmation">${order.orderDate}</span>
+			-
+			납기일자 :
+			<span class="shipment_order_confirmation">${order.deliveryDate}</span>
+			</div>
+			
+			<div class="shipment_order_text">
+			계약 코드 : <span class="shipment_order_confirmation">${order.orderId}</span> 
+			납품처 : <span class="shipment_order_confirmation">${order.hospital}</span> 
+			납품처 주소 : <span class="shipment_order_confirmation">${order.address}</span> 
+            </div>
+            
+            <div class="shipment_order_text">
+			대표 이름 : <span class="shipment_order_confirmation">${order.name}</span>  
+			대표 번호 : <span class="shipment_order_confirmation">${order.phone}</span>  
+			대표 이메일 : <span class="shipment_order_confirmation">${order.email}</span> 
+            </div>
+            
+			</div>
+              
+              <div class="shipment_order_table_box">
 
-    <div class="pagetitle">
-      <h1>출하 계획표</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">출하 계획표</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
+              <!-- Bordered Table   -->
+              <table class="table table-bordered">
+              
+              	<colgroup>
+			        <col width="20%" />
+			        <col width="20%" />
+			        <col width="15%" />
+			        <col width="20%" />
+			        <col width="20%" />
+			        <col width="5%" />
+			        <%-- <col width="auto" /> --%>
+		        </colgroup>
+              
+                <thead class="shipment_table_thead">
+                  <tr>
+                    <th scope="col"><div>품목명</div></th>
+                    <th scope="col"><div>품목코드</div></th>
+                    <th scope="col"><div>수량</div></th>
+                    <th scope="col"><div>판매단가</div></th>
+                    <th scope="col"><div>부가세</div></th>
+                    <th scope="col"><div>현재고</div></th>
+                  </tr>
+                </thead>
+                <tbody>
+                <c:forEach var="product" items="${product}">
+                  <tr>
+                    <td><div>${product.product}</div></td>
+                    <td><div>${product.code}</div></td>
+                    <td><div class="count">${product.count}</div></td>
+                    <td><div class="price">${product.price}</div></td>
+                    <td><div class="tax">${product.tax}</div></td>
+                    <td><div class="stock">${product.stock}</div></td>
+                  </tr>
+                </c:forEach>
+                </tbody>
+              </table>
+              </div>
+              <!-- End Bordered Table -->
+              
+              <div class="shipment_order_sum">
+				<div>총수량 : <span id="totCount">100</span></div>
+				<div>총 판매가 : <span id="totPrice">123,000</span></div> 
+				<div>총 부가세 : <span id="totTax">12,300</span></div> 
+				<div>총 액 : <span id="totAmount">135,300</span></div>
+			  </div>
+              
+            </div>
+            </div>
 
-    <section class="section dashboard">
-      <div class="row">
+<div class="shipment_order_botton">
+<button id="cancelBtn" type="button" class="shipment_order_canclebnt">삭제</button><button class="shipment_order_registerbnt">다운로드</button>
+</div>
 
-    <!-- Table with hoverable rows -->
-	 <div class="col-12">
-	  <div class="card overflow-auto">
-	
-	    <div class="filter">
-	      <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-	      <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-	        <li class="dropdown-header text-start">
-	          <h6>Filter</h6>
-	        </li>
-	
-	        <li><a class="dropdown-item" href="#">Today</a></li>
-	        <li><a class="dropdown-item" href="#">This Month</a></li>
-	        <li><a class="dropdown-item" href="#">This Year</a></li>
-	      </ul>
-	    </div>
-	    
-	      <div class="card-body">
-	        <h5 class="card-title">출하 계획표 <span>| 오늘</span></h5>
-	        
-	        <!-- 여기 내용 적을 것 -->
-	        
-	        
-	        
-		  </div>
-	    </div>
-	   </div>
-	  </div>
-	 </section>
-	    
-  </main>
-   
-   
-   
-   
-   
-  <!-- 본문 끝 -->
-  
+</main>
+<!-- 본문 끝 -->
+  <form id="cancelForm" action="/cancelOrder" method="post">
+  	<input type="hidden" name="orderId" value="${order.orderId}">
+  </form>
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
@@ -90,6 +124,7 @@
   <!-- Template Main JS File -->
   <script src="resources/js/main.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="resources/js/adminDetail.js"></script>
 
 </body>
 </html>
