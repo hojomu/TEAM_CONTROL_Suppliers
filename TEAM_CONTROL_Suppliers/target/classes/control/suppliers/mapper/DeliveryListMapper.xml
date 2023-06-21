@@ -1,4 +1,4 @@
-<!-- <?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -6,37 +6,77 @@
   
 <mapper namespace="control.suppliers.mapper.DeliveryListMapper" >
   
-<resultMap id="orderResultMap" type="OrderVO">
-  <id property="orderId" column="order_id" />
+<resultMap id="diliveryListMap" type="control.suppliers.model.DeliveryListVO">
+  <id property="orderId" column="order_id" javaType="int"/>
+  <result property="orderId" column="order_id" />
   <result property="deliveryDate" column="delivery_date" />
-  <association property="customer" javaType="CustomerVO">
-    <result property="hospital" column="hospital" />
-    <result property="email" column="email" />
-    <result property="address" column="address" />
-  </association>
-  <collection property="orderedProducts" ofType="OrderedProductVO">
-    <id property="productId" column="product_id" />
-    <result property="count" column="count" />
-    <association property="product" javaType="ProductVO">
-      <result property="name" column="name" />
-      <result property="code" column="code" />
-    </association>
-  </collection>
+  <result property="address" column="address" javaType="String"/>
+  <result property="email" column="email" javaType="String"/>
+  <result property="hospital" column="hospital" javaType="String"/>
+  <collection column="orderId = order_id" property="orderedProduct" javaType="List"
+     ofType="control.suppliers.model.OrderedProductVO" select="selectOrderedProductList"/>     
 </resultMap>
+    
+<!-- <resultMap id="orderedProductMap" type="control.suppliers.model.OrderedProductVO">
+  <id property="orderedProductId" column="ordered_product_id" javaType="int"/>
+  <result property="count" column="count" />
+  <result property="product" column="product" />
+  <result property="code" column="code" />
+  <collection column="productId = product_id" property="product" javaType="List" 
+   ofType="control.suppliers.model.ProductVO" select="selectProductList"/>
+</resultMap>
+  -->
+<!--  <resultMap id="productMap" type="control.suppliers.model.ProductVO">
+  <id property="productId" column="product_id" javaType="int"/>
+  <result property="name" column="name" />
+  <result property="code" column="code" />
+</resultMap> --> 
+ 
 
-조인 쿼리
-<select id="getOrdersWithProducts" resultMap="orderResultMap">
-  SELECT o.order_id, o.delivery_date,
-         c.hospital, c.email, c.address,
-         op.product_id, op.count,
-         p.name, p.code
-  FROM order_table o
-  JOIN customer_table c ON o.customer_id = c.customer_id
-  JOIN ordered_product_table op ON o.order_id = op.order_id
-  JOIN product_table p ON op.product_id = p.product_id
-  WHERE o.delivery_date = #{deliveryDate}
-</select>
 
+	<select id="list" resultMap="diliveryListMap">
+		SELECT DISTINCT
+			o.order_id,
+			DATE_FORMAT(o.delivery_date, '%Y-%m-%d') AS delivery_date,
+			c.hospital as hospital,
+			c.address as address,
+			c.email AS email
+		FROM `order` o
+		JOIN ordered_product op ON o.order_id = op.order_id
+		JOIN customer c ON o.customer_id = c.customer_id
+			WHERE Date(o.delivery_date) = CURRENT_DATE()
+		
+	</select>
+		
+	 	<!-- <select id="selectOrderedProductList" parameterType="control.suppliers.model.DeliveryListVO" resultType="control.suppliers.model.OrderedProductVO">
+		SELECT
+		    op.count AS count,
+		    p.name AS name,
+		    p.code AS code
+		FROM ordered_product op
+		LEFT JOIN product p ON op.product_id = p.product_id
+		WHERE op.order_id = #{orderId}
+		</select> -->
+		
+ 	 <select id="selectOrderedProductList" parameterType="control.suppliers.model.DeliveryListVO" resultType="control.suppliers.model.OrderedProductVO">
+		SELECT 
+		    op.count AS count,
+		    p.name AS product, 
+		    p.code AS code
+		From ordered_product op
+		JOIN product p ON op.product_id = p.product_id 
+	  	WHERE op.order_id = #{orderId} 
+
+	</select>
+<!-- 
+	<select id="selectProductList" parameterType="control.suppliers.model.DeliveryListVO" resultMap="control.suppliers.model.ProductVO">
+		  SELECT
+		    p.product_id AS product_id,
+		    p.name AS name,
+		    p.code AS code
+		  FROM product p
+		  WHERE p.product_id = #{orderedProduct.product_id}
+	</select>   -->
+	
 </mapper>
 
-  -->

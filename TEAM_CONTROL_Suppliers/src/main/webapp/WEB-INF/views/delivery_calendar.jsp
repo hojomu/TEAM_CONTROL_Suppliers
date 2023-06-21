@@ -3,12 +3,11 @@
     pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%>
 <%@page import="control.suppliers.model.CalendarVO"%>
- <%@page import="control.suppliers.model.CustomerVO"%> -
+<%@page import="control.suppliers.model.CustomerVO"%> 
 <%@ page import="java.util.Calendar" %>
 
 <body>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- headerSidebar jsp -->
 <%@ include file="delivery_headerSidebar.jsp" %>
 
@@ -23,58 +22,71 @@
   
   
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="resources/js/delivery_calendar.js"></script>
+  <script src="resources/js/delivery_calendar.js"></script>
   
   <script>
-  
-    	document.addEventListener('DOMContentLoaded', function() {
-    	  $(function () {
-             var request = $.ajax({
-             url:"/calendar/event", 
-             method: "GET",
-             dataType: "json"
-            });
-       		
-           request.done(function (data) {
-              console.log(data); 
-                 
-        	var calendarEl = document.getElementById('calendar');
-        	
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                // Tool Bar 목록 document : https://fullcalendar.io/docs/toolbar
-                headerToolbar: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'dayGridMonth,dayGridWeek,dayGridDay'
-                },
+  document.addEventListener('DOMContentLoaded', function() {
+/*   $(function () {
+	  
+	     var request = $.ajax({
+	     url:"/calendar/event", 
+	     method: "GET",
+	     dataType: "json"
+	    });
+	     
+	     request.done(function (data) {
+             console.log(data); 
+   */
 
-                selectable: true,
-                selectMirror: true,
+    	var calendarEl = document.getElementById('calendar');
+    	
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            // Tool Bar 목록 document : https://fullcalendar.io/docs/toolbar       
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,dayGridWeek,dayGridDay'
+            },
 
-                navLinks: true, // can click day/week names to navigate views
-               /*  editable: true, //이벤트 편집 기능 */
-              
-                dayMaxEvents: true, // 이벤트가 많을 때"더 보기" 생성
-                
-                // 이벤트 객체 필드 document : https://fullcalendar.io/docs/event-object
-                events:[
-                	    {title:hospital, 
-                	    start:delivery_date}] 
-                
-                });
-
-                calendar.render();
-                
-              });
-           
+            selectable: true,
+            selectMirror: true,
+            navLinks: true, // can click day/week names to navigate views
+           /*  editable: true, //이벤트 편집 기능 */          
+            dayMaxEvents: true, // 이벤트가 많을 때"더 보기" 생성
+            
+            // 이벤트 객체 필드 document : https://fullcalendar.io/docs/event-object
+            events: function (info, successCallback, failureCallback) {
+          	  
+            	$.ajax({
+            	    url: "calendar/event",
+            	    method: "GET",
+            	    dataType: "json",
+            	    success: function(data) {
+            	      var events = [];
+            	      for (var i = 0; i < data.length; i++) {
+            	        var event = {
+            	          title: data[i].title,
+            	          start: data[i].start
+            	        };
+            	        events.push(event);
+            	      }
+            	      successCallback(events);
+            	    },
+            	    error: function(xhr, status, error) {
+            	      failureCallback(error);
+            	    }
+            	  });
+            	}
+    		
+   	     });
+        	calendar.render();
+        
+        });
+        /* 
         	   request.fail(function( jqXHR, textStatus ) {
                alert( "Request failed: " + textStatus );
-           });
-       });
+           }); */
 
-   });
-
-    	
     	</script>
     	
  	

@@ -72,12 +72,12 @@ public class HomeController {
 		return "delivery_calendar";
 	}
 		
-	// 배송 스케줄 캘린더로 이동
+	/*// 배송 스케줄 캘린더로 이동
 	@RequestMapping(value = "/delivery_list", method = RequestMethod.GET)
 	public String delivery_list(Locale locale, Model model) {
 		return "delivery_list";
 	}
-	
+	*/
 	// login 화면
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Locale locale, Model model) {

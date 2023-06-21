@@ -1,37 +1,31 @@
 package control.suppliers.model;
 
 public class CalendarVO {
-	private int transportId; 
-	private int customerId;
-	private String customerHospital; // calendarTitle
-	private String deliveryDate; // calendarStart
+	private int orderId; 	
+	private String hospital; // calendarTitle 
+	private String delivery_date; // calendarStart
 	
+/*	private List<CustomerVO> Customer;*/
+
 	
-	public int getTransportId() {
-		return transportId;
+	public int getOrderId() {
+		return orderId;
 	}
-	public void setTransportId(int transportId) {
-		this.transportId = transportId;
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
 	}
-	public int getCustomerId() {
-		return customerId;
+	public String getHospital() {
+		return hospital;
 	}
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
+	public void setHospital(String hospital) {
+		this.hospital = hospital;
 	}
-	public String getCustomerHospital() {
-		return customerHospital;
+	public String getDelivery_date() {
+		return delivery_date;
 	}
-	public void setCustomerHospital(String customerHospital) {
-		this.customerHospital = customerHospital;
+	public void setDelivery_date(String delivery_date) {
+		this.delivery_date = delivery_date;
 	}
-	
-	public String getDeliveryDate() {
-		return deliveryDate;
-	}
-	public void setDeliveryDate(String deliveryDate) {
-		this.deliveryDate = deliveryDate;
-	}
-	
+
 
 }

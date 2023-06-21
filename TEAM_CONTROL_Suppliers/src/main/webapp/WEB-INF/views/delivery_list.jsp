@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- headerSidebar jsp -->
 <%@ include file="delivery_headerSidebar.jsp" %>
@@ -22,172 +23,51 @@
       <div class="row">
 
     <!-- Table with hoverable rows -->
+    <c:forEach items="${list}" var="DeliveryList">
     <form>
-	 <div class="col-12">
-	  <div class="card overflow-auto">
-	      <div class="list-body">
-		 	<ul class="list_top">
-		 		<li class="num">no. 241567</li>
-		 		<li class="hos_name">울산대학교병원</li>
-		 		<li class="hos_adress">울산 동구 대학병원로 25 </li>
-		 	</ul>	
+        <div class="col-12">
+            <div class="card overflow-auto">
+                <div class="list-body">
+                    <ul class="list_top">
+                        <li class="num">No.${DeliveryList.orderId}</li>
+                        <li class="hos_name">${DeliveryList.hospital}</li>
+                        <li class="hos_adress">${DeliveryList.address}</li>
+                    </ul>
 
-	        <table class="table table-hover">
-	          <thead>
-	            <tr>
-	              <th scope="col" >품목명</th>
-	              <th scope="col">품목코드</th>
-	              <th scope="col" >수량</th>
-	              <th scope="col" ></th>
-	            </tr>
-	          </thead>
-	          
-	          <tbody class="table_inside">
-	            <tr>
-	              <td>튼튼한 청진기</td>
-	              <td>230121</td>
-	              <td>5</td>
-	            </tr>
-	            <tr>
-	              <td>바늘 얇은 주사기</td>
-	              <td>230121</td>
-	              <td>20</td>
-	            </tr>
-	            <tr>
-	              <td>C제품</td>
-	              <td>230121</td>
-	              <td>300</td>
-	            </tr>
-	            <tr>
-	              <td>D제품</td>
-	              <td>230121</td>
-	              <td>100</td>
-	            </tr>
-	            <tr>
-	              <td>E제품</td>
-	              <td>230121</td>
-	              <td>50</td>
-	            </tr>
-	            <tr>
-	              <td>A제품</td>
-	              <td>230121</td>
-	              <td>50</td>
-	            </tr>
-	            <tr>
-	              <td>B제품</td>
-	              <td>230121</td>
-	              <td>20</td>
-	            </tr>
-	            <tr>
-	              <td>C제품</td>
-	              <td>230121</td>
-	              <td>300</td>
-	            </tr>
-	            <tr>
-	              <td>D제품</td>
-	              <td>230121</td>
-	              <td>100</td>
-	            </tr>
-	            <tr>
-	              <td>E제품</td>
-	              <td>230121</td>
-	              <td>50</td>
-	            </tr>
-	          </tbody>
-	        </table>
-	        <!-- End Table with hoverable rows -->
-	        
-	        <ul class="list_button">
-		 		<li> <button type="submit" class="start" > 배송시작 </button> </li>
-		 		<li> <button type="button" class="end"> 배송완료 </button> </li>
-		 	</ul>	
-	        </div>      
-	    </div>
-	   </div>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">품목명</th>
+                                <th scope="col">품목코드</th>
+                                <th scope="col">수량</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                    
+                        <tbody class="table_inside">         
+     						<c:forEach items="${DeliveryList.orderedProduct}" var="orderedProduct">
+                             <tr>      	 
+                       			     <td>${orderedProduct.product}</td>
+								     <td>${orderedProduct.code}</td>
+								     <td>${orderedProduct.count}</td>
+							 </tr>
+							 </c:forEach> 
+                              
+                         
+                        </tbody>
+                    </table>
+                    <!-- End Table with hoverable rows -->
+                    
+                    <ul class="list_button">
+                        <li><button type="button" class="start">배송시작</button></li>
+                        <li><button type="button" class="end">배송완료</button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </form>
-	   
-    <!-- Table with hoverable rows -->
-	 <div class="col-12">
-	  <div class="card overflow-auto">
-	      <div class="list-body">
-		 	<ul class="list_top">
-		 		<li class="num">no. 248921</li>
-		 		<li class="hos_name">인석의료재단보람병원</li>
-		 		<li class="hos_adress">울산 남구 돋질로336번길 10 </li>
-		 	</ul>	
+	</c:forEach>
 
-	        <table class="table table-hover">
-	          <thead>
-	            <tr>
-	              <th scope="col" >품목명</th>
-	              <th scope="col">품목코드</th>
-	              <th scope="col" >수량</th>
-	              <th scope="col" ></th>
-	            </tr>
-	          </thead>
-	          
-	          <tbody class="table_inside">
-	            <tr>
-	              <td>A제품</td>
-	              <td>230121</td>
-	              <td>50</td>
-	            </tr>
-	            <tr>
-	              <td>B제품</td>
-	              <td>230121</td>
-	              <td>20</td>
-	            </tr>
-	            <tr>
-	              <td>C제품</td>
-	              <td>230121</td>
-	              <td>300</td>
-	            </tr>
-	            <tr>
-	              <td>D제품</td>
-	              <td>230121</td>
-	              <td>100</td>
-	            </tr>
-	            <tr>
-	              <td>E제품</td>
-	              <td>230121</td>
-	              <td>50</td>
-	            </tr>
-	            <tr>
-	              <td>A제품</td>
-	              <td>230121</td>
-	              <td>50</td>
-	            </tr>
-	            <tr>
-	              <td>B제품</td>
-	              <td>230121</td>
-	              <td>20</td>
-	            </tr>
-	            <tr>
-	              <td>C제품</td>
-	              <td>230121</td>
-	              <td>300</td>
-	            </tr>
-	            <tr>
-	              <td>D제품</td>
-	              <td>230121</td>
-	              <td>100</td>
-	            </tr>
-	            <tr>
-	              <td>E제품</td>
-	              <td>230121</td>
-	              <td>50</td>
-	            </tr>
-	          </tbody>
-	        </table>
-	        <!-- End Table with hoverable rows -->
-	        
-	        <ul class="list_button">
-		 		<li> <button type="submit" class="start" > 배송시작 </button> </li>
-		 		<li> <button type="button" class="end"> 배송완료 </button> </li>
-		 	</ul>	
-	        </div>      
-	    </div>
-	   </div>
 	  </div>
 	 </section>
 	    

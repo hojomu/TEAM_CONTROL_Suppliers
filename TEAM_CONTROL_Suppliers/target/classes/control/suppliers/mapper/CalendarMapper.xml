@@ -9,28 +9,26 @@
   <!-- 운반자 개별 스케줄 캘린더 resultMaps -->
   <resultMap id="CalendarResultMap" type="control.suppliers.model.CalendarVO">
   	<id property="orderId" column="order_id" javaType="int"/>
-  	<result property="transportId" column="transport_id"/>
-  	<result property="deliveryDate" column="delivery_date"/>
-  	<association property="customerId" resultMap="CustomerResultMap" />
+  	<!-- <result property="orderId" column="order_id" /> -->
+  	<result property="start" column="delivery_date"/>
+  	<result property="title" column="hospital" javaType="String"/>
+  	<!-- <association property="customerId" resultMap="getEventList" /> -->
+    <collection column="customerId = customer_id" property="Customer" javaType="List"
+     ofType="control.suppliers.model.CustomerVO" select="event"/>  
   </resultMap>
 	
-   <resultMap id="CustomerResultMap" type="control.suppliers.model.CustomerVO">
-    <id  property="customerId" column="customer_id"/>
-    <result property="hospital" column="hospital"  />
-  </resultMap>
-	
-	<select id="getEventList" resultMap="CalendarResultMap">
+	<select id="event" resultType="control.suppliers.model.CalendarVO">
 		<!-- select * from calendar  -->
-		SELECT
-			o.transport_id,
+		SELECT DISTINCT
+			o.order_id,
 			DATE_FORMAT(o.delivery_date, '%Y-%m-%d') AS delivery_date,
-			c.name as hospital
+			c.hospital as hospital
 		FROM `order` o		
 		JOIN customer c ON o.customer_id = c.customer_id
-		
-	
+
 	</select>
 
 </mapper>
+
 
  
