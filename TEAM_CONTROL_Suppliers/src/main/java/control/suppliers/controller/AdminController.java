@@ -21,11 +21,9 @@ import com.google.gson.Gson;
 
 import control.suppliers.model.AdminGraphVO;
 import control.suppliers.model.AdminOrderVO;
-import control.suppliers.model.CriteriaVO;
 import control.suppliers.model.DatePerOrderVO;
 import control.suppliers.model.LoginVO;
 import control.suppliers.model.OrderedProductVO;
-import control.suppliers.model.PageVO;
 import control.suppliers.model.ProductStockVO;
 import control.suppliers.model.TransportDataVO;
 import control.suppliers.service.AdminService;
@@ -44,15 +42,14 @@ public class AdminController {
 		// 그래프 페이지로 이동
 		@RequestMapping(value = "/adminGraph", method = RequestMethod.GET)
 		public String adminGraph(HttpSession session, Model model, AdminGraphVO adm) {
+			log.info("안녕");
 		    LoginVO account = (LoginVO) session.getAttribute("account");
-		    log.info("{}",account);
 		    if(account == null || !account.getDept().equals("admin")) {
 		    	return "redirect:/security";
 		    } else {
 			AdminGraphVO graphData = as.getGraph(adm);
 			ArrayList<DatePerOrderVO> dpoData = as.getDpo(adm);
 			ArrayList<ProductStockVO> stockData = as.getStock();
-			log.info("adm: {} ",adm);
 			
 			Gson gson = new Gson();
 			String dpoDataJson = gson.toJson(dpoData);
@@ -69,32 +66,35 @@ public class AdminController {
 		
 		// 출하 계획표 불러오기
 		@RequestMapping(value="/adminTable", method = RequestMethod.GET)
-		public String adminTable (Model model,AdminOrderVO data) {
-			
+		public String adminTable (HttpSession session, Model model,AdminOrderVO data) {
+			LoginVO account = (LoginVO) session.getAttribute("account");
+		    if(account == null || !account.getDept().equals("admin")) {
+		    	return "redirect:/security";
+		    } else {
 			List<AdminOrderVO> resultList = as.list(data);
-			//log.info("as.list(cri) 결과: {}", resultList);
 			
 			Gson gson = new Gson();
 			String resultListJson = gson.toJson(resultList);
-			//log.info("resultListJson: {}", resultListJson);
 			
 			model.addAttribute("listJson", resultListJson);
 			
 			model.addAttribute("list", resultList);
 			
-			/*int total=as.total(cri);
-			
-			model.addAttribute("paging", new PageVO(cri, total));*/
-			
 			return "adminTable";
+		    }
 		}
 		
 		// 관리자 운반 관리 페이지로 이동
 		@RequestMapping(value = "/adminCarrier", method = RequestMethod.GET)
-		public String adminCarrier(Locale locale, Model model) {
+		public String adminCarrier(HttpSession session, Locale locale, Model model) {
+			LoginVO account = (LoginVO) session.getAttribute("account");
+		    if(account == null || !account.getDept().equals("admin")) {
+		    	return "redirect:/security";
+		    } else {
 			model.addAttribute("kakaoMapApiKey",kakaoMapApiKey);
 			model.addAttribute("list",as.transportList());
 			return "adminCarrier";
+		    }
 		}
 		
 		// 실시간 랜더링 데이터 호출
@@ -105,24 +105,40 @@ public class AdminController {
 		
 		// 주문 상세보기 페이지 이동
 		@RequestMapping(value = "/detail", method = RequestMethod.GET)
-		public String orderDetail(Model model, AdminOrderVO data) {
+		public String orderDetail(HttpSession session, Model model, AdminOrderVO data) {
+			LoginVO account = (LoginVO) session.getAttribute("account");
+		    if(account == null || !account.getDept().equals("admin")) {
+		    	return "redirect:/security";
+		    } else {
 			ArrayList<AdminOrderVO> orderDetail = as.list(data);
 			List<OrderedProductVO> product = orderDetail.get(0).getOrderedProduct();
 			model.addAttribute("orderDetail",orderDetail);
 			model.addAttribute("product",product);
-			log.info("{}",orderDetail);
 			
 			return "adminDetail";
+		    }
 		}
 		
 		// 주문 취소
 		@RequestMapping(value = "/cancelOrder", method = RequestMethod.POST)
 		public String cancelOrder(AdminOrderVO data) {
-			log.info("{}",data);
 			int result = as.cancelOrder(data);
 			
 			return result == 1 ? "redirect:/adminTable"
 					: "redirect:/detail";
+		}
+		
+		// 재고량 자세히 보기
+		@RequestMapping(value = "/stockDetail", method = RequestMethod.GET)
+		public String stockDetail(HttpSession session, Model model) {
+			LoginVO account = (LoginVO) session.getAttribute("account");
+		    if(account == null || !account.getDept().equals("admin")) {
+		    	return "redirect:/security";
+		    } else {
+		    model.addAttribute("stockData", as.getStock());
+		    
+			return "stockDetail";
+		    }
 		}
 		
 }
