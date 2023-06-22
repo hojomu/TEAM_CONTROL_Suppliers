@@ -4,8 +4,8 @@
 
 <!-- headerSidebar jsp -->
 <%@ include file="delivery_headerSidebar.jsp" %>
-
-	<link href ="resources/css/delivery_list.css" rel="stylesheet"/>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ <link href ="resources/css/delivery_list.css" rel="stylesheet"/>
 
 
 <!-- 본문 내용 -->
@@ -23,8 +23,8 @@
       <div class="row">
 
     <!-- Table with hoverable rows -->
-    <c:forEach items="${list}" var="DeliveryList">
-    <form>
+    <c:forEach items="${list}" var="DeliveryList" >
+    <form class="transport_location"  method="POST"  action="/transport_location" >
         <div class="col-12">
             <div class="card overflow-auto">
                 <div class="list-body">
@@ -59,8 +59,8 @@
                     <!-- End Table with hoverable rows -->
                     
                     <ul class="list_button">
-                        <li><button type="button" class="start">배송시작</button></li>
-                        <li><button type="button" class="end">배송완료</button></li>
+                        <li><button type="button" id="btnStart" class="start" >배송시작</button></li>
+                        <li><button type="button" id="btnStop" class="end">배송완료</button></li>
                     </ul>
                 </div>
             </div>
@@ -108,5 +108,6 @@
   <script src="resources/js/main.js"></script>
  
   <script src="resources/js/delivery_list.js"></script>
+
 </body>
 </html>

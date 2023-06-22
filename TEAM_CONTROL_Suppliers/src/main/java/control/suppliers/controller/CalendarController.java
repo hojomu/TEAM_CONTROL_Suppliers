@@ -4,23 +4,28 @@ package control.suppliers.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import control.suppliers.model.CalendarVO;
+import control.suppliers.model.LoginVO;
 import control.suppliers.service.CalendarService;
 
 @Controller
+
 @RequestMapping("/calendar")
 public class CalendarController {
 
-		private static final Logger log = LoggerFactory.getLogger(CalendarController.class);
+		private final Logger log = LoggerFactory.getLogger(CalendarController.class);
 		
 		private final CalendarService calendarService;
 		
@@ -30,9 +35,10 @@ public class CalendarController {
 	
 		@RequestMapping(value="/event", method = RequestMethod.GET)
 		@ResponseBody
-		public List<CalendarVO> event() {
+		public String event() {
+	
 			List<CalendarVO> list = calendarService.event();
-			System.out.println(list);
+			/*System.out.println(list);*/
 			
 			JSONObject jsonObj = new JSONObject();
 			JSONArray jsonArr = new JSONArray();
@@ -48,13 +54,14 @@ public class CalendarController {
 				jsonArr.add(jsonObj); // 대괄호 안에 넣어주기[{key:value , key:value, key:value},{key:value , key:value, key:value}]
 			}
 			
-			log.info("jsonArrCheck: {}", jsonArr);
+			/*log.info("jsonArrCheck: {}", jsonArr);*/
 			
-			return jsonArr;
+			return jsonArr.toString();
+
 		}
 
 	}
-     
+
 
 
 
