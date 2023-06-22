@@ -27,7 +27,6 @@
   <link href="resources/vendor/quill/quill.bubble.css" rel="stylesheet">
   <link href="resources/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="resources/vendor/simple-datatables/style.css" rel="stylesheet">
-  <script src="resources/vendor/apexcharts/apexcharts.min.js"></script>
   <!-- Template Main CSS File -->
   <link href="resources/css/style.css" rel="stylesheet">
   <link rel="stylesheet" href="/resources/css/admin.css">
