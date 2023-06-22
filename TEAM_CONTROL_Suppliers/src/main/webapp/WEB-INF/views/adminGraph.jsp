@@ -32,21 +32,21 @@
                   <h6>Filter</h6>
                 </li>
                 
-                <li><a class="dropdown-item" href="/adminGraph?totTurnover=${adm.totTurnover}&customerNum=${adm.customerNum}&dpoOption=${adm.dpoOption}">오늘</a></li>
-                <li><a class="dropdown-item" href="/adminGraph?orderAmount=1&totTurnover=${adm.totTurnover}&customerNum=${adm.customerNum}&dpoOption=${adm.dpoOption}">이번 달</a></li>
-                <li><a class="dropdown-item" href="/adminGraph?orderAmount=2&totTurnover=${adm.totTurnover}&customerNum=${adm.customerNum}&dpoOption=${adm.dpoOption}">올 해</a></li>
+                <li><a class="dropdown-item oaAtag" href="#">오늘</a></li>
+                <li><a class="dropdown-item oaAtag" href="#">이번 달</a></li>
+                <li><a class="dropdown-item oaAtag" href="#">올 해</a></li>
               </ul>
             </div>
             
             <div class="card-body">
-              <h5 class="card-title">주문량 <span id="orderAmountSpan">${adm.orderAmount}</span></h5>
+              <h5 class="card-title">주문량 <span id="orderAmountSpan"></span></h5>
 
               <div class="d-flex align-items-center">
                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                   <i class="bi bi-cart"></i>
                 </div>
                 <div class="ps-3">
-                  <h6>${graphData.orderAmount}</h6>
+                  <h6 id="orderAmountValue">${graphData.orderAmount}</h6>
                   <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
 
                 </div>
@@ -67,20 +67,20 @@
                   <h6>Filter</h6>
                 </li>
 
-                <li><a class="dropdown-item" href="/adminGraph?orderAmount=${adm.orderAmount}&customerNum=${adm.customerNum}&dpoOption=${adm.dpoOption}">이번 달</a></li>
-                <li><a class="dropdown-item" href="/adminGraph?orderAmount=${adm.orderAmount}&totTurnover=1&customerNum=${adm.customerNum}&dpoOption=${adm.dpoOption}">올해</a></li>
+                <li><a class="dropdown-item toAtag" href="#">이번 달</a></li>
+                <li><a class="dropdown-item toAtag" href="#">올 해</a></li>
               </ul>
             </div>
 
             <div class="card-body">
-              <h5 class="card-title">매출액 <span id="turnOverSpan">${adm.totTurnover}</span></h5>
+              <h5 class="card-title">매출액 <span id="totTurnoverSpan"></span></h5>
 
               <div class="d-flex align-items-center">
                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                   <i class="bi bi-currency-dollar"></i>
                 </div>
                 <div class="ps-3">
-                  <h6>${graphData.totTurnover} 만원</h6>
+                  <h6 id="totTurnoverValue">${graphData.totTurnover}</h6>
                   <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
 
                 </div>
@@ -102,21 +102,21 @@
                   <h6>Filter</h6>
                 </li>
 
-                <li><a class="dropdown-item" href="/adminGraph?orderAmount=${adm.orderAmount}&totTurnover=${adm.totTurnover}&dpoOption=${adm.dpoOption}">전체</a></li>
-                <li><a class="dropdown-item" href="/adminGraph?orderAmount=${adm.orderAmount}&totTurnover=${adm.totTurnover}&customerNum=1&dpoOption=${adm.dpoOption}">올해</a></li>
-                <li><a class="dropdown-item" href="/adminGraph?orderAmount=${adm.orderAmount}&totTurnover=${adm.totTurnover}&customerNum=2&dpoOption=${adm.dpoOption}">이번 달</a></li>
+                <li><a class="dropdown-item cnAtag" href="#">전체</a></li>
+                <li><a class="dropdown-item cnAtag" href="#">올 해</a></li>
+                <li><a class="dropdown-item cnAtag" href="#">이번 달</a></li>
               </ul>
             </div>
 
             <div class="card-body">
-              <h5 class="card-title">고객(병원) <span id="customerNumSpan">${adm.customerNum}</span></h5>
+              <h5 class="card-title">고객(병원) <span id="customerNumSpan"></span></h5>
 
               <div class="d-flex align-items-center">
                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                   <i class="bi bi-people"></i>
                 </div>
                 <div class="ps-3">
-                  <h6>${graphData.customerNum}</h6>
+                  <h6 id="customerNumValue">${graphData.customerNum}</h6>
                   <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
 
                 </div>
@@ -139,35 +139,55 @@
                   <h6>Filter</h6>
                 </li>
 
-                <li><a class="dropdown-item" href="/adminGraph?orderAmount=${adm.orderAmount}&totTurnover=${adm.totTurnover}&customerNum=${adm.customerNum}">이번 달</a></li>
-                <li><a class="dropdown-item" href="/adminGraph?orderAmount=${adm.orderAmount}&totTurnover=${adm.totTurnover}&customerNum=${adm.customerNum}&dpoOption=1">올해</a></li>
+                <li><a class="dropdown-item dpoAtag" data-set="0" href="#">이번 달</a></li>
+                <li><a class="dropdown-item dpoAtag" data-set="1" href="#">올해</a></li>
               </ul>
             </div>
 
             <div class="card-body">
-              <h5 class="card-title">물품 별 주문량 <span id="dpoOptionSpan">${adm.dpoOption}</span></h5>
+              <h5 class="card-title">물품 별 주문량 <span id="dpoOptionSpan"></span></h5>
 
               <!-- Line Chart -->
               <div id="reportsChart"></div>
 
               <script>
-                document.addEventListener("DOMContentLoaded", function() {
+              
+              	var orderDpo = ${dpoData};
+              	console.log(orderDpo);
+              	console.log(typeof orderDpo);
+              	
+              	var options = {
+              		  chart: {
+              		      height: 500,
+              		      type: 'bar',
+              		  },
+              		  dataLabels: {
+              		      enabled: false
+              		  },
+              		  series: [],
+              		  title: {
+              		      text: 'Ajax Example',
+              		  },
+              		  noData: {
+              		    text: 'Loading...'
+              		  }
+              		}
+
+              	var chart = new ApexCharts(document.querySelector("#reportsChart"),options);
+              	chart.render();
+              	
+                function renderGraph(dayIndex) {
+              		
                 	var series = [];
-                	var dpoData = ${dpoData};
-                	
-                	//console.log(dpoData);
                 	
                 	var settedSeries = [];
                 	var settedColors = [];
                 	var settedCategories = [];
                 	
-                	var dpoOption = ${adm.dpoOption};
                 	
-                	//console.log("dpoOption :" +dpoOption);
-                	
-                	switch(dpoOption){
-                		case 0:
-                			// 이번 달의 날짜 수 계산하기
+                	if(dayIndex == 0){
+                    var dpoData = orderDpo.thisMonth;
+                	//이번달
                         	var basicDateSetter = dpoData[0].dateOrderAmount[0].date;
                         	var dateObject = new Date(basicDateSetter);
                         	var fixedYear = dateObject.getFullYear();
@@ -225,11 +245,10 @@
                         		  //console.log(formattedDate);
                         		  settedCategories.push(formattedDate);
                         		}
-                        	//console.log(settedSeries);
-                        	//console.log(settedColors);
-                        	break;
-                        
-                		case 1:
+                	} else if (dayIndex == 1){
+                		//일 년
+                    var dpoData = orderDpo.thisYear;
+                		
                         	var basicDateSetter = dpoData[0].dateOrderAmount[0].date;
                         	var dateObject = new Date(basicDateSetter);
                         	var fixedYear = dateObject.getFullYear();
@@ -279,54 +298,57 @@
                         		  settedCategories.push(formattedDate);
                         		}
                         	//console.log(settedSeries);
-                        	
-                        	break;
-                	}
+                	}	
                 	
+                	options = {
+                        series: settedSeries,
+                        chart: {
+                          height: 500,
+                          type: 'area',
+                          toolbar: {
+                            show: false
+                          },
+                          zoom: false // 확대 기능 비활성화
+                        },
+                        markers: {
+                          size: 4
+                        },
+                        colors: settedColors,
+                        fill: {
+                          type: "gradient",
+                          gradient: {
+                            shadeIntensity: 1,
+                            opacityFrom: 0.3,
+                            opacityTo: 0.4,
+                            stops: [0, 90, 100]
+                          }
+                        },
+                        dataLabels: {
+                          enabled: false
+                        },
+                        stroke: {
+                          curve: 'smooth',
+                          width: 2
+                        },
+                        xaxis: {
+                          type: 'datetime',
+                          categories: settedCategories
+                        },
+                        tooltip: {
+                          x: {
+                            format: 'dd/MM/yy'
+                          },
+                        }
+                      };
                 	
-                	
-
-                  new ApexCharts(document.querySelector("#reportsChart"), {
-                    series: settedSeries,
-                    chart: {
-                      height: 350,
-                      type: 'area',
-                      toolbar: {
-                        show: false
-                      },
-                      zoom: false // 확대 기능 비활성화
-                    },
-                    markers: {
-                      size: 4
-                    },
-                    colors: settedColors,
-                    fill: {
-                      type: "gradient",
-                      gradient: {
-                        shadeIntensity: 1,
-                        opacityFrom: 0.3,
-                        opacityTo: 0.4,
-                        stops: [0, 90, 100]
-                      }
-                    },
-                    dataLabels: {
-                      enabled: false
-                    },
-                    stroke: {
-                      curve: 'smooth',
-                      width: 2
-                    },
-                    xaxis: {
-                      type: 'datetime',
-                      categories: settedCategories
-                    },
-                    tooltip: {
-                      x: {
-                        format: 'dd/MM/yy'
-                      },
-                    }
-                  }).render();
+                    chart.updateOptions(options);
+                };
+                
+                document.addEventListener("DOMContentLoaded", function() {
+                	var startIndex = 0;
+                	renderGraph(startIndex);
                 });
+                
               </script>
               <!-- End Line Chart -->
 
@@ -347,7 +369,7 @@
               <h5 class="card-title">물품 별 재고</h5>
 
               <!-- Stacked Bar Chart -->
-              <canvas id="barChart" style="max-height: 700px;"></canvas>
+              <canvas id="barChart" style="max-height: 900px;"></canvas>
               <script>
               document.addEventListener("DOMContentLoaded", function() {
             	  var stockData = ${stockData};
@@ -431,7 +453,6 @@
       Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
     </div>
   </footer><!-- End Footer -->
-
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->

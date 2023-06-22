@@ -2,7 +2,6 @@ package control.suppliers.mapper;
 
 import java.util.ArrayList;
 
-import control.suppliers.model.AdminGraphVO;
 import control.suppliers.model.AdminOrderVO;
 import control.suppliers.model.CriteriaVO;
 import control.suppliers.model.DatePerOrderVO;
@@ -16,10 +15,11 @@ public interface AdminMapper {
 	public int total(CriteriaVO cri);
 
 	// 그래프 페이지
-	public int getGraph(AdminGraphVO adm);
-	public int selectTotTurnover(AdminGraphVO adm);
-	public int selectCustomerNum(AdminGraphVO adm);
-	public ArrayList<DatePerOrderVO> getDpo(AdminGraphVO adm);
+	public ArrayList<Integer> getGraph();
+	public ArrayList<Integer> selectTotTurnover();
+	public ArrayList<Integer> selectCustomerNum();
+	public ArrayList<DatePerOrderVO> getDpoMonth();
+	public ArrayList<DatePerOrderVO> getDpoYear();
 	public ArrayList<ProductStockVO> getStock();
 
 	// 관리자 운반 페이지 리스트

@@ -69,13 +69,13 @@ public class AdminOrderVO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
 	@Override
 	public String toString() {
 		return "AdminOrderVO [orderId=" + orderId + ", deliveryDate=" + deliveryDate + ", orderDate=" + orderDate
 				+ ", orderedProduct=" + orderedProduct + ", address=" + address + ", name=" + name + ", hospital="
-				+ hospital + ", email=" + email + "]";
+				+ hospital + ", email=" + email + ", phone=" + phone + "]";
 	}
+	
     
 	
 }

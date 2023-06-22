@@ -10,6 +10,7 @@ import control.suppliers.model.AdminGraphVO;
 import control.suppliers.model.AdminOrderVO;
 import control.suppliers.model.CriteriaVO;
 import control.suppliers.model.DatePerOrderVO;
+import control.suppliers.model.DpoVO;
 import control.suppliers.model.ProductStockVO;
 import control.suppliers.model.TransportDataVO;
 
@@ -30,17 +31,20 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	// 그래프 페이지
-	public AdminGraphVO getGraph(AdminGraphVO adm) {
+	public AdminGraphVO getGraph() {
 		
 		AdminGraphVO graphData = new AdminGraphVO();
-		graphData.setOrderAmount(am.getGraph(adm));
-		graphData.setTotTurnover(am.selectTotTurnover(adm));
-		graphData.setCustomerNum(am.selectCustomerNum(adm));
+		graphData.setOrderAmount(am.getGraph());
+		graphData.setTotTurnover(am.selectTotTurnover());
+		graphData.setCustomerNum(am.selectCustomerNum());
 		
 		return graphData;
 	}
-	public ArrayList<DatePerOrderVO> getDpo(AdminGraphVO adm) {
-		return am.getDpo(adm);
+	public DpoVO getDpo() {
+		DpoVO totalData = new DpoVO();
+		totalData.setThisMonth(am.getDpoMonth());
+		totalData.setThisYear(am.getDpoYear());
+		return totalData;
 	}
 	public ArrayList<ProductStockVO> getStock(){
 		return am.getStock();
