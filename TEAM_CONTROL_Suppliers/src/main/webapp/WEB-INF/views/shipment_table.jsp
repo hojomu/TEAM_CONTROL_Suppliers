@@ -56,16 +56,16 @@
                 <tbody>
                 
                   <!-- for문 시작 -->
-				  <c:forEach items="${list}" var="order_list">
+ 				  <c:forEach items="${OrderList}" var="order_list">
 	                  <tr>
 	                    <th scope="row"><div>${order_list.order_id}</div></th>
 	                    <td><div>${order_list.order_date}</div></td>
 	                    <td><div>${order_list.delivery_date}</div></td>
-	                    <%-- <td><div><a href="detail?customer_id=${order_list.customer_id}">${order_list.customer_id}</a></div></td> --%>
-	                    <td><div><a href="shipment_detail">${order_list.customer_id}</a></div></td>
-	                    <td><div>${order_list.address}</div></td>
+	                    <td><div><a href="detail?customer_id=${order_list.customer_id}">${order_list.customer_id}</a></div></td>
+	                    <td><div></div></td>
+	                    
 	                  </tr>
-                  </c:forEach>
+                  </c:forEach> 
 				  <!-- for문 끝 -->
 
                 </tbody>
