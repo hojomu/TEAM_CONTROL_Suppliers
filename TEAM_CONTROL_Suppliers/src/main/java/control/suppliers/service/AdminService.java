@@ -6,6 +6,7 @@ import control.suppliers.model.AdminGraphVO;
 import control.suppliers.model.AdminOrderVO;
 import control.suppliers.model.CriteriaVO;
 import control.suppliers.model.DatePerOrderVO;
+import control.suppliers.model.DpoVO;
 import control.suppliers.model.ProductStockVO;
 import control.suppliers.model.TransportDataVO;
 
@@ -16,8 +17,8 @@ public interface AdminService {
 	public int total(CriteriaVO cri);
 	
 	// 그래프 페이지
-	public AdminGraphVO getGraph(AdminGraphVO adm);
-	public ArrayList<DatePerOrderVO> getDpo(AdminGraphVO adm);
+	public AdminGraphVO getGraph();
+	public DpoVO getDpo();
 	public ArrayList<ProductStockVO> getStock();
 	
 	// 관리자 운반 페이지 리스트

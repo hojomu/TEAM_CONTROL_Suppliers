@@ -22,6 +22,7 @@ import com.google.gson.Gson;
 import control.suppliers.model.AdminGraphVO;
 import control.suppliers.model.AdminOrderVO;
 import control.suppliers.model.DatePerOrderVO;
+import control.suppliers.model.DpoVO;
 import control.suppliers.model.LoginVO;
 import control.suppliers.model.OrderedProductVO;
 import control.suppliers.model.ProductStockVO;
@@ -41,24 +42,26 @@ public class AdminController {
 		
 		// 그래프 페이지로 이동
 		@RequestMapping(value = "/adminGraph", method = RequestMethod.GET)
-		public String adminGraph(HttpSession session, Model model, AdminGraphVO adm) {
+		public String adminGraph(HttpSession session, Model model) {
 			log.info("안녕");
 		    LoginVO account = (LoginVO) session.getAttribute("account");
 		    if(account == null || !account.getDept().equals("admin")) {
 		    	return "redirect:/security";
 		    } else {
-			AdminGraphVO graphData = as.getGraph(adm);
-			ArrayList<DatePerOrderVO> dpoData = as.getDpo(adm);
+			AdminGraphVO graphData = as.getGraph();
+			DpoVO dpoData = as.getDpo();
 			ArrayList<ProductStockVO> stockData = as.getStock();
 			
 			Gson gson = new Gson();
+			/*String graphDataJson = gson.toJson(graphData);*/
 			String dpoDataJson = gson.toJson(dpoData);
 			String stockDataJson = gson.toJson(stockData);
 			// 그레프 페이지
 		    model.addAttribute("graphData", graphData);
 		    model.addAttribute("dpoData", dpoDataJson);
 		    model.addAttribute("stockData", stockDataJson);
-		    model.addAttribute("adm", adm);
+		    
+		    log.info("{}",graphData);
 		
 			return "adminGraph";
 		    }

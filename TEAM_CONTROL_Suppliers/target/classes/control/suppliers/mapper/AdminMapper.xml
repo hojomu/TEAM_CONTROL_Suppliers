@@ -95,34 +95,37 @@
 	  	SELECT 
 	  		COUNT(*)
 	  	FROM `order`
-	  	<where>
-	  		<choose>
-	  			<when test="orderAmount == 0">
-					YEAR(order_date) = YEAR(CURRENT_DATE()) AND MONTH(order_date) = MONTH(CURRENT_DATE()) AND DAY(order_date) = DAY(CURRENT_DATE())
-						AND order_id IN (
-							SELECT order_id
-							FROM order_cancel
-							WHERE state = 'normal'
-						)
-	  			</when>
-	  			<when test="orderAmount == 1">
-	  				YEAR(order_date) = YEAR(CURRENT_DATE()) AND MONTH(order_date) = MONTH(CURRENT_DATE())
-						AND order_id IN (
-							SELECT order_id
-							FROM order_cancel
-							WHERE state = 'normal'
-						)
-	  			</when>
-	  			<when test="orderAmount == 2">
-	  				YEAR(order_date) = YEAR(CURRENT_DATE())
-						AND order_id IN (
-							SELECT order_id
-							FROM order_cancel
-							WHERE state = 'normal'
-						)
-	  			</when>
-	  		</choose>
-	  	</where>
+	  	WHERE
+			YEAR(order_date) = YEAR(CURRENT_DATE()) AND MONTH(order_date) = MONTH(CURRENT_DATE()) AND DAY(order_date) = DAY(CURRENT_DATE())
+			AND order_id IN (
+				SELECT order_id
+				FROM order_cancel
+				WHERE state = 'normal'
+			)
+			
+		UNION ALL
+		SELECT 
+	  		COUNT(*)
+	  	FROM `order`
+	  	WHERE
+			YEAR(order_date) = YEAR(CURRENT_DATE()) AND MONTH(order_date) = MONTH(CURRENT_DATE())
+			AND order_id IN (
+				SELECT order_id
+				FROM order_cancel
+				WHERE state = 'normal'
+			)
+			
+		UNION ALL
+		SELECT 
+	  		COUNT(*)
+	  	FROM `order`
+	  	WHERE
+			YEAR(order_date) = YEAR(CURRENT_DATE())
+			AND order_id IN (
+				SELECT order_id
+				FROM order_cancel
+				WHERE state = 'normal'
+			)
   	</select>
   	<select id="selectTotTurnover" resultType="int">
   		SELECT SUM(op.count * p.price)
@@ -131,54 +134,59 @@
 		WHERE op.order_id IN (
 		  SELECT order_id
 		  FROM `order`
-		  <where>
-		  	<choose>
-			    <when test="totTurnover == 0">
-			      YEAR(order_date) = YEAR(CURRENT_DATE()) AND MONTH(order_date) = MONTH(CURRENT_DATE())
-			   		  AND order_id IN (
-						SELECT order_id
-						FROM order_cancel
-						WHERE state = 'normal'
-					  )
-			    </when>
-			    <when test="totTurnover == 1">
-			      YEAR(order_date) = YEAR(CURRENT_DATE())
-			   		  AND order_id IN (
-						SELECT order_id
-						FROM order_cancel
-						WHERE state = 'normal'
-					  )
-			    </when>
-		    </choose>
-		  </where>
+		  WHERE
+		      YEAR(order_date) = YEAR(CURRENT_DATE()) AND MONTH(order_date) = MONTH(CURRENT_DATE())
+		   		  AND order_id IN (
+					SELECT order_id
+					FROM order_cancel
+					WHERE state = 'normal'
+				  )
+		)
+		
+		UNION ALL
+		SELECT SUM(op.count * p.price)
+		FROM ordered_product op
+		JOIN product p ON op.product_id = p.product_id
+		WHERE op.order_id IN (
+		  SELECT order_id
+		  FROM `order`
+		  WHERE
+		      YEAR(order_date) = YEAR(CURRENT_DATE())
+		   		  AND order_id IN (
+					SELECT order_id
+					FROM order_cancel
+					WHERE state = 'normal'
+				  )
   		)
   	</select>
   	<select id="selectCustomerNum" resultType="int">
 	  	SELECT
 			COUNT(DISTINCT c.customer_id)
 		FROM customer c
-  		<choose>
-		  	<when test="customerNum == 0">
-		  	</when>
-		  	<when test="customerNum == 1">
-		  		JOIN `order` o ON o.customer_id = c.customer_id
-				JOIN order_cancel oc ON oc.order_id = o.order_id
-				WHERE
-					YEAR(o.order_date) = YEAR(CURRENT_DATE())
-				    AND oc.state = 'normal';
-		  	</when>
-		  	<when test="customerNum == 2">
-		  		JOIN `order` o ON o.customer_id = c.customer_id
-				JOIN order_cancel oc ON oc.order_id = o.order_id
-				WHERE
-					YEAR(o.order_date) = YEAR(CURRENT_DATE()) AND MONTH(o.order_date) = MONTH(CURRENT_DATE())
-				    AND oc.state = 'normal';
-		  	</when>
-		</choose>
+		
+		UNION ALL
+		SELECT
+			COUNT(DISTINCT c.customer_id)
+		FROM customer c
+  		JOIN `order` o ON o.customer_id = c.customer_id
+		JOIN order_cancel oc ON oc.order_id = o.order_id
+		WHERE
+			YEAR(o.order_date) = YEAR(CURRENT_DATE())
+		    AND oc.state = 'normal'
+		    
+		UNION ALL
+		SELECT
+			COUNT(DISTINCT c.customer_id)
+		FROM customer c
+  		JOIN `order` o ON o.customer_id = c.customer_id
+		JOIN order_cancel oc ON oc.order_id = o.order_id
+		WHERE
+			YEAR(o.order_date) = YEAR(CURRENT_DATE()) AND MONTH(o.order_date) = MONTH(CURRENT_DATE())
+		    AND oc.state = 'normal'
   	</select>
   	
   	<!-- 날짜 별 제품 주문량 그래프 -->
-  	<select id="getDpo" resultMap="getDpoResultMap">
+  	<select id="getDpoMonth" resultMap="getDpoResultMap">
   		SELECT
 		    p.name AS product,
 		    DATE_FORMAT(o.order_date, '%Y-%m-%d') AS date,
@@ -188,18 +196,23 @@
   		JOIN ordered_product op ON o.order_id = op.order_id
   		JOIN product p ON op.product_id = p.product_id
   		WHERE
-  		<choose>
-  			<when test="dpoOption == 0">
-  				YEAR(o.order_date) = YEAR(CURRENT_DATE()) AND MONTH(o.order_date) = MONTH(CURRENT_DATE())
-  					AND oc.state = 'normal'
-  				GROUP BY date, p.name
-  			</when>
-  			<when test="dpoOption == 1">
-  				YEAR(o.order_date) = YEAR(CURRENT_DATE())
-  					AND oc.state = 'normal'
-  				GROUP BY DATE_FORMAT(o.order_date, '%Y-%m'), p.name
-  			</when>
-  		</choose>
+			YEAR(o.order_date) = YEAR(CURRENT_DATE()) AND MONTH(o.order_date) = MONTH(CURRENT_DATE())
+				AND oc.state = 'normal'
+			GROUP BY date, p.name
+  	</select>
+  	<select id="getDpoYear" resultMap="getDpoResultMap">
+  		SELECT
+		    p.name AS product,
+		    DATE_FORMAT(o.order_date, '%Y-%m-%d') AS date,
+		    SUM(op.count) AS orderAmount
+  		FROM `order` o
+  		JOIN order_cancel oc ON o.order_id = oc.order_id
+  		JOIN ordered_product op ON o.order_id = op.order_id
+  		JOIN product p ON op.product_id = p.product_id
+  		WHERE
+  			YEAR(o.order_date) = YEAR(CURRENT_DATE())
+				AND oc.state = 'normal'
+			GROUP BY DATE_FORMAT(o.order_date, '%Y-%m'), p.name
   	</select>
   	
   	<!-- 물품 별 재고 그래프 -->
