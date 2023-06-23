@@ -12,7 +12,7 @@ import control.suppliers.model.ProductVO;
 
 public interface OrderMapper {
 	
-	// 출하 등록 페이지 전체(OrderVO,OrderedProductDTO) insert
+	// 출하 등록 페이지 전체(OrderVO,OrderedProductDTO) insert  
 	public void orderIn(OrderVO order);
 	
 	// customer 계약코드 조회 기능

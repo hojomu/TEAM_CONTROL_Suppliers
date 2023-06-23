@@ -6,7 +6,7 @@
   
 <mapper namespace="control.suppliers.mapper.OrderMapper">
 
-	<!-- 출하 등록 페이지 전체(OrderVO,OrderedProductDTO) insert -->
+	<!-- 출하 등록 페이지 전체(OrderVO,OrderedProductDTO)   insert -->
   	<insert id="orderIn">
 	 	<selectKey keyProperty="order_id" order="BEFORE" resultType="int">
 	 	select max(order_id)+1 order_id

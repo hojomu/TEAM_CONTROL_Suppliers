@@ -3,7 +3,7 @@
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<!-- headerSidebar jsp -->
+<!-- headerSidebar jsp  -->
 <%@ include file="shipment_header.jsp" %>
 
 <!-- 본문 내용 -->
