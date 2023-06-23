@@ -24,7 +24,7 @@
 
     <!-- Table with hoverable rows -->
     <c:forEach items="${list}" var="DeliveryList" >
-    <form class="transport_location"  method="POST"  action="/transport_location" >
+    <form class="transport_location"  method="POST" >
         <div class="col-12">
             <div class="card overflow-auto">
                 <div class="list-body">
@@ -59,8 +59,8 @@
                     <!-- End Table with hoverable rows -->
                     
                     <ul class="list_button">
-                        <li><button type="button" id="btnStart" class="start" >배송시작</button></li>
-                        <li><button type="button" id="btnStop" class="end">배송완료</button></li>
+                        <li><button type="button"  class="btnStart start" >배송시작</button></li>
+                        <li><button type="button" class="btnStop end">배송완료</button></li>
                     </ul>
                 </div>
             </div>

@@ -45,7 +45,6 @@
 		JOIN ordered_product op ON o.order_id = op.order_id
 		JOIN customer c ON o.customer_id = c.customer_id
 			WHERE Date(o.delivery_date) = CURRENT_DATE()
-		
 	</select>
 		
 	 	<!-- <select id="selectOrderedProductList" parameterType="control.suppliers.model.DeliveryListVO" resultType="control.suppliers.model.OrderedProductVO">
@@ -80,10 +79,8 @@
 	
 	<!-- 위치 정보 저장하기 insert / 현재시간 추가하기 -->
 	<insert id="transport_location" parameterType="control.suppliers.model.TransportDataVO">
-	 <!-- <foreach collection="ELocationVO" item="eLocation" separator=";"> -->
-		 insert into ELocationdata (latitude, longitude, getTime, employee_id, transfer_state, order_id)
- 		  values (#{eLocation.latitude}, #{eLocation.longitude}, now(), #{employeeId}, #{eLocation.transferState}, #{orderId})
-  	 <!-- </foreach> -->
+		 insert into carrierlocation (latitude, longitude, getTime, employee_id, transfer_state, order_id)
+ 		  values (#{latitude}, #{longitude}, now(), #{employeeId}, #{transferState}, #{orderId})
 	</insert>
 	
 </mapper>

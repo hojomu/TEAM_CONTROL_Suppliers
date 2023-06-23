@@ -12,7 +12,7 @@ public interface DeliveryListService {
 	public ArrayList<DeliveryListVO> list(DeliveryListVO data);
 
 	// 운반자 위치 정보  
-
-	public void transport_location(String orderId, String employeeId, String latitude, String longitude, String transferState);
+	public void transport_location(TransportDataVO trandata);
 
 }
+ 

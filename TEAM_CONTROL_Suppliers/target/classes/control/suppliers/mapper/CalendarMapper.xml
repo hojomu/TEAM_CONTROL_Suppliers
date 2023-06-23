@@ -25,7 +25,7 @@
 			c.hospital as hospital
 		FROM `order` o		
 		JOIN customer c ON o.customer_id = c.customer_id
-
+		
 	</select>
 
 </mapper>

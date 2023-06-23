@@ -21,11 +21,11 @@ public class DeliveryListServiceImpl implements DeliveryListService {
         return dm.list(data);
     }
     
-    // 위치 정보 저장하기 
- 	public void transport_location(String orderId, String employeeId, String latitude, String longitude, String transferState) {
- 		/*System.out.println("service="+data);*/
- 		dm.transport_location(orderId, employeeId, latitude,longitude, transferState);
- 	}
+	@Override
+	public void transport_location(TransportDataVO trandata) {
+		 System.out.println(trandata);
+		 dm.transport_location(trandata);
+	}
 
 	
 }
