@@ -48,7 +48,7 @@
 	  </div>
 	  <div class="customer_button">
 		  <div class="customer_button_item">
-				<input type="submit" value="확 인" class="btn-get-started" formaction="CustomerInput">
+				<input type="submit" value="확 인" class="btn-get-started" formaction="CustomerInput" >
 		  </div>
 	  </div>
     </form>
