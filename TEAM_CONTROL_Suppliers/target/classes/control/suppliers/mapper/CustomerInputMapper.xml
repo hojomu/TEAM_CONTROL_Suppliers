@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="control.suppliers.mapper.CustomerInputMapper">
+
+  	<insert id="customerInput">
+  		<selectKey keyProperty="customer_id" order="BEFORE" resultType="int">
+  			select max(customer_id) + 1 customer_id
+  			from customer
+  		</selectKey>
+  		insert into customer(customer_id, name, phone, email, hospital, address) 
+  		values(#{customer_id}, #{name}, #{phone}, #{email}, #{hospital}, #{address});
+  	</insert>
+</mapper>
+  	
