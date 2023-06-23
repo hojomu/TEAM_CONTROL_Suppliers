@@ -6,7 +6,7 @@ public class OrderedProductDTO {
     private int count;
     private int order_id;
     private int product_id;
-    /*private List<String> list;*/  
+    /*private List<String> list;*/
 
     public int getOrdered_product_id() {
         return ordered_product_id;

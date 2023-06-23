@@ -2,7 +2,7 @@ package control.suppliers.model;
 
 import java.util.ArrayList;
 
-public class OrderVO {  
+public class OrderVO {
 	
     private int order_id;
     private String order_date;

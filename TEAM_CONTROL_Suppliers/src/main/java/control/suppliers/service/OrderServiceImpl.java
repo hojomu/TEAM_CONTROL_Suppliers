@@ -19,7 +19,7 @@ import control.suppliers.model.ProductVO;
 public class OrderServiceImpl implements OrderService {
 	
 	@Autowired
-	OrderMapper om;  
+	OrderMapper om;
 	
 	@Autowired
 	OrderProductMapper opm;

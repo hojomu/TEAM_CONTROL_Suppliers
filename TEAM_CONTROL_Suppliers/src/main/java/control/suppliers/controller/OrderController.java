@@ -32,7 +32,7 @@ public class OrderController {
 	@Autowired
 	OrderService os;
 	
-	// 출하 등록 페이지  
+	// 출하 등록 페이지
 /*	@RequestMapping(value = "/shipment_order", method = RequestMethod.GET)
 	public String shipment_order() {
 		return "shipment_order";

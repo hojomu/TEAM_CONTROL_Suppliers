@@ -12,4 +12,4 @@
 	    	VALUES(#{ordered_product_id}, #{count}, #{order_id}, #{product_id})
 	</insert>   
 
-</mapper>  
+</mapper>

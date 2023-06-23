@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!-- headerSidebar jsp -->
-<%@ include file="shipment_header.jsp" %>  
+<%@ include file="shipment_header.jsp" %>
 
 <!-- 본문 내용 -->
 <main id="main" class="main">

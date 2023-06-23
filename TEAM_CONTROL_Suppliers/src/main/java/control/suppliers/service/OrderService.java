@@ -10,7 +10,7 @@ import control.suppliers.model.OrderedProductDTO;
 import control.suppliers.model.OrderedProductVO;
 import control.suppliers.model.ProductVO;
 
-public interface OrderService {  
+public interface OrderService {
 	
 	// 출하 등록 페이지 전체(OrderVO,OrderedProductDTO) insert
 	public void orderIn(OrderVO order);
