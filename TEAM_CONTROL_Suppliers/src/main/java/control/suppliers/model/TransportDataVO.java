@@ -1,5 +1,6 @@
 package control.suppliers.model;
 
+import java.util.ArrayList;
 
 public class TransportDataVO {
 	private int employeeId;
@@ -8,6 +9,8 @@ public class TransportDataVO {
 	private double latitude;
 	private double longitude;
 	private String transferState;
+	private ArrayList<ELocationVO> eLocationVO;
+	
 	public int getEmployeeId() {
 		return employeeId;
 	}
@@ -44,10 +47,17 @@ public class TransportDataVO {
 	public void setTransferState(String transferState) {
 		this.transferState = transferState;
 	}
-	
+	public ArrayList<ELocationVO> geteLocationVO() {
+		return eLocationVO;
+	}
+	public void seteLocationVO(ArrayList<ELocationVO> eLocationVO) {
+		this.eLocationVO = eLocationVO;
+	}
 	@Override
 	public String toString() {
 		return "TransportDataVO [employeeId=" + employeeId + ", orderId=" + orderId + ", eName=" + eName + ", latitude="
-				+ latitude + ", longitude=" + longitude + ", transferState=" + transferState + "]";
+				+ latitude + ", longitude=" + longitude + ", transferState=" + transferState + ", eLocationVO="
+				+ eLocationVO + "]";
 	}
+	
 }

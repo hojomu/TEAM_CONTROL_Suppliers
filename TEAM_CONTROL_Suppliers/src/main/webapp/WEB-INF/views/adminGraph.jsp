@@ -39,7 +39,7 @@
             </div>
             
             <div class="card-body">
-              <h5 class="card-title">주문량 <span id="orderAmountSpan"></span></h5>
+              <h5 class="card-title" style="font-weight: bold; color: #012970;">주문량 <span id="orderAmountSpan"></span></h5>
 
               <div class="d-flex align-items-center">
                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -73,7 +73,7 @@
             </div>
 
             <div class="card-body">
-              <h5 class="card-title">매출액 <span id="totTurnoverSpan"></span></h5>
+              <h5 class="card-title" style="font-weight: bold; color: #012970;">매출액 <span id="totTurnoverSpan"></span></h5>
 
               <div class="d-flex align-items-center">
                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -109,7 +109,7 @@
             </div>
 
             <div class="card-body">
-              <h5 class="card-title">고객(병원) <span id="customerNumSpan"></span></h5>
+              <h5 class="card-title" style="font-weight: bold; color: #012970;">고객(병원) <span id="customerNumSpan"></span></h5>
 
               <div class="d-flex align-items-center">
                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -145,7 +145,7 @@
             </div>
 
             <div class="card-body">
-              <h5 class="card-title">물품 별 주문량 <span id="dpoOptionSpan"></span></h5>
+              <h5 class="card-title" style="font-weight: bold; color: #012970;">물품 별 주문량 <span id="dpoOptionSpan"></span></h5>
 
               <!-- Line Chart -->
               <div id="reportsChart"></div>
@@ -167,7 +167,7 @@
               	<a href="/stockDetail">자세히보기</a>
               </div>
             
-              <h5 class="card-title">물품 별 재고</h5>
+              <h5 class="card-title" style="font-weight: bold; color: #012970;">물품 별 재고</h5>
 
               <canvas id="barChart" style="max-height: 900px;"></canvas>
 

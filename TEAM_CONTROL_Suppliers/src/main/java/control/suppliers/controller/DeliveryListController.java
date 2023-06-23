@@ -1,6 +1,9 @@
 package control.suppliers.controller;
 
 import java.util.List;
+import java.util.Locale;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +19,7 @@ import com.google.gson.Gson;
 
 import control.suppliers.model.DeliveryListVO;
 import control.suppliers.model.ELocationVO;
+import control.suppliers.model.LoginVO;
 import control.suppliers.model.TransportDataVO;
 import control.suppliers.service.DeliveryListService;
 
@@ -26,10 +30,24 @@ public class DeliveryListController {
 	@Autowired
 	DeliveryListService ds;
 	
+	// 배송 스케줄 캘린더로 이동
+	@RequestMapping(value = "/delivery_calendar", method = RequestMethod.GET)
+	public String delivery_calendar(HttpSession session, Model model) {
+		LoginVO account = (LoginVO) session.getAttribute("account");
+	    if(account == null || !account.getDept().equals("transport")) {
+	    	return "redirect:/security";
+	    } else {
+	    	return "delivery_calendar";
+	    }
+	}
+		
 	// 배송 리스트 불러오기
 	@GetMapping(value="/delivery_list")
-	public String deliverylistTable (Model model, DeliveryListVO data) {
-		
+	public String deliverylistTable (HttpSession session,Model model, DeliveryListVO data) {
+		LoginVO account = (LoginVO) session.getAttribute("account");
+	    if(account == null || !account.getDept().equals("transport")) {
+	    	return "redirect:/security";
+	    } else {
 		List<DeliveryListVO> resultList = ds.list(data);	
 		
 		Gson gson = new Gson();
@@ -38,7 +56,8 @@ public class DeliveryListController {
 		model.addAttribute("listJson", resultListJson);		
 		model.addAttribute("list", resultList);
 		
-		return "delivery_list";
+			return "delivery_list";
+	    }
 	}
 	
 	// 운반자 위치 확인 

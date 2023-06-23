@@ -55,7 +55,6 @@
       				<h5 class="card-title">현재 운반중 <span>| 오늘</span></h5>
       				<div id="carrierListBox">
       					<ul id="carrierList">
-      						<li>김상식씨</li>
       					</ul>
       				</div>
       				
