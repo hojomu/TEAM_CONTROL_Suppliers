@@ -47,19 +47,32 @@ public class OrderController {
 	}
 	
 	// customer 계약코드 조회 기능
-	@RequestMapping(value = "/formcustomerbnt", method = RequestMethod.GET)
-	public String order_customer (@RequestParam("customer_id") int customer_id, Model model) {
-	    model.addAttribute("order_customer", os.memorder_customer(customer_id));
+/*	@RequestMapping(value = "/formcustomerbnt", method = RequestMethod.GET)
+	public String order_customer(@RequestParam(value = "customer_id", required = false) Integer customer_id, Model model) {
+	    if (customer_id != null) {
+	        model.addAttribute("order_customer", os.memorder_customer(customer_id));
+	    }
 	    return "shipment_order";
-	}
-
-	// product 상품이름만 리스트 불러오기, 검색기능
-	@RequestMapping(value = {"/shipment_order", "/list"}, method = {RequestMethod.GET})
-	public String list (Model model, CriteriaVO cri) {
-		model.addAttribute("list", os.list(cri));
-		int total=os.total(cri);
-		model.addAttribute("paging", new PageVO(cri, total));
+	}*/
+/*	@RequestMapping(value = {"/shipment_order"}, method = {RequestMethod.GET})
+	public String customerList (Model model) {
+		model.addAttribute("customerList", os.customerList());
 		return "shipment_order";
+	}
+	
+	// product 상품이름만 리스트 불러오기, 검색기능
+	@RequestMapping(value = {"/shipment_order"}, method = {RequestMethod.GET})
+	public String productList (Model model) {
+		model.addAttribute("productList", os.productList());
+		return "shipment_order";
+	}*/
+	
+
+	@RequestMapping(value = {"/shipment_order"}, method = {RequestMethod.GET})
+	public String shipmentOrder(Model model) {
+	model.addAttribute("customerList", os.customerList());
+	model.addAttribute("productList", os.productList());
+	return "shipment_order";
 	}
 
 	// product 상품이름으로 상품정보 불러오기

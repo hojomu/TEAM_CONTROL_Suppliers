@@ -1,35 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 
 <!-- headerSidebar jsp -->
 <%@ include file="shipment_header.jsp" %>
 
 <!-- 본문 내용 -->
 <main id="main" class="main">
-
+<c:set var="order" value="${OrderDetail[0]}" />
 			<div class="card">
             <div class="card-body">
             <div class="shipment_table_header">
             
             <div class="shipment_search_date">
 			수주일자 :
-			<span class="shipment_order_confirmation">2023-06-07</span>
+			<span class="shipment_order_confirmation">${order.orderDate}</span>
 			-
 			납기일자 :
-			<span class="shipment_order_confirmation">2023-06-30</span>
+			<span class="shipment_order_confirmation">${order.deliveryDate}</span>
 			</div>
 			
 			<div class="shipment_order_text">
-			계약 코드 : <span class="shipment_order_confirmation">01-0607-001</span> 
-			납품처 : <span class="shipment_order_confirmation">울산병원</span> 
-			납품처 주소 : <span class="shipment_order_confirmation">울산 남구 어쩌고 저쩌고</span> 
+			계약 코드 : <span class="shipment_order_confirmation">${order.orderId}</span> 
+			
+			납품처 : <span class="shipment_order_confirmation">${order.hospital}</span> 
+			납품처 주소 : <span class="shipment_order_confirmation">${order.address}</span> 
             </div>
             
             <div class="shipment_order_text">
-			대표 이름 : <span class="shipment_order_confirmation">김수민</span>  
-			대표 번호 : <span class="shipment_order_confirmation">010-1234-5678</span>  
-			대표 이메일 : <span class="shipment_order_confirmation">abc123@gmail.com</span> 
+			대표 이름 : <span class="shipment_order_confirmation">${order.name}</span>  
+			대표 번호 : <span class="shipment_order_confirmation">${order.phone}</span>  
+			대표 이메일 : <span class="shipment_order_confirmation">${order.email}</span> 
             </div>
             
 			</div>
@@ -60,80 +61,43 @@
                   </tr>
                 </thead>
                 <tbody>
+                <c:forEach var="product" items="${product}">
                   <tr>
-                    <td><div>a제품</div></td>
-                    <td><div>0123</div></td>
-                    <td><div>100</div></td>
-                    <td><div>50</div></td>
-                    <td><div>5</div></td>
-                    <td><div>50</div></td>
+                    <td><div>${product.product}</div></td>
+                    <td><div>${product.code}</div></td>
+                    <td><div class="count">${product.count}</div></td>
+                    <td><div class="price">${product.price}</div></td>
+                    <td><div class="tax">${product.tax}</div></td>
+                    <td><div class="stock">${product.stock}</div></td>
                   </tr>
-                  <tr>
-                    <td><div>a제품</div></td>
-                    <td><div>0123</div></td>
-                    <td><div>100</div></td>
-                    <td><div>50</div></td>
-                    <td><div>5</div></td>
-                    <td><div>50</div></td>
-                  </tr>
-                  <tr>
-                    <td><div>a제품</div></td>
-                    <td><div>0123</div></td>
-                    <td><div>100</div></td>
-                    <td><div>50</div></td>
-                    <td><div>5</div></td>
-                    <td><div>50</div></td>
-                  </tr>
-                  <tr>
-                    <td><div>a제품</div></td>
-                    <td><div>0123</div></td>
-                    <td><div>100</div></td>
-                    <td><div>50</div></td>
-                    <td><div>5</div></td>
-                    <td><div>50</div></td>
-                  </tr>
-                  <tr>
-                    <td><div>a제품</div></td>
-                    <td><div>0123</div></td>
-                    <td><div>100</div></td>
-                    <td><div>50</div></td>
-                    <td><div>5</div></td>
-                    <td><div>50</div></td>
-                  </tr>
-                  <tr>
-                    <td><div>a제품</div></td>
-                    <td><div>0123</div></td>
-                    <td><div>100</div></td>
-                    <td><div>50</div></td>
-                    <td><div>5</div></td>
-                    <td><div>50</div></td>
-                  </tr>
-                  <tr>
-                    <td><div>a제품</div></td>
-                    <td><div>0123</div></td>
-                    <td><div>100</div></td>
-                    <td><div>50</div></td>
-                    <td><div>5</div></td>
-                    <td><div>50</div></td>
-                  </tr>
+                </c:forEach>
                 </tbody>
               </table>
               </div>
               <!-- End Bordered Table -->
               
               <div class="shipment_order_sum">
-				<div>총수량 : <span>100</span></div>
-				<div>총 판매가 : <span>123,000</span></div> 
-				<div>총 부가세 : <span>12,300</span></div> 
-				<div>총 액 : <span>135,300</span></div>
+				<span>총수량 : <span id="totCount" class="shipment_order_confirmation">100</span></span>
+				<span>총 판매가 : <span id="totPrice" class="shipment_order_confirmation">123,000</span></span>
+				<span>총 부가세 : <span id="totTax" class="shipment_order_confirmation">12,300</span></span>
+				<span>총 액 : <span id="totAmount" class="shipment_order_confirmation">135,300</span></span>
 			  </div>
               
             </div>
             </div>
 
 <div class="shipment_order_botton">
-<button class="shipment_order_canclebnt">삭제</button><button class="shipment_order_registerbnt">다운로드</button>
+<button id="cancelBtn" type="button" class="shipment_order_canclebnt">삭제</button>
+<button id="Popup_d_Bnt" class="shipment_order_registerbnt" onclick="openPopup()">다운로드</button>
 </div>
+
+  <form id="cancelForm" action="/cancelOrder" method="post">
+  	<input type="hidden" name="orderId" value="${order.orderId}">
+  </form>
+
+<form id="PopupForm" action="/orderPopup" method="get">
+  <input type="hidden" id="orderIdInput" name="orderId" value="${order.orderId}">
+</form>
 
 </main>
 <!-- 본문 끝 -->
@@ -165,8 +129,10 @@
   <script src="resources/vendor/php-email-form/validate.js"></script>
 
   <!-- Template Main JS File -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="resources/js/main.js"></script>
-  <script src="resources/js/shipment_order.js"></script>
+  <script src="resources/js/adminDetail.js"></script>
+  <script src="resources/js/shipment_detail.js"></script>
 
 </body>
 </html>

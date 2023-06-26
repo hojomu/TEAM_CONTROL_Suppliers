@@ -1,83 +1,4 @@
-/*
-$("#openPopup").on("click",function(e){
-    e.preventDefault(); // 기본 제출 동작 막기 (submit동작 막기)
-      popup.style.display = "block";
-    });
-
-$("#closePopup").on("click",function(e){
-    e.preventDefault(); // 기본 제출 동작 막기 (submit동작 막기)
-      popup.style.display = "none";
-    });*/
-
-/*	var optionWindow = document.getElementById('optionWindow');
-    var selectedProductsElement = document.getElementById('selectedProducts');*/
-
-    $("#showOption").on("click",function(e){
-    e.preventDefault(); // 기본 제출 동작 막기 (submit동작 막기)
-      optionWindow.style.display = 'block';
-    });
-
-    $("#hideOption").on("click",function(e){
-    e.preventDefault(); // 기본 제출 동작 막기 (submit동작 막기)	
-      optionWindow.style.display = 'none';
-    });
-
-/*    function addSelectedProducts(e) {
-      e.preventDefault(); // 기본 제출 동작 막기 (submit동작 막기)
-      var selectedProducts = document.querySelectorAll('input[type="checkbox"]:checked');
-      var selectedProductNames = Array.from(selectedProducts).map(function(product) {
-        return product.value;
-      });
-
-      selectedProductsElement.innerText = selectedProductNames.join(', ');
-
-      hideOption();
-    } */
-    
-/*    $(document).ready(function() {
-    	// 검색 폼 제출 이벤트 처리
-    	$('#searchForm').on('submit', function(event) {
-    		event.preventDefault(); // 기본 폼 제출 동작 방지
-    		
-    		var searchInput = $('#searchInput').val(); // 검색어 가져오기
-    		
-    		// AJAX를 사용하여 검색 결과를 가져옴
-    		$.ajax({
-    			url: 'search',
-    			type: 'GET',
-    			data: { name: searchInput },
-    			success: function(data) {
-    				// 검색 결과를 테이블에 추가
-    				$('#productTable tbody').append(data);
-    			},
-    			error: function() {
-    				alert('검색에 실패했습니다.');
-    			}
-    		});
-    	});
-    	
-    	// 추가 버튼 클릭 이벤트 처리
-    	$(document).on('click', '.addButton', function() {
-    		var row = $(this).closest('tr'); // 추가 버튼이 속한 행
-    		var name = row.find('.productName').text(); // 품목명 가져오기
-    		
-    		// 추가된 품목을 기준으로 다시 검색
-    		$('#searchInput').val(name); // 검색어 설정
-    		$('#searchForm').submit(); // 검색 폼 제출
-    	});
-    });
-function showOption() {
-    var optionWindow = document.getElementById("optionWindow");
-    optionWindow.classList.remove("hidden");
-}
-*/
-
-
-
-
-
 // shipment_order 화면이 시작되자마자 ==> $(document).ready(function(){} 이벤트
-
 var index = 0;
 
 /*// 새로운 <tr> 요소 생성
@@ -113,34 +34,51 @@ $("#addButton").on("click",function(e){
 
 })
 
-var pid="";
-var cnt="";
-/*var trp="";*/
+/*var pname="";*/
+//var pid=""; // 품목코드
+//var cnt=""; // 수량
+/*var opid="";
+var oid="";
+var pnum="";*/
+var trp="";
 //var opid="";
 //var oid="";
 
 // input태그를 생성하기 위한 함수
 function inputTag(index){
 
-	pid = "<input type='text' name='orderedproduct[" + index + "].product_id'" + ">";
-	cnt = "<input type='text' name='orderedproduct[" + index + "].count'" + ">";
-/*	trp = "<tr>"+
-			"<td><div><input type='text' name='orderedproduct[" + index + "].product_id'></div></td>"+ 
-			"<td><div><input type='text' name='orderedproduct[" + index + "].count'></div></td>"+
-			"<td><div><input type='text' name='orderedproduct[" + index + "].product_id'></div></td>"+ 
-			"<td><div><input type='text' name='orderedproduct[" + index + "].count'></div></td>" +
-			"<td><div><input type='text' name='orderedproduct[" + index + "].product_id'></div></td>"+ 
-			"<td><div><input type='text' name='orderedproduct[" + index + "].count'></div></td>" 
-			+"</tr>"*/
+/*	pname = "<input type='text' name='orderedproduct[" + index + "].name' class='inputNameClass'" + ">";*/
+//	pid = "<input type='text' style='border: none;' name='orderedproduct[" + index + "].product_id' class='inputNameClass'" + ">";
+//	cnt = "<input type='text' name='orderedproduct[" + index + "].count' class='inputNameClass'" + ">";
+/*	opid = "<input type='text' name='orderedproduct[" + index + "].price' class='inputNameClass'" + ">";
+	oid = "<input type='text' name='orderedproduct[" + index + "].tax' class='inputNameClass'" + ">";
+	pnum = "<input type='text' name='orderedproduct[" + index + "].code' class='inputNameClass'" + ">";*/
+	trp = "<tr>"+
+			"<td><div><input type='text' name='name' class='inputNameClass'></div></td>"+ 
+			"<td><div><input type='text' style='border: none;' name='orderedproduct[" + index + "].product_id' class='inputProductId'></div></td>"+
+			"<td><div><input type='text' name='orderedproduct[" + index + "].count' class='inputCount'></div></td>"+ 
+			"<td><div><input type='text' style='border: none;' name='price' class='inputPriceId'></div></td>" +
+			"<td><div><input type='text' style='border: none;' name='tax' class='inputTaxId'></div></td>"+ 
+			"<td><div><input type='text' style='border: none;' name='code' class='inputCodeId'></div></td>" 
+			+"</tr>"
 
 //	opid = "<input type='text' name='orderedproduct[" + index + "].ordered_product_id'" + ">";
 //	oid = "<input type='text' name='orderedproduct[" + index + "].order_id'" + ">";
 	
-	console.log(trp);
+/*	console.log(pname);*/
+//	console.log(pid);
+//	console.log(cnt);
+/*	console.log(opid);
+	console.log(oid);
+	console.log(pnum);*/
 	
-	$("#pid").append(pid);
-	$("#cnt").append(cnt);
-/*	$("#trp").append(trp);*/
+/*	$("#pname").append(pname);*/
+//	$(".pid").append(pid);
+//	$(".cnt").append(cnt);
+/*	$("#opid").append(opid);
+	$("#oid").append(oid);
+	$("#pnum").append(pnum);*/
+	$(".trp").append(trp);
 //	$("#opid").append(opid);
 //	$("#oid").append(oid);
 	
@@ -157,57 +95,68 @@ function inputTag(index){
            
 }
 
+//inputCount 클래스의 모든 요소를 가져오기
+const inputCounts = document.querySelectorAll('.inputCount');
 
-$(document).ready(function() {
-	  $('#shipment_order_form').submit(function(event) {
-	    event.preventDefault(); // 기본 동작 중단
-	    
-	    var customer_id = $('#customer_id').val();
-	    var hospital = $('#hospital').val();
-	    var address = $('#address').val();
-	    var name = $('#name').val();
-	    var phone = $('#phone').val();
-	    var email = $('#email').val();
-	    
-	    $.ajax({
-	      url: '/shipment_order',
-	      type: 'GET',
-	      data: {
-	        customer_id: customer_id,
-	        hospital: hospital,
-	        address: address,
-	        name: name,
-	        phone: phone,
-	        email: email
-	      },
-	      success: function(response) {
-	        // AJAX 요청 성공 시 처리할 로직 작성
-	        $('#shipment_order_result').html(response); // 결과를 해당 요소에 추가
-	      },
-	      error: function(xhr, status, error) {
-	        // AJAX 요청 실패 시 처리할 로직 작성
-	        console.error(error);
-	      }
-	    });
-	  });
-	});
+// shipment_order_amount 클래스에 값을 입력하는 함수
+function setShipmentOrderAmount() {
+  let totalAmount = 0;
 
-
-
-/*function sendData() {
-    var orderDate = document.getElementById("order_date").value;
-    var deliveryDate = document.getElementById("delivery_date").value;
-    var customerId = document.getElementById("customer_id").value;
-
-    document.querySelector('form[name="shipment_order"] input[name="order_date"]').value = orderDate;
-    document.querySelector('form[name="shipment_order"] input[name="delivery_date"]').value = deliveryDate;
-    document.querySelector('form[name="shipment_order"] input[name="customer_id"]').value = customerId;
-
-    document.querySelector('form[name="shipment_order"]').submit();
-  }
-
-  var button = document.querySelector('.product_order_checkbutton');
-  button.addEventListener('click', function() {
-    sendData();
+  // inputCount 클래스의 각 요소를 순회하며 값을 합산
+  inputCounts.forEach((count) => {
+    const value = parseInt(count.value);
+    if (!isNaN(value)) {
+      totalAmount += value;
+    }
   });
-*/
+
+  // shipment_order_amount 클래스에 합산된 값을 입력
+  const shipmentOrderAmount = document.querySelector('.shipment_order_amount');
+  shipmentOrderAmount.value = totalAmount;
+}
+
+// 마우스로 아무 곳이나 클릭할 때 setShipmentOrderAmount 함수를 호출하여 값 입력
+document.addEventListener('click', setShipmentOrderAmount);
+
+
+
+
+
+document.addEventListener("click", function(e) {
+    if (!e.target.classList.contains("inputNameClass")) {
+        var inputNameId = document.querySelector(".inputNameClass").value;
+        var inputProductId = document.querySelector(".inputProductId");
+        var inputPriceId = document.querySelector(".inputPriceId");
+        var inputTaxId = document.querySelector(".inputTaxId");
+        var inputCodeId = document.querySelector(".inputCodeId");
+
+        
+        
+        // 데이터 리스트에서 일치하는 고객 찾기
+        var product = null;
+        var productList = document.querySelectorAll("table tbody tr");
+        for (var i = 0; i < productList.length; i++) {
+            var Pname = productList[i].querySelector("td:first-child").innerText;
+            if (Pname === inputNameId) {
+                product = productList[i];
+                break;
+            }
+        }
+
+        // 입력 필드에 고객 데이터 채우기
+        if (product !== null) {
+            inputProductId.value = product.querySelector("td:nth-child(2)").innerText;
+            inputPriceId.value = product.querySelector("td:nth-child(4)").innerText;
+            inputTaxId.value = product.querySelector("td:nth-child(5)").innerText;
+            inputCodeId.value = product.querySelector("td:nth-child(6)").innerText;
+        } else {
+            // 고객을 찾지 못했을 경우, 입력 필드를 초기화합니다.
+            inputProductId.value = "";
+            inputPriceId.value = "";
+            inputTaxId.value = "";
+            inputCodeId.value = "";
+        }
+    }
+});
+
+

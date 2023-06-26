@@ -17,27 +17,49 @@
 	</insert>
 	
 	<!-- 계약코드 조회 기능 -->
-    <select id="memorder_customer" resultType="control.suppliers.model.CustomerVO">
+<!--     <select id="memorder_customer" resultType="control.suppliers.model.CustomerVO">
   	  	select *
   		from customer
   		where customer_id=#{customer_id}
-  	</select>
+  	</select> -->
+  	  	<select id="customerList" resultType="control.suppliers.model.CustomerVO">
+				select *
+				from customer
+				<if test="keyword != null">
+					<choose>
+						<otherwise>
+						where customer_id like concat('%',#{keyword},'%')
+						OR  name like concat('%',#{keyword},'%')
+						OR  phone like concat('%',#{keyword},'%')
+						OR  email like concat('%',#{keyword},'%')
+						OR  hospital like concat('%',#{keyword},'%')
+						OR  address like concat('%',#{keyword},'%')
+						</otherwise>
+					</choose>
+			    </if>
+			    order by customer_id desc
+  	</select> 
   	
   	<!-- product 상품이름만 리스트 불러오기, 검색기능 -->
-  	<select id="list" resultType="control.suppliers.model.ProductVO">
+  	<select id="productList" resultType="control.suppliers.model.ProductVO">
 				select *
 				from product
 				<if test="keyword != null">
 					<choose>
 						<otherwise>
-						where name like concat('%',#{keyword},'%')
+						where product_id like concat('%',#{keyword},'%')
+						OR  name like concat('%',#{keyword},'%')
+						OR  code like concat('%',#{keyword},'%')
+						OR  price like concat('%',#{keyword},'%')
+						OR  tax like concat('%',#{keyword},'%')
+						OR  count like concat('%',#{keyword},'%')
 						</otherwise>
 					</choose>
 			    </if>
 			    order by name desc
   	</select>
   		
-  	<select id="total" resultType="int">
+<!--   	<select id="total" resultType="int">
   			select count(*) from product
   			<if test="keyword != null">
 						
@@ -53,7 +75,7 @@
 			</choose>
 
 			</if>
-  	</select>
+  	</select> -->
   		
   		<!-- product 상품이름으로 상품정보 불러오기 -->
    	<select id="productDetail" resultType="control.suppliers.model.ProductVO">

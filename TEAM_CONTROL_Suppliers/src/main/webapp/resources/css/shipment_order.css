@@ -295,7 +295,7 @@ input#productC:checked + label:before{
   background-position: 50%;
   }
 
-/* .product_order_checkbnt{
+.product_order_checkbnt{
 	font-family: "Roboto", sans-serif;
     font-weight: 500;
     font-size: 14px;
@@ -312,7 +312,7 @@ input#productC:checked + label:before{
 
 .product_order_checkbnt:hover{
     background: #356dff;
-} */
+} 
 
 #addButton{
 	font-family: "Roboto", sans-serif;

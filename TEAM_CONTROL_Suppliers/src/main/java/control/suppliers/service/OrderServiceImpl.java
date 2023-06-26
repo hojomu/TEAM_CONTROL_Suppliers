@@ -36,20 +36,24 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	// customer 계약코드 조회 기능
-	public CustomerVO memorder_customer(int customer_id) {
+/*	public CustomerVO memorder_customer(int customer_id) {
 		return om.memorder_customer(customer_id);
+	}*/
+    public ArrayList<CustomerVO> customerList() {
+    System.out.println();
+		return om.customerList();
 	}
 	
 	// product 상품이름만 리스트 불러오기, 검색기능
-    public ArrayList<ProductVO> list(CriteriaVO cri) {
-    System.out.println(cri);
-		return om.list(cri);
+    public ArrayList<ProductVO> productList() {
+    System.out.println();
+		return om.productList();
 	}
 	
 	// product 상품이름만 리스트 불러오기, 검색기능
-	public int total(CriteriaVO cri) {
+/*	public int total(CriteriaVO cri) {
 		return om.total(cri);
-	}
+	}*/
 	
 	
 	// product 상품이름으로 상품정보 불러오기

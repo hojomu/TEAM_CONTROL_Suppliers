@@ -34,7 +34,7 @@ public class LoginController {
 			session.setAttribute("account", member);
 			String dept = member.getDept();
 			if(dept.equals("sales")) {
-				return "redirect:/adminGraph";
+				return "redirect:/shipment_table";
 			} else if(dept.equals("transport")) {
 				return "redirect:/delivery_calendar";
 			} else if(dept.equals("admin")) {
