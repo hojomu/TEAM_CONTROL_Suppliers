@@ -295,7 +295,7 @@ input#productC:checked + label:before{
   background-position: 50%;
   }
 
-/* .product_order_checkbnt{
+.product_order_checkbnt{
 	font-family: "Roboto", sans-serif;
     font-weight: 500;
     font-size: 14px;
@@ -312,7 +312,7 @@ input#productC:checked + label:before{
 
 .product_order_checkbnt:hover{
     background: #356dff;
-} */
+} 
 
 #addButton{
 	font-family: "Roboto", sans-serif;
@@ -326,7 +326,7 @@ input#productC:checked + label:before{
     color: #fff;
     background: #4492ff;
     border: none;
-    margin: 5px 5px 5px 5px;
+    margin-left: 5px;
 }
 
 #addButton:hover{
@@ -378,3 +378,26 @@ overflow-y: scroll;
       border: 1px solid #ccc;
       padding: 10px;
     }
+    
+    .CustomerTableSelect{
+    margin-top: 10px;
+    }
+    
+    #customerBtn{
+    	font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 1px;
+    padding: 5px 5px;
+    border-radius: 4px;
+    transition: 0.5s;
+    line-height: 1;
+    color: #fff;
+    background: #4492ff;
+    border: none;
+    margin: 5px 5px 5px 5px;
+    }
+    
+    #customerBtn:hover{
+    background: #356dff;
+}

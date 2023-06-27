@@ -7,7 +7,7 @@
 <mapper namespace="control.suppliers.mapper.OrderListMapper">
 
 		<!-- shipment_table 리스트 -->
-   		<select id="OrderList" resultType="control.suppliers.model.OrderVO">
+<!--    		<select id="OrderList" resultType="control.suppliers.model.OrderVO">
 				select *
 				from `order`
 				<if test="keyword != null">
@@ -22,9 +22,82 @@
 					</choose>
 			    </if>
 			    order by order_id desc
-  		</select>
+  		</select> -->
   		
-  		<select id="total" resultType="int">
+  		<!-- 출하 계획표 resultMaps -->
+	  	<resultMap id="OrderListResultMap" type="control.suppliers.model.AdminOrderVO">
+	      <id property="orderId" column="orderId" javaType="int"/>
+	      <result property="deliveryDate" column="deliveryDate" javaType="String"/>
+	      <result property="orderDate" column="orderDate" javaType="String"/>
+	      <result property="hospital" column="hospital" javaType="String"/>
+	      <result property="name" column="name" javaType="String"/>
+	      <result property="address" column="address" javaType="String"/>
+	      <result property="email" column="email" javaType="String"/>
+	      <result property="phone" column="phone" javaType="String"/>
+	      <collection column="orderId = orderId" property="orderedProduct" javaType="List"
+	      ofType="control.suppliers.model.OrderedProductVO" select="selectOrderedProductList"/>
+	    </resultMap>
+  		
+  		<select id="OrderList" resultMap="OrderListResultMap">
+		SELECT
+			o.order_id AS orderId,
+			DATE_FORMAT(o.delivery_date, '%Y-%m-%d') AS deliveryDate,
+			DATE_FORMAT(o.order_date, '%Y-%m-%d') AS orderDate,
+			c.hospital AS hospital,
+			c.name AS name,
+			c.address AS address,
+			c.email AS email,
+			c.phone AS phone
+		FROM `order` o
+		JOIN order_cancel oc ON o.order_id = oc.order_id
+		JOIN customer c ON o.customer_id = c.customer_id
+		WHERE oc.state = 'normal'
+			<choose>
+				<when test="orderId != 0">
+					AND o.order_id = #{orderId}
+				</when>
+			</choose>
+		ORDER BY o.order_id DESC
+	</select>
+	
+<!-- 	<select id="getOrderId" resultMap="OrderListResultMap">
+		SELECT
+			o.order_id AS orderId,
+			DATE_FORMAT(o.delivery_date, '%Y-%m-%d') AS deliveryDate,
+			DATE_FORMAT(o.order_date, '%Y-%m-%d') AS orderDate,
+			c.hospital AS hospital,
+			c.name AS name,
+			c.address AS address,
+			c.email AS email,
+			c.phone AS phone
+		FROM `order` o
+		JOIN order_cancel oc ON o.order_id = oc.order_id
+		JOIN customer c ON o.customer_id = c.customer_id
+		WHERE oc.state = 'normal'
+			<choose>
+				<when test="orderId != 0">
+					AND o.order_id = #{orderId}
+				</when>
+			</choose>
+		ORDER BY o.order_id DESC
+	</select> -->
+	
+	<select id="selectOrderedProductList" parameterType="control.suppliers.model.AdminOrderVO" resultType="control.suppliers.model.OrderedProductVO">
+		Select
+			op.count AS count,
+			p.name AS product,
+			p.code AS code,
+			p.count AS stock,
+			p.tax AS tax,
+			p.price AS price
+		From ordered_product op
+		LEFT JOIN product p ON op.product_id = p.product_id
+		WHERE op.order_id = #{orderId}
+	</select>
+	
+	
+  		
+<!--   		<select id="total" resultType="int">
   			select count(*) from `order`
   			<if test="keyword != null">
 						
@@ -40,6 +113,6 @@
 			</choose>
 
 			</if>
-  		</select>
+  		</select> -->
   		
   		</mapper>

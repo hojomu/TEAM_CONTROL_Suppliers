@@ -11,21 +11,47 @@
 				<div class="card">
 		            <div class="card-body">
 		            
+	
 		            <form id="searchForm" action="shipment_order" method="post">
-		            
 			            <div class="shipment_table_header">
 			   
-							<!-- 계약자 정보 -->
- 							    <div class="shipment_order_text">
-								        계약 코드 : <input type="text" value="${order_customer.customer_id}" name="customer_id" id="customer_id" class="shipment_order_text_input"> 
-								     <button type="submit" formaction="formcustomerbnt" formmethod="get" class="product_order_checkbnt">조회</button>
-								        납품처 : <input type="text" value="${order_customer.hospital}" name="hospital" class="shipment_order_text_input"> 
-								        납품처 주소 : <input type="text" value="${order_customer.address}" name="address" class="shipment_order_text_input"><br>
-								        대표 이름 : <input type="text" value="${order_customer.name}" name="name" class="shipment_order_text_input"> 
-								        대표 번호 : <input type="text" value="${order_customer.phone}" name="phone" class="shipment_order_text_input"> 
-								        대표 이메일 : <input type="text" value="${order_customer.email}" name="email" class="shipment_order_text_input">
-							    </div>
-							<!-- 계약자 정보 끝 -->
+							<table class="CustomerTableSelect">
+							    <thead>
+							        <tr>
+							            <th>Customer Code</th>
+							            <th>Name</th>
+							            <th>Phone</th>
+							            <th>Email</th>
+							            <th>Hospital</th>
+							            <th>Address</th>
+							        </tr>
+							    </thead>
+							    <tbody>
+							        <c:forEach items="${customerList}" var="customer">
+							            <tr>
+							            	<td style="display: none;">${customer.customer_id}</td>
+							                <td style="display: none;">${customer.name}</td>
+							                <td style="display: none;">${customer.phone}</td>
+							                <td style="display: none;">${customer.email}</td>
+							                <td style="display: none;">${customer.hospital}</td>
+							                <td style="display: none;">${customer.address}</td>
+							            </tr>
+
+							            </c:forEach>
+							            
+							        	<tr>
+							            	<td><input type="text" name="customer_id" id="inputCustomerId"><button id="customerBtn">Select</button></td>
+							                <td><input type="text" name="name" id="inputName"></td>
+							                <td><input type="text" name="phone" id="inputPhone"></td>
+							                <td><input type="text" name="email" id="inputEmail"></td>
+							                <td><input type="text" name="hospital" id="inputHospital"></td>
+							                <td><input type="text" name="address" id="inputAddress"></td>
+							            </tr>
+					
+							    </tbody>
+							</table>
+							
+
 							
 							<!-- 날짜 입력 -->
 				            <div class="shipment_search_date">
@@ -37,6 +63,7 @@
 							</div><!-- 날짜 입력 끝 -->
 			            
 						</div><!-- shipment_table_header 끝 -->
+						
 
 						<input type="hidden" name="order_date">
 						<input type="hidden" name="delivery_date">
@@ -45,33 +72,9 @@
 		                <!-- shipment_order_table_box -->
  			            <div class="shipment_order_table_box">
 			               
-						   <!-- optionWindow -->
-						   <div id="optionWindow">
-						   
-							    <div class="product_order_option_searchbox">
-									    <input type="text" id="searchInput" placeholder="search..." class="product_order_option_search keyword" name="keyword" value="${paging.cri.keyword}">
-									    <button class="product_order_option_searchbnt">검색</button>
-							    </div>
-						    
-						    	<div class="optionItem_box">
-									<!-- for문 시작 -->
- 									<c:forEach items="${list}" var="product_list">
-										<div class="optionItem">
-											<div>${product_list.name}<a href="productDetail?name=${product_list.name}"> +</a></div>
-										</div>
-									</c:forEach>
-									<!-- for문 끝 -->
-								</div>
-								
-								<div class="product_order_option_buttombox">
-								    <!-- <button class="product_order_checkbnt">추가</button> -->
-								    <button id="addButton">추가</button>
-								    <button class="product_order_cencelbnt" id="hideOption">취소</button>
-							    </div>
-							    
-						  </div>  <!-- optionWindow 끝 -->
 
-						<div><!-- <button id="addButton">추가</button> --></div>
+						<div></div>
+					
 			              
 			              <!-- Bordered Table -->
 							<table class="table table-bordered" id="productTable">
@@ -88,11 +91,7 @@
 							    <tr>
 							      <th scope="col">
 								      <div class="order_showOption">
-									           품목명
-									       <button formaction="formproductbnt" formmethod="get" class="showOptionbnt" id="showOption">
-					                    	<img alt="more" src="resources/img/more.png" width="22px" height="auto" class="order_morebnt">
-				           				   </button>
-									      <!-- <button id="addButton">추가</button> -->
+									           품목명<button id="addButton">추가</button>
 									      
 								      </div>
 							      </th>
@@ -103,69 +102,32 @@
 							      <th scope="col"><div>품목코드</div></th>
 							    </tr>
 							  </thead>
- 							  <tbody id="productTableBody">
 
-							    <tr id="trp">
-							      <td>
-							      		<div id="pname">
-							      			<!-- <input type="text" class="name" id="name" name="name"> -->
-							      			${productDetail.name}
-							      		</div>
-							      </td>
-							      <td>
-							      		<div id="pid">
-							      			<!-- <input type="text" class="product_id" id="product_id" name="orderedproduct[0].product_id"> -->
-							      			<%-- <input value="${productDetail.product_id}" name="product_id"> --%>
-							      		</div>
-							      </td>
-							      <td>
-							      		<div id="cnt">
-							      			<!-- <input class="shipment_order_num count" type="text" id="count" name="orderedproduct[0].count">개 -->
-							      		</div>
-							      	</td>
-							      <td>
-							      		<div id="opid">
-							      			<!-- <input  type="text" id="price" name="price"> -->
-							      			${productDetail.price}
-							      		</div>
-							      </td>
-							      <td>
-							      		<div id="oid">
-							      			<!-- <input  type="text" id="tax" name="tax"> -->
-							      			${productDetail.tax}
-							      		</div>
-							      </td>
-							      <td>
-							      		<div id="pnum">
-							      			<!-- <input  type="text" id="code" name="code"> -->
-							      			${productDetail.code}
-							      		</div>
-							      </td>
-							    </tr>
+							  
+								<tbody id="productTableBody" class="trp">
+ 							  
+ 							  			<c:forEach items="${productList}" var="product_list">
+							            <tr>
+							            	<td style="display: none;">${product_list.name}</td>
+							                <td style="display: none;">${product_list.product_id}</td>
+							                <td style="display: none;">${product_list.count}</td>
+							                <td style="display: none;">${product_list.price}</td>
+							                <td style="display: none;">${product_list.tax}</td>
+							                <td style="display: none;">${product_list.code}</td>
+							            </tr>
+							            </c:forEach>
+
 
 							  </tbody>
-							  
-<%-- 							  <tbody>
-			                  <tr>
-			                    <td><div>${detail.name}</div></td>
-			                    <td><div>${detail.code}</div></td>
-			                    <td>
-				                    <div class="shipment_order_numberbox">
-					                    <input class="shipment_order_num">
-					                    <p class="shipment_order_n">개</p>
-				                    </div>
-			                    </td>
-			                    <td><div>${detail.price}</div></td>
-			                    <td><div>${detail.tax}</div></td>
-			                    <td><div>${detail.count}</div></td>
-			                  </tr>
-			                </tbody> --%>
 			                
 							</table>
+							
+							
+							
 			              
 			            </div><!-- shipment_order_table_box 끝 -->
 		              
-<!-- 		              <div class="shipment_order_sum">
+<!--  		              <div class="shipment_order_sum">
 						<div>총수량 : <input type="text" class="shipment_order_amount"></div>
 						<div>총 판매가 : <input type="text" class="shipment_order_selling"></div> 
 						<div>총 부가세 : <input type="text" class="shipment_order_surtax"></div> 

@@ -44,13 +44,24 @@
               <!-- Bordered Table -->
               <table class="table table-bordered">
               
+                <colgroup>
+			        <col width="5%" />
+			        <col width="15%" />
+			        <col width="15%" />
+			        <col width="20%" />
+			        <col width="20%" />
+			        <col width="25%" />
+			        <%-- <col width="auto" /> --%>
+		        </colgroup>
+              
                 <thead class="shipment_table_thead">
                   <tr>
                     <th scope="col"><div>no</div></th>
                     <th scope="col"><div>수주일자</div></th>
                     <th scope="col"><div>납기일자</div></th>
-                    <th scope="col"><div>남품처</div></th>
-                    <th scope="col"><div>총 액</div></th>
+                    <th scope="col"><div>납품처</div></th>
+                    <th scope="col"><div>전화번호</div></th>
+                    <th scope="col"><div>이메일</div></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -58,12 +69,12 @@
                   <!-- for문 시작 -->
  				  <c:forEach items="${OrderList}" var="order_list">
 	                  <tr>
-	                    <th scope="row"><div>${order_list.order_id}</div></th>
-	                    <td><div>${order_list.order_date}</div></td>
-	                    <td><div>${order_list.delivery_date}</div></td>
-	                    <td><div><a href="detail?customer_id=${order_list.customer_id}">${order_list.customer_id}</a></div></td>
-	                    <td><div></div></td>
-	                    
+	                    <th scope="row"><div>${order_list.orderId}</div></th>
+	                    <td><div>${order_list.orderDate}</div></td>
+	                    <td><div>${order_list.deliveryDate}</div></td>
+	                    <td><div><a href="/OrderDetail?orderId=${order_list.orderId}">${order_list.hospital}</a></div></td>
+	                    <td><div>${order_list.phone}</div></td>
+	                    <td><div>${order_list.email}</div></td>
 	                  </tr>
                   </c:forEach> 
 				  <!-- for문 끝 -->

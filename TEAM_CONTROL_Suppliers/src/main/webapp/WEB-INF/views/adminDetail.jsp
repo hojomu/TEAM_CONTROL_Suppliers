@@ -86,7 +86,7 @@
             </div>
 
 <div class="shipment_order_botton">
-<button id="cancelBtn" type="button" class="shipment_order_canclebnt">삭제</button><button class="shipment_order_registerbnt">다운로드</button>
+<button id="cancelBtn" type="button" class="shipment_order_canclebnt">삭제</button><button class="shipment_order_registerbnt" onclick="openPopup()">다운로드</button>
 </div>
 
 </main>
@@ -125,6 +125,6 @@
   <script src="resources/js/main.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="resources/js/adminDetail.js"></script>
-
+  <script src="resources/js/shipment_detail.js"></script>
 </body>
 </html>

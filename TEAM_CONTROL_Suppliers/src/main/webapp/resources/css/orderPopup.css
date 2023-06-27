@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+.popuptitle{
+	margin: 10px;
+	text-align: center;
+}
+
+table {
+    border-collapse: collapse; /* 테이블 셀 경계를 병합하여 선이 겹치지 않게 함 */
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+.popup_left{
+	float:left;
+    height: 200px;
+    width: 50%;
+}
+
+.table_left{
+	width: 150px;
+}
+
+.popup_right{
+	float:right;
+    height: 200px;
+    width: 50%;
+}
+
+.sign{
+	height: 100px;
+}
+
+.orderpopup_table_box{
+	clear: both;
+	width: 100%;
+}
+
+.orderpopup_th{
+	width: 140px;
+}
+
+.table_footer_l{
+	width: 90px;
+}
+
+.table_footer{
+	width: 140px;
+}

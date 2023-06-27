@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import control.suppliers.mapper.OrderListMapper;
+import control.suppliers.model.AdminOrderVO;
 import control.suppliers.model.CriteriaVO;
 import control.suppliers.model.OrderVO;
 
@@ -17,9 +18,8 @@ public class OrderListServiceImpl implements OrderListService {
 
 	//상품조회
 	// shipment_table 리스트
-	public ArrayList<OrderVO> OrderList(CriteriaVO cri){
-		System.out.println(cri);
-		return olm.OrderList(cri);
+	public ArrayList<AdminOrderVO> OrderList(AdminOrderVO data){
+		return olm.OrderList(data);
 	}
 
 	// shipment_table 리스트
