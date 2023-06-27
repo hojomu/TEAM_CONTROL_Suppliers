@@ -29,9 +29,9 @@
 		JOIN order_cancel oc ON o.order_id = oc.order_id
 		JOIN ordered_product op ON o.order_id = op.order_id
 		JOIN customer c ON o.customer_id = c.customer_id
-		WHERE oc.state = 'normal'
-	 		AND Date(o.delivery_date) = CURRENT_DATE()
-			AND transport_id = #{employeeId}
+			WHERE transport_id = #{employeeId}
+				AND oc.state = 'normal'
+			    AND Date(o.delivery_date) = CURRENT_DATE()
 	</select>
 		
 

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <%@page import="java.util.List"%>
 <%@page import="control.suppliers.model.CalendarVO"%>
 <%@page import="control.suppliers.model.CustomerVO"%> 
@@ -23,8 +24,33 @@
   
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="resources/js/delivery_calendar.js"></script>
+  <script type="text/javascript" src="./fullcalendar-5.11.5//lang-all.js"></script>
   
   <script>
+  FullCalendar.globalLocales.push(function () {
+	  'use strict';
+
+	  var ko = {
+	    code: "ko",
+	    buttonText: {
+	      prev: "\uC774\uC804\uB2EC",
+	      next: "\uB2E4\uC74C\uB2EC",
+	      today: "\uC624\uB298",
+	      month: "\uC6D4",
+	      week: "\uC8FC",
+	      day: "\uC77C",
+	      list: "\uC77C\uC815\uBAA9\uB85D"
+	    },
+	    weekText: "\uC8FC",
+	    allDayText: "\uC885\uC77C",
+	    moreLinkText: "\uAC1C",
+	    noEventsText: "\uC77C\uC815\uC774 \uC5C6\uC2B5\uB2C8\uB2E4"
+	  };
+
+	  return ko;
+
+	}());
+
   document.addEventListener('DOMContentLoaded', function() {
 /*   $(function () {
 	  
@@ -61,6 +87,7 @@
             	    url: "calendar/event",
             	    method: "GET",
             	    dataType: "json",
+            	     lang : "ko",
             	    success: function(data) {
             	      var events = [];
             	      for (var i = 0; i < data.length; i++) {

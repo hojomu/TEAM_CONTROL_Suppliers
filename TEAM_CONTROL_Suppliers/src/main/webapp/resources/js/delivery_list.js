@@ -87,7 +87,8 @@
     	    $(".btnStop").click(function() {
     	    	
     	    	  var btn = $(this); // 클릭된 버튼 객체 저장
-    	    	    
+    	    	  var email_auth_cd = '';
+    	    		
     	    	  // 이미 클릭된 버튼인 경우 리턴하여 재클릭을 막음
     	    	    if (btn.hasClass("disabled")) {
     	    	      return;
@@ -109,14 +110,13 @@
     	      btn.addClass("disabled").css("background-color", "grey");
     	      
     	      // 서버에 위치 정보 및 상태 전송
-    	      sendLocation(trandata, function() {
-    	    	    // 위치 정보 및 상태 전송 성공 시 이메일 전송 요청
-    	    	  mailSender(orderId);
-    	    	  });
+    	      // 위치 정보 및 상태 전송 성공 시 이메일 전송 요청
+    	      sendLocation(trandata); 
+    	      email(orderId);
     	    });
     	    
     	    // 서버로 위치 정보 및 상태 전송하는 함수
-    	    function sendLocation(trandata) {
+    	    function sendLocation(trandata, orderId) {
     	      $.ajax({
     	        url: "/transport_location", // 서버의 저장 로직을 처리하는 엔드포인트 URL
     	        method: "POST",
@@ -130,28 +130,31 @@
     	        }
     	       
     	      });
+    	      
     	    }
-    	    
+    	    	  
     	 // 이메일 전송 요청 함수
-    	    function mailSender() {
-       	      console.log("aaa");
-       	       
-       	      var email = "<%= DeliveryList.email %>";// DeliveryList에서 email 값을 가져옴     
-       	   /*  var emailData = {
-       		    email: $(".hos_email").text(),  // DeliveryList에서 email 값을 가져옴    
-       		    orderId: orderId
-       		  }; 
-       	    */
-    	     
+    	    function email(orderId) {   
+    	    	var email = document.querySelector('.hos_email').getAttribute('data-email');
+    	    	
+    	    	var emailData = {
+    	    	    email: email,
+    	    	    orderId: orderId
+    	    	    };
+    	 /*   	
+    	    	console.log(emailData);*/
+    	    	
        	      $.ajax({
-    	        url: "/send_email", // 이메일 전송을 처리하는 엔드포인트 URL
+    	        url: "/email", // 이메일 전송을 처리하는 엔드포인트 URL
     	        method: "POST",
-    	        data: email, 
+    	        data: JSON.stringify(emailData),
+    	        contentType: "application/json",
     	        success: function(response) {
     	          console.log("이메일이 성공적으로 전송되었습니다.");
+    	          email_auth_cd = response;
     	        },
-    	        error: function(xhr, status, error) {
-    	          console.error("이메일 전송 중 오류가 발생했습니다:", error);
+    	        error: function(response) {
+    	          console.error("이메일 전송 중 오류가 발생했습니다:", response);
     	        }
     	      });
     	    }

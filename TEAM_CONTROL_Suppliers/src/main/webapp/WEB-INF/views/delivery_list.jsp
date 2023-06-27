@@ -25,11 +25,11 @@
 
     
 	<input type="hidden" id="empid" value="${account.employeeId}">
-	<c:set var="employeeId" value="${account.employeeId}" />
+<%-- 	<c:set var="employeeId" value="${account.employeeId}" /> --%>
 
     <c:forEach items="${list}" var="DeliveryList" >
 
-    <form class="transport_location"  method="POST" action="send_email">
+    <form class="transport_location"  method="post" action="/email">
         <div class="col-12">
             <div class="card overflow-auto">
                 <div class="list-body">
@@ -37,7 +37,7 @@
                         <li class="num">No.${DeliveryList.orderId}</li>
                         <li class="hos_name">${DeliveryList.hospital}</li>
                         <li class="hos_adress">${DeliveryList.address}</li>
-                        <li class="hos_email" style="display: none;">${DeliveryList.email}</li>
+                       <li class="hos_email" data-email="${DeliveryList.email}" style="display: none;">${DeliveryList.email}</li>
                     </ul>
 
                     <table class="table table-hover">
