@@ -7,7 +7,6 @@
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
  <link href ="resources/css/delivery_list.css" rel="stylesheet"/>
 
-
 <!-- 본문 내용 -->
   <main id="main" class="main">
 
@@ -23,8 +22,14 @@
       <div class="row">
 
     <!-- Table with hoverable rows -->
+
+    
+	<input type="hidden" id="empid" value="${account.employeeId}">
+	<c:set var="employeeId" value="${account.employeeId}" />
+
     <c:forEach items="${list}" var="DeliveryList" >
-    <form class="transport_location"  method="POST" >
+
+    <form class="transport_location"  method="POST" action="send_email">
         <div class="col-12">
             <div class="card overflow-auto">
                 <div class="list-body">
@@ -32,6 +37,7 @@
                         <li class="num">No.${DeliveryList.orderId}</li>
                         <li class="hos_name">${DeliveryList.hospital}</li>
                         <li class="hos_adress">${DeliveryList.address}</li>
+                        <li class="hos_email" style="display: none;">${DeliveryList.email}</li>
                     </ul>
 
                     <table class="table table-hover">
@@ -66,6 +72,7 @@
             </div>
         </div>
     </form>
+
 	</c:forEach>
 
 	  </div>

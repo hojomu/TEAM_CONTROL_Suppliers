@@ -17,6 +17,17 @@
      ofType="control.suppliers.model.CustomerVO" select="event"/>  
   </resultMap>
 	
+	<select id="getEventsByEmployeeId" parameterType="int" resultType="control.suppliers.model.CalendarVO">
+ 	  SELECT o.order_id,
+           DATE_FORMAT(o.delivery_date, '%Y-%m-%d') AS delivery_date,
+           c.hospital AS hospital
+    FROM `order` o
+    JOIN customer c ON o.customer_id = c.customer_id
+    JOIN order_cancel oc ON o.order_id = oc.order_id
+    WHERE o.transport_id = #{employeeId}
+      AND oc.state = 'normal'
+	</select>
+
 	<select id="event" resultType="control.suppliers.model.CalendarVO">
 		<!-- select * from calendar  -->
 		SELECT DISTINCT
@@ -25,7 +36,8 @@
 			c.hospital as hospital
 		FROM `order` o		
 		JOIN customer c ON o.customer_id = c.customer_id
-		
+			WHERE oc.state = 'normal'
+		<!-- 	AND transport_id = #{transportId} -->
 	</select>
 
 </mapper>

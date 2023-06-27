@@ -17,8 +17,7 @@ import control.suppliers.model.CalendarVO;
 		CalendarMapper cm;
 		
 		@Override
-		public List<CalendarVO> event() {
-			return cm.event();
-		}	
-
+		public List<CalendarVO> getEventsByEmployeeId(int employeeId) {
+			return cm.getEventsByEmployeeId(employeeId);
+		}
 	}

@@ -9,6 +9,7 @@ import control.suppliers.model.CalendarVO;
 public interface CalendarMapper {
 	
 	//생산계획 전체 조회
-	public List<CalendarVO> event();	
+
+	public List<CalendarVO> getEventsByEmployeeId(int employeeId);	
 }
 

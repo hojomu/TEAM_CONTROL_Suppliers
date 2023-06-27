@@ -35,28 +35,26 @@ public class CalendarController {
 	
 		@RequestMapping(value="/event", method = RequestMethod.GET)
 		@ResponseBody
-		public String event() {
+		public String event(HttpSession session) {
 	
-			List<CalendarVO> list = calendarService.event();
+			LoginVO account = (LoginVO) session.getAttribute("account");
+		    int employeeId = account.getEmployeeId();
+		    
+		    List<CalendarVO> list = calendarService.getEventsByEmployeeId(employeeId);
 			/*System.out.println(list);*/
 			
 			JSONObject jsonObj = new JSONObject();
 			JSONArray jsonArr = new JSONArray();
 			
-			HashMap<String, Object> hash = new HashMap<String, Object>();		
-			
-			for(int i=0; i < list.size(); i++) { 
-				hash.put("title", list.get(i).getHospital()); //병원이름
-				hash.put("start", list.get(i).getDelivery_date()); //배송일자
-				/*hash.put("end", list.get(i).get("end")); //종료일자*/
-				
-				jsonObj = new JSONObject(hash); //중괄호 {key:value , key:value, key:value}
-				jsonArr.add(jsonObj); // 대괄호 안에 넣어주기[{key:value , key:value, key:value},{key:value , key:value, key:value}]
-			}
-			
-			/*log.info("jsonArrCheck: {}", jsonArr);*/
-			
-			return jsonArr.toString();
+			   for (CalendarVO event : list) {
+			        HashMap<String, Object> hash = new HashMap<String, Object>();
+			        hash.put("title", event.getHospital());
+			        hash.put("start", event.getDelivery_date());
+			        jsonObj = new JSONObject(hash);
+			        jsonArr.add(jsonObj);
+			    }
+			    
+			    return jsonArr.toString();
 
 		}
 

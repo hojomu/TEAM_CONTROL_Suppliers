@@ -1,5 +1,6 @@
 package control.suppliers.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -23,7 +24,7 @@ public class LoginController {
 	private final Logger log = LoggerFactory.getLogger(getClass());
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String loginManeger(HttpSession session, Model model, LoginVO login) {
+	public String loginManeger(HttpSession session, Model model, LoginVO login, HttpServletRequest request) {
 		LoginVO member = ls.login(login);
 		log.info("{}", member);
 		
@@ -32,6 +33,10 @@ public class LoginController {
 			return "login";
 		} else {
 			session.setAttribute("account", member);
+			  
+			// 사용자 ID를 JavaScript 변수로 전달
+	        model.addAttribute("account", member.getEmployeeId());
+	        
 			String dept = member.getDept();
 			if(dept.equals("sales")) {
 				return "redirect:/adminGraph";

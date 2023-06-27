@@ -4,6 +4,7 @@ import java.util.List;
 
 public class DeliveryListVO {
 	 private int orderId;
+	 private int employeeId;
 	 private String deliveryDate;
 /*	 private String customerHospital;
 	 private String customerAddress;
@@ -61,6 +62,14 @@ public class DeliveryListVO {
 
 		public void setEmail(String email) {
 			this.email = email;
+		}
+
+		public int getEmployeeId() {
+			return employeeId;
+		}
+
+		public void setEmployeeId(int employeeId) {
+			this.employeeId = employeeId;
 		}
 
 

@@ -4,6 +4,7 @@ public class CalendarVO {
 	private int orderId; 	
 	private String hospital; // calendarTitle 
 	private String delivery_date; // calendarStart
+	private int employeeId;
 	
 /*	private List<CustomerVO> Customer;*/
 
@@ -25,6 +26,12 @@ public class CalendarVO {
 	}
 	public void setDelivery_date(String delivery_date) {
 		this.delivery_date = delivery_date;
+	}
+	public int getEmployee_id() {
+		return employeeId;
+	}
+	public void setEmployee_id(int employee_id) {
+		this.employeeId = employee_id;
 	}
 
 

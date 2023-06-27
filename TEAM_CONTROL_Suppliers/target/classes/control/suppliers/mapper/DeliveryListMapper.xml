@@ -17,22 +17,6 @@
      ofType="control.suppliers.model.OrderedProductVO" select="selectOrderedProductList"/>     
 </resultMap>
     
-<!-- <resultMap id="orderedProductMap" type="control.suppliers.model.OrderedProductVO">
-  <id property="orderedProductId" column="ordered_product_id" javaType="int"/>
-  <result property="count" column="count" />
-  <result property="product" column="product" />
-  <result property="code" column="code" />
-  <collection column="productId = product_id" property="product" javaType="List" 
-   ofType="control.suppliers.model.ProductVO" select="selectProductList"/>
-</resultMap>
-  -->
-<!--  <resultMap id="productMap" type="control.suppliers.model.ProductVO">
-  <id property="productId" column="product_id" javaType="int"/>
-  <result property="name" column="name" />
-  <result property="code" column="code" />
-</resultMap> --> 
- 
-
 
 	<select id="list" resultMap="diliveryListMap">
 		SELECT DISTINCT
@@ -42,20 +26,15 @@
 			c.address as address,
 			c.email AS email
 		FROM `order` o
+		JOIN order_cancel oc ON o.order_id = oc.order_id
 		JOIN ordered_product op ON o.order_id = op.order_id
 		JOIN customer c ON o.customer_id = c.customer_id
-			WHERE Date(o.delivery_date) = CURRENT_DATE()
+		WHERE oc.state = 'normal'
+	 		AND Date(o.delivery_date) = CURRENT_DATE()
+			AND transport_id = #{employeeId}
 	</select>
 		
-	 	<!-- <select id="selectOrderedProductList" parameterType="control.suppliers.model.DeliveryListVO" resultType="control.suppliers.model.OrderedProductVO">
-		SELECT
-		    op.count AS count,
-		    p.name AS name,
-		    p.code AS code
-		FROM ordered_product op
-		LEFT JOIN product p ON op.product_id = p.product_id
-		WHERE op.order_id = #{orderId}
-		</select> -->
+
 		
  	 <select id="selectOrderedProductList" parameterType="control.suppliers.model.DeliveryListVO" resultType="control.suppliers.model.OrderedProductVO">
 		SELECT 
@@ -67,15 +46,7 @@
 	  	WHERE op.order_id = #{orderId} 
 
 	</select>
-<!-- 
-	<select id="selectProductList" parameterType="control.suppliers.model.DeliveryListVO" resultMap="control.suppliers.model.ProductVO">
-		  SELECT
-		    p.product_id AS product_id,
-		    p.name AS name,
-		    p.code AS code
-		  FROM product p
-		  WHERE p.product_id = #{orderedProduct.product_id}
-	</select>   -->
+
 	
 	<!-- 위치 정보 저장하기 insert / 현재시간 추가하기 -->
 	<insert id="transport_location" parameterType="control.suppliers.model.TransportDataVO">

@@ -10,6 +10,7 @@ public class TransportDataVO {
 	private double longitude;
 	private String transferState;
 	private ArrayList<ELocationVO> eLocationVO;
+	private String cEmail;
 	
 	public int getEmployeeId() {
 		return employeeId;
@@ -58,6 +59,12 @@ public class TransportDataVO {
 		return "TransportDataVO [employeeId=" + employeeId + ", orderId=" + orderId + ", eName=" + eName + ", latitude="
 				+ latitude + ", longitude=" + longitude + ", transferState=" + transferState + ", eLocationVO="
 				+ eLocationVO + "]";
+	}
+	public String getcEmail() {
+		return cEmail;
+	}
+	public void setcEmail(String cEmail) {
+		this.cEmail = cEmail;
 	}
 	
 }

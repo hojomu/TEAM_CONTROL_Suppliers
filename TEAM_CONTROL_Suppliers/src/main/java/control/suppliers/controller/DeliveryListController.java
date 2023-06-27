@@ -1,11 +1,15 @@
 package control.suppliers.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 
@@ -48,6 +53,9 @@ public class DeliveryListController {
 	    if(account == null || !account.getDept().equals("transport")) {
 	    	return "redirect:/security";
 	    } else {
+	    int employeeId  = account.getEmployeeId();
+	    data.setEmployeeId(employeeId);
+	    
 		List<DeliveryListVO> resultList = ds.list(data);	
 		
 		Gson gson = new Gson();
@@ -63,12 +71,12 @@ public class DeliveryListController {
 	// 운반자 위치 확인 
 
 	@PostMapping(value = "/transport_location") 
-	public String transport_location(@RequestBody TransportDataVO trandata) {
+	public ResponseEntity<String>transport_location(@RequestBody TransportDataVO trandata) {
 
 		System.out.println(trandata);
 		
 		ds.transport_location(trandata);
-			return "transport_location";
+			return  new ResponseEntity<>("Success", HttpStatus.OK);
 
 	}
 		
